@@ -1,9 +1,9 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/.."
-python3 -m unittest discover -s tests -p 'test_*.py'
-python3 scripts/check_i18n.py
+cargo run -p transtools -- check
 cargo test --workspace
+cargo test --release -p transtools validation::tests
 cargo fmt --all -- --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo check --features flatpak

@@ -13,6 +13,9 @@ clap.workspace = true
 tracing.workspace = true
 dotenv.workspace = true
 tracing-subscriber.workspace = true
+quick-xml = "0.42"
+regex.workspace = true
+tempfile = "3"
 
 [dev-dependencies]
 test-base.workspace = true

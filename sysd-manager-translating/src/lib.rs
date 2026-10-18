@@ -27,15 +27,27 @@ pub const PACK_FILE_DIR: &str = "target/loc";
 /// Making the PO Template File
 /// https://www.gnu.org/software/gettext/manual/html_node/xgettext-Invocation.html
 pub fn xgettext(potfiles_file_path: &str, output_pot_file: &str) -> Result<(), TransError> {
+    xgettext_in(
+        Path::new("."),
+        Path::new(potfiles_file_path),
+        Path::new(output_pot_file),
+    )
+}
+
+/// Extract without changing the caller's working directory or environment.
+pub fn xgettext_in(root: &Path, potfiles: &Path, output: &Path) -> Result<(), TransError> {
     let mut command = Command::new("xgettext");
+    command.current_dir(root);
 
     for preset in glib_preset() {
         command.arg(preset);
     }
 
     let output = command
-        .arg(format!("--files-from={potfiles_file_path}"))
-        .arg(format!("--output={output_pot_file}"))
+        .arg("--files-from")
+        .arg(potfiles)
+        .arg("--output")
+        .arg(output)
         .arg("--verbose")
         .output()
         .map_err(|error| TransError::create_command_error(command, error))?;

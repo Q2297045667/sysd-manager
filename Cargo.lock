@@ -2442,8 +2442,11 @@ version = "0.4.0"
 dependencies = [
  "clap",
  "dotenv",
+ "quick-xml",
+ "regex",
  "sysd-manager-test-base",
  "sysd-manager-translating",
+ "tempfile",
  "tracing",
  "tracing-subscriber",
 ]

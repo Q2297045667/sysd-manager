@@ -1,5 +1,7 @@
 use std::sync::OnceLock;
 
+pub mod ui;
+
 /// An owned, isolated fixture directory. Never changes the working directory or
 /// the user's environment, so fixtures can be used by parallel tests.
 pub struct TempDir(std::path::PathBuf);

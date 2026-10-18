@@ -1,6 +1,8 @@
 extern crate tracing;
 extern crate translating;
 
+mod validation;
+
 use clap::Command;
 use clap::Parser;
 use clap::Subcommand;
@@ -30,6 +32,8 @@ struct Args {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
+    /// Validate Chinese translations, GTK labels, and source extraction
+    Check,
     /// Extract translation text form code and generate a Portable Object Template (pot) file
     Extract {
         /// Do not regenerate the Potfile list
@@ -119,6 +123,9 @@ fn main() -> std::process::ExitCode {
 
 fn execute_command(args: Args) -> Result<(), TransError> {
     match &args.command {
+        Some(Commands::Check) => validation::check(&env::current_dir()?)
+            .map(|count| println!("i18n: {count} Chinese translations verified"))
+            .map_err(TransError::BoxError),
         Some(Commands::Mo) => translating::generate_mo(),
         Some(Commands::Desktop) => translating::generate_desktop(),
         Some(Commands::Po { lang }) => update_po_file(lang),

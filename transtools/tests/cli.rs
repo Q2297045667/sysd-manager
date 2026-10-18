@@ -13,7 +13,7 @@ fn invalid_language_is_a_failure_exit() {
 
 #[cfg(unix)]
 #[test]
-fn catalog_compiler_failure_is_a_failure_exit_without_partial_catalogs() {
+fn translation_commands_propagate_compiler_failures_without_partial_catalogs() {
     use std::os::unix::fs::PermissionsExt;
     let directory = TempDir::new().unwrap();
     let compiler = directory.path().join("msgfmt");
@@ -23,18 +23,37 @@ fn catalog_compiler_failure_is_a_failure_exit_without_partial_catalogs() {
     )
     .unwrap();
     fs::set_permissions(&compiler, fs::Permissions::from_mode(0o755)).unwrap();
-    let result = Command::new(env!("CARGO_BIN_EXE_transtools"))
-        .arg("mo")
-        .env("PATH", directory.path())
-        .env("CARGO_TARGET_DIR", directory.path().join("build"))
-        .output()
-        .unwrap();
-    assert_eq!(result.status.code(), Some(1));
-    assert!(String::from_utf8_lossy(&result.stdout).contains("fixture compiler failure"));
+    for action in ["mo", "check"] {
+        let result = Command::new(env!("CARGO_BIN_EXE_transtools"))
+            .arg(action)
+            .env("PATH", directory.path())
+            .env("CARGO_TARGET_DIR", directory.path().join("build"))
+            .output()
+            .unwrap();
+        assert_eq!(result.status.code(), Some(1));
+        assert!(String::from_utf8_lossy(&result.stdout).contains("fixture compiler failure"));
+    }
     assert!(
         !directory
             .path()
             .join("build/locale/cs/LC_MESSAGES/sysd-manager.mo")
             .exists()
     );
+}
+
+#[test]
+fn catalog_check_works_from_an_unrelated_working_directory() {
+    let directory = TempDir::new().unwrap();
+    let result = Command::new(env!("CARGO_BIN_EXE_transtools"))
+        .arg("check")
+        .current_dir(directory.path())
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}\n{}",
+        String::from_utf8_lossy(&result.stdout),
+        String::from_utf8_lossy(&result.stderr)
+    );
+    assert!(String::from_utf8_lossy(&result.stdout).contains("Chinese translations verified"));
 }

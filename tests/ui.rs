@@ -26,23 +26,16 @@ mod systemd_mock;
 
 use adw::prelude::*;
 use gtk::{gio, glib};
-use std::{
-    process::Command,
-    time::{Duration, Instant},
-};
+use std::time::{Duration, Instant};
 
 fn main() {
     if std::env::var_os("SYSD_UI_TEST_ISOLATED").is_none() {
-        let status = Command::new("python3")
-            .arg(concat!(
-                env!("CARGO_MANIFEST_DIR"),
-                "/scripts/run_ui_tests.py"
-            ))
-            .arg(std::env::current_exe().unwrap())
-            .env("SYSD_TEST_LOCALE_DIR", env!("SYSD_LOCALE_DIR"))
-            .status()
-            .unwrap();
-        assert!(status.success(), "isolated GTK tests failed");
+        test_base::ui::run_isolated(
+            &std::env::current_exe().unwrap(),
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")),
+            std::path::Path::new(env!("SYSD_LOCALE_DIR")),
+        )
+        .expect("isolated GTK tests failed");
         return;
     }
     // SAFETY: a fresh single-threaded subprocess, before GTK or async startup.

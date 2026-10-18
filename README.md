@@ -239,12 +239,14 @@ Run all automated checks from the project root:
 scripts/test_i18n.sh
 ```
 
-This runs catalog validation and its negative tests, workspace tests, isolated
-locale probes, English and Chinese window tests, formatting, Clippy, Flatpak and
+This runs Rust catalog validation and its negative tests in debug and release
+builds, workspace tests, isolated locale probes, English and Chinese window
+tests, formatting, Clippy, Flatpak and
 AppImage compile checks, and metadata generation. In addition to the build
-dependencies, install Python 3, gettext tools, `dbus-daemon`,
+dependencies, install gettext tools, `dbus-daemon`,
 `glib-compile-schemas`, and `gtk4-broadwayd`. Locale probes use installed UTF-8
 locales or generate temporary ones with `localedef` and the glibc locale sources.
+The automated checks do not require a Python interpreter.
 
 Window tests use a private Broadway display, D-Bus daemon, in-memory GSettings,
 and temporary XDG directories. A mock systemd service verifies start, stop,
@@ -324,7 +326,7 @@ After adding or changing messages, update and validate the Chinese catalog:
 
 ```bash
 cargo run -p transtools -- expo --lang zh_Hans
-python3 scripts/check_i18n.py
+cargo run -p transtools -- check
 cargo test --test i18n
 ```
 
