@@ -9,6 +9,16 @@ If this project saves you or your company time, consider [sponsoring](https://gi
 
 <!-- ## [Unreleased] -->
 
+## [Unreleased]
+
+### Added
+- Language selector in Preferences, populated from the translation catalogs found at runtime
+- User translation drop-in folder (`~/.local/share/sysd-manager/translations`) with automatic `.po` compilation
+- Translations folder shortcut and language list refresh in Preferences
+
+### Changed
+- Interface language is file-driven instead of being selected only through the environment
+
 ## [2.24.0] - 2026-10-16
 
 ### Added

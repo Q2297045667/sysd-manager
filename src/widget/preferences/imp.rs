@@ -13,6 +13,7 @@ use crate::{
         ACTION_WIN_KEY_PREF_UNIT_LIST_ACTIVE_STAUTUS_AS_ICON, ADWAITA,
         KEY_PREF_UNIT_LIST_DISPLAY_SUMMARY, UNIT_FILE_LINE_NUMBER_ACTION,
     },
+    i18n,
     systemd_gui::new_settings,
     utils::font_management::{self},
     widget::{
@@ -22,7 +23,7 @@ use crate::{
         preferences::{
             data::{
                 KEY_PREF_CASE_INSENSITIVE_DEFAULT, KEY_PREF_CONTROLS_ALWAYS_SHOWS_START_STOP,
-                KEY_PREF_LIST_PRESERVE_FILTERS, KEY_PREF_UNIT_DESCRIPTION_WRAP,
+                KEY_PREF_LANGUAGE, KEY_PREF_LIST_PRESERVE_FILTERS, KEY_PREF_UNIT_DESCRIPTION_WRAP,
                 KEY_PREF_UNIT_LIST_DISPLAY_COLORS,
             },
             drop_down_elem::{build_pane_orientation_selector, build_preferred_color_scheme},
@@ -36,7 +37,12 @@ use gtk::{
     glib::{self, BoolError},
     pango::{self, FontFace},
 };
-use std::cell::OnceCell;
+use std::{
+    cell::{Cell, OnceCell, RefCell},
+    env, fs,
+    path::{Path, PathBuf},
+    rc::Rc,
+};
 use strum::IntoEnumIterator;
 use tracing::{debug, error, info, warn};
 
@@ -74,6 +80,19 @@ pub struct PreferencesDialogImpl {
 
     #[template_child]
     preferred_color_scheme: TemplateChild<adw::ComboRow>,
+
+    #[template_child]
+    language: TemplateChild<adw::ComboRow>,
+
+    #[template_child]
+    language_restart_hint: TemplateChild<adw::ActionRow>,
+
+    #[template_child]
+    translations_folder_row: TemplateChild<adw::ActionRow>,
+
+    languages: Rc<RefCell<Vec<i18n::Language>>>,
+
+    updating_language: Rc<Cell<bool>>,
 
     #[template_child]
     app_orientation: TemplateChild<adw::ComboRow>,
@@ -265,6 +284,36 @@ impl PreferencesDialogImpl {
         }
         false
     }
+
+    #[template_callback]
+    fn open_translations_folder(&self) {
+        let Some(directory) = i18n::translations_dir() else {
+            warn!("No user data directory; the translations folder is unavailable");
+            return;
+        };
+        if let Err(error) = fs::create_dir_all(&directory) {
+            warn!(
+                "Unable to create the translations folder {}: {error}",
+                directory.display()
+            );
+            return;
+        }
+        let launcher = gtk::FileLauncher::new(Some(&gio::File::for_path(&directory)));
+        let window = self.app_window.get().cloned();
+        launcher.launch(window.as_ref(), None::<&gio::Cancellable>, move |result| {
+            if let Err(error) = result {
+                warn!(
+                    "Unable to open the translations folder {}: {error}",
+                    directory.display()
+                );
+            }
+        });
+    }
+
+    #[template_callback]
+    fn refresh_languages(&self) {
+        self.reload_languages();
+    }
 }
 
 impl PreferencesDialogImpl {
@@ -325,6 +374,130 @@ impl PreferencesDialogImpl {
         self.settings
             .get()
             .expect("`settings` should be set in `setup_settings`.")
+    }
+
+    fn reload_languages(&self) {
+        let languages = i18n::available_languages();
+        let user_supplied = languages
+            .iter()
+            .filter(|language| language.origin == i18n::Origin::User)
+            .count();
+        info!(
+            "Discovered {} interface language catalogs ({user_supplied} user supplied)",
+            languages.len()
+        );
+        let selected = self.stored_language();
+        self.populate_language_row(languages, &selected);
+    }
+
+    fn setup_language(&self) {
+        self.reload_languages();
+
+        if let Some(directory) = i18n::translations_dir() {
+            self.translations_folder_row
+                .set_subtitle(&Self::display_directory(&directory));
+        } else {
+            self.translations_folder_row
+                .set_subtitle(&pgettext("preference", "No user data directory available"));
+            self.translations_folder_row.set_sensitive(false);
+        }
+
+        let languages = Rc::clone(&self.languages);
+        let updating = Rc::clone(&self.updating_language);
+        let hint = self.language_restart_hint.clone();
+        let settings = self.settings().clone();
+        self.language.connect_selected_item_notify(move |combo| {
+            if updating.get() {
+                return;
+            }
+            let index = combo.selected() as usize;
+            let code = if index == 0 {
+                String::new()
+            } else {
+                let borrowed = languages.borrow();
+                let Some(language) = borrowed.get(index - 1) else {
+                    return;
+                };
+                language.code.clone()
+            };
+            let stored = settings.string(KEY_PREF_LANGUAGE).to_string();
+            let applied = i18n::applied_language().unwrap_or_default();
+            if code == stored {
+                hint.set_visible(code != applied);
+                return;
+            }
+            match settings.set_string(KEY_PREF_LANGUAGE, &code) {
+                Ok(()) => {
+                    gio::Settings::sync();
+                    info!("Interface language preference saved as {code:?}");
+                    hint.set_visible(code != applied);
+                }
+                Err(error) => warn!("Unable to save the interface language preference: {error}"),
+            }
+        });
+    }
+
+    fn populate_language_row(&self, languages: Vec<i18n::Language>, selected: &str) {
+        let default_label = pgettext("preference", "System Default");
+        let mut labels = Vec::with_capacity(languages.len() + 1);
+        labels.push(default_label);
+
+        let mut selected_index = 0;
+        for (index, language) in languages.iter().enumerate() {
+            labels.push(language.label());
+            if language.code == selected {
+                selected_index = index + 1;
+            }
+        }
+        let selected_code = if selected_index == 0 {
+            String::new()
+        } else {
+            languages[selected_index - 1].code.clone()
+        };
+
+        let labels: Vec<&str> = labels.iter().map(String::as_str).collect();
+        let model = gtk::StringList::new(&labels);
+
+        // Selection changes are persisted by the notify handler, but restoring
+        // the stored value must not look like a user change.
+        self.updating_language.set(true);
+        self.language.set_model(Some(&model));
+        self.language.set_selected(selected_index as u32);
+        self.updating_language.set(false);
+
+        if selected_index == 0 && !selected.is_empty() {
+            // The catalog providing the stored language was removed. Drop the
+            // dangling preference so the dialog and the next start agree.
+            warn!("Stored interface language {selected:?} is not available");
+            if let Err(error) = self.settings().set_string(KEY_PREF_LANGUAGE, "") {
+                warn!("Unable to clear the interface language preference: {error}");
+            }
+            gio::Settings::sync();
+        }
+
+        let applied = i18n::applied_language().unwrap_or_default();
+        self.language_restart_hint
+            .set_visible(selected_code != applied);
+        *self.languages.borrow_mut() = languages;
+    }
+
+    fn stored_language(&self) -> String {
+        self.settings().string(KEY_PREF_LANGUAGE).to_string()
+    }
+
+    fn display_directory(directory: &Path) -> String {
+        let Some(home) = env::var_os("HOME")
+            .filter(|home| !home.is_empty())
+            .map(PathBuf::from)
+        else {
+            return directory.display().to_string();
+        };
+        match directory.strip_prefix(&home) {
+            Ok(relative) if !relative.as_os_str().is_empty() => {
+                format!("~/{}", relative.display())
+            }
+            _ => directory.display().to_string(),
+        }
     }
 
     fn load_preferences_values(&self) {
@@ -455,6 +628,8 @@ impl ObjectImpl for PreferencesDialogImpl {
         build_preferred_color_scheme(&self.preferred_color_scheme, settings);
 
         build_pane_orientation_selector(&self.app_orientation, settings);
+
+        self.setup_language();
 
         debug!("All styles {:?}", style_schemes());
 

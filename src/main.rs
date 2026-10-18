@@ -34,7 +34,7 @@ use widget::{
     app_window::{AppWindow, menu},
     preferences::{
         PreferencesDialog,
-        data::{DbusLevel, KEY_PREF_PREFERRED_COLOR_SCHEME, PREFERENCES},
+        data::{DbusLevel, KEY_PREF_LANGUAGE, KEY_PREF_PREFERRED_COLOR_SCHEME, PREFERENCES},
     },
 };
 
@@ -44,9 +44,6 @@ fn main() -> glib::ExitCode {
 
     dotenv().ok();
 
-    // SAFETY: no GTK, D-Bus, async runtime or worker threads have started yet.
-    let locale_setup = unsafe { i18n::init() };
-
     let timer = tracing_subscriber::fmt::time::ChronoLocal::new("%Y-%m-%d %H:%M:%S%.3f".to_owned());
     tracing_subscriber::fmt()
         .with_timer(timer)
@@ -54,6 +51,17 @@ fn main() -> glib::ExitCode {
         .with_env_filter(EnvFilter::from_default_env())
         .with_ansi(true)
         .init();
+
+    // An explicit interface language preference overrides the environment.
+    // The schema may be unavailable when the binary is run without installing
+    // it; in that case fall back to the environment-provided language.
+    let preferred_language = gio::SettingsSchemaSource::default()
+        .and_then(|source| source.lookup(APP_ID, true))
+        .map(|_| new_settings().string(KEY_PREF_LANGUAGE))
+        .unwrap_or_default();
+
+    // SAFETY: no GTK, D-Bus, async runtime or worker threads have started yet.
+    let locale_setup = unsafe { i18n::init_with(Some(preferred_language.as_str())) };
 
     match locale_setup {
         Ok(path) => info!("Translation catalog directory: {}", path.display()),

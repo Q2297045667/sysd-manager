@@ -12,7 +12,7 @@ mod analyze;
 mod consts;
 #[path = "../src/errors.rs"]
 mod errors;
-#[path = "../src/i18n.rs"]
+#[path = "../src/i18n/mod.rs"]
 mod i18n;
 #[path = "../src/systemd_gui.rs"]
 mod systemd_gui;
@@ -26,7 +26,11 @@ mod systemd_mock;
 
 use adw::prelude::*;
 use gtk::{gio, glib};
-use std::time::{Duration, Instant};
+use std::{
+    fs,
+    path::Path,
+    time::{Duration, Instant},
+};
 
 fn main() {
     if std::env::var_os("SYSD_UI_TEST_ISOLATED").is_none() {
@@ -161,6 +165,20 @@ fn main() {
         );
     }
 
+    // A catalog dropped into the user folder must appear in the language
+    // list as soon as the preferences dialog scans the catalogs.
+    let dropin = Path::new(&std::env::var_os("XDG_DATA_HOME").expect("isolated XDG_DATA_HOME"))
+        .join("sysd-manager/translations");
+    fs::create_dir_all(&dropin).unwrap();
+    fs::copy(
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("po/zh_Hans.po"),
+        dropin.join("xx.po"),
+    )
+    .unwrap();
+    systemd_gui::new_settings()
+        .set_string(widget::preferences::data::KEY_PREF_LANGUAGE, "xx")
+        .unwrap();
+
     let preferences = widget::preferences::PreferencesDialog::new(Some(&window));
     preferences.present(Some(&window));
     pump(Duration::from_millis(100));
@@ -171,6 +189,46 @@ fn main() {
         } else {
             "Preferred Color Scheme"
         },
+    );
+    let language_row: adw::ComboRow = find_titled(
+        preferences.upcast_ref(),
+        if chinese { "语言" } else { "Language" },
+    )
+    .expect("language preferences row");
+    let model = language_row.model().expect("language model");
+    let labels: Vec<_> = (0..model.n_items())
+        .filter_map(|index| model.item(index))
+        .filter_map(|item| item.downcast::<gtk::StringObject>().ok())
+        .map(|item| item.string().to_string())
+        .collect();
+    let dropped = labels
+        .iter()
+        .position(|label| label == "Chinese (Simplified Han script) — xx")
+        .unwrap_or_else(|| panic!("drop-in language missing from {labels:?}"));
+    assert_eq!(language_row.selected(), dropped as u32);
+
+    let restart_hint: adw::ActionRow = find_titled(
+        preferences.upcast_ref(),
+        if chinese {
+            "重启后应用语言"
+        } else {
+            "Restart to Apply the Language"
+        },
+    )
+    .expect("language restart hint");
+    assert!(
+        restart_hint.is_visible(),
+        "pending language change is hidden"
+    );
+    language_row.set_selected(0);
+    pump(Duration::from_millis(50));
+    assert!(
+        !restart_hint.is_visible(),
+        "restart hint visible without a pending change"
+    );
+    assert_eq!(
+        systemd_gui::new_settings().string(widget::preferences::data::KEY_PREF_LANGUAGE),
+        ""
     );
     preferences.close();
     pump(Duration::from_millis(100));
@@ -264,6 +322,25 @@ fn main() {
         "ui: {} real windows and dialogs passed",
         if chinese { "Chinese" } else { "English" }
     );
+}
+
+fn find_titled<T: IsA<gtk::Widget>>(root: &gtk::Widget, title: &str) -> Option<T> {
+    if let Ok(widget) = root.clone().downcast::<T>()
+        && widget.find_property("title").is_some()
+    {
+        let value = widget.property_value("title");
+        if value.get::<Option<String>>().ok().flatten().as_deref() == Some(title) {
+            return Some(widget);
+        }
+    }
+    let mut child = root.first_child();
+    while let Some(widget) = child {
+        if let Some(found) = find_titled(&widget, title) {
+            return Some(found);
+        }
+        child = widget.next_sibling();
+    }
+    None
 }
 
 fn find_widget<T: IsA<gtk::Widget>>(root: &gtk::Widget) -> Option<T> {

@@ -142,6 +142,11 @@
       <default>0</default>
       <summary>Application Preferred Color Scheme</summary>
     </key>
+    <key name="pref-language" type="s">
+      <default>''</default>
+      <summary>Interface language catalog code</summary>
+      <description>Empty follows the system locale. Any other value selects one of the translation catalogs discovered at startup (for example zh_Hans).</description>
+    </key>
     <key name="pref-window-orientaion-mode" type="s">
       <choices>
         <choice value="auto"/>

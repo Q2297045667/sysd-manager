@@ -27,6 +27,47 @@ You can set the application's Dbus level to &lt;u&gt;System&lt;/u&gt; if you wan
               </object>
             </child>
             <child>
+              <object class="AdwComboRow" id="language">
+                <property name="subtitle" translatable="yes" context="preference" comments="row subtitle">Interface language. Changes are applied when the application restarts.</property>
+                <property name="title" translatable="yes" context="preference" comments="row">Language</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="language_restart_hint">
+                <property name="visible">False</property>
+                <property name="title" translatable="yes" context="preference">Restart to Apply the Language</property>
+                <property name="subtitle" translatable="yes" context="preference">Close and reopen SysD Manager to use the selected language.</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="translations_folder_row">
+                <property name="title" translatable="yes" context="preference" comments="row">Translations Folder</property>
+                <property name="tooltip-text" translatable="yes" context="preference">Put a .po or .mo file named after the language (for example de.po) in this folder to add an interface language.</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="spacing">6</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkButton" id="open_translations_folder_button">
+                        <property name="css-classes">flat</property>
+                        <property name="icon-name">folder-open-symbolic</property>
+                        <property name="tooltip-text" translatable="yes" context="preference">Open the translations folder</property>
+                        <signal name="clicked" handler="open_translations_folder" swapped="True"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="refresh_languages_button">
+                        <property name="css-classes">flat</property>
+                        <property name="icon-name">view-refresh-symbolic</property>
+                        <property name="tooltip-text" translatable="yes" context="preference">Look for new translation files</property>
+                        <signal name="clicked" handler="refresh_languages" swapped="True"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
               <object class="AdwComboRow" id="app_orientation">
                 <property name="subtitle" translatable="yes" context="preference" comments="row subtitle">Application's division orientation mode</property>
                 <property name="title" translatable="yes" context="preference" comments="row">Orientation</property>

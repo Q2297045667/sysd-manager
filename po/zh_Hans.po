@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sysd-manager 2.24.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 02:39+0800\n"
+"POT-Creation-Date: 2026-10-19 03:19+0800\n"
 "PO-Revision-Date: 2026-10-19 00:00+0800\n"
 "Last-Translator: CGuo <CGuoXYZ@163.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -918,202 +918,247 @@ msgstr "首选配色方案"
 #. row subtitle
 #: data/interfaces/preferences.ui:31
 msgctxt "preference"
+msgid "Interface language. Changes are applied when the application restarts."
+msgstr "界面语言。更改将在应用重启后生效。"
+
+#. row
+#: data/interfaces/preferences.ui:32
+msgctxt "preference"
+msgid "Language"
+msgstr "语言"
+
+#: data/interfaces/preferences.ui:38
+msgctxt "preference"
+msgid "Restart to Apply the Language"
+msgstr "重启后应用语言"
+
+#: data/interfaces/preferences.ui:39
+msgctxt "preference"
+msgid "Close and reopen SysD Manager to use the selected language."
+msgstr "关闭并重新打开 SysD Manager 以使用所选语言。"
+
+#. row
+#: data/interfaces/preferences.ui:44
+msgctxt "preference"
+msgid "Translations Folder"
+msgstr "翻译文件夹"
+
+#: data/interfaces/preferences.ui:45
+msgctxt "preference"
+msgid ""
+"Put a .po or .mo file named after the language (for example de.po) in this "
+"folder to add an interface language."
+msgstr "将按语言命名的 .po 或 .mo 文件（例如 de.po）放入此文件夹即可添加界面语言。"
+
+#: data/interfaces/preferences.ui:54
+msgctxt "preference"
+msgid "Open the translations folder"
+msgstr "打开翻译文件夹"
+
+#: data/interfaces/preferences.ui:62
+msgctxt "preference"
+msgid "Look for new translation files"
+msgstr "查找新的翻译文件"
+
+#. row subtitle
+#: data/interfaces/preferences.ui:72
+msgctxt "preference"
 msgid "Application's division orientation mode"
 msgstr "界面排序方式"
 
 #. row
-#: data/interfaces/preferences.ui:32
+#: data/interfaces/preferences.ui:73
 msgctxt "preference"
 msgid "Orientation"
 msgstr "界面排序方向"
 
 #. row
-#: data/interfaces/preferences.ui:37
+#: data/interfaces/preferences.ui:78
 msgctxt "preference"
 msgid "Change the format of printed timestamps"
 msgstr "更改时间戳的显示格式"
 
 #. row
-#: data/interfaces/preferences.ui:38
+#: data/interfaces/preferences.ui:79
 msgctxt "preference"
 msgid "Timestamp style"
 msgstr "时间戳样式"
 
 #. row
-#: data/interfaces/preferences.ui:43
+#: data/interfaces/preferences.ui:84
 msgctxt "preference"
 msgid "The Monospace Font"
 msgstr "等宽字体"
 
 #. row
-#: data/interfaces/preferences.ui:44
+#: data/interfaces/preferences.ui:85
 msgctxt "preference"
 msgid "Text font"
 msgstr "文本字体"
 
-#: data/interfaces/preferences.ui:48
+#: data/interfaces/preferences.ui:89
 msgctxt "preference"
 msgid "Default"
 msgstr "默认"
 
 #. button
-#: data/interfaces/preferences.ui:56
+#: data/interfaces/preferences.ui:97
 msgctxt "preference"
 msgid "Select Font"
 msgstr "选择字体"
 
 #. group
-#: data/interfaces/preferences.ui:67
+#: data/interfaces/preferences.ui:108
 msgctxt "preference"
 msgid "Unit List"
 msgstr "单元列表"
 
 #. subtitle
-#: data/interfaces/preferences.ui:70
+#: data/interfaces/preferences.ui:111
 msgctxt "preference"
 msgid "Display Colors on unit list table cells, according to their content."
 msgstr "根据内容在单元列表中着色。"
 
 #. title
-#: data/interfaces/preferences.ui:71
+#: data/interfaces/preferences.ui:112
 msgctxt "preference"
 msgid "Display Colors"
 msgstr "颜色指示"
 
 #. subtitle
-#: data/interfaces/preferences.ui:76
+#: data/interfaces/preferences.ui:117
 msgctxt "preference"
 msgid "Display different totals regarding retrieved units"
 msgstr "显示已检索单元的统计摘要"
 
 #. title
-#: data/interfaces/preferences.ui:77
+#: data/interfaces/preferences.ui:118
 msgctxt "preference"
 msgid "Display Totals Summary"
 msgstr "显示统计摘要"
 
-#: data/interfaces/preferences.ui:82
+#: data/interfaces/preferences.ui:123
 msgid "Columns Display Parameters"
 msgstr "列显示参数"
 
-#: data/interfaces/preferences.ui:91
+#: data/interfaces/preferences.ui:132
 #: data/interfaces/unit_properties_selection.ui:37
 msgid "Columns"
 msgstr "列"
 
 #. subtitle
-#: data/interfaces/preferences.ui:100
+#: data/interfaces/preferences.ui:141
 msgctxt "preference"
 msgid "Search and filtering case insensitivity default option"
 msgstr "搜索与筛选默认不区分大小写"
 
 #. title
-#: data/interfaces/preferences.ui:101
+#: data/interfaces/preferences.ui:142
 msgctxt "preference"
 msgid "Case Insensitive"
 msgstr "忽略大小写"
 
 #. subtitle
-#: data/interfaces/preferences.ui:106
+#: data/interfaces/preferences.ui:147
 msgctxt "preference"
 msgid "Display Unit's Active Status as an icon rather than text"
 msgstr "以图标显示单元活动状态，而非文本"
 
 #. title
-#: data/interfaces/preferences.ui:107
+#: data/interfaces/preferences.ui:148
 msgctxt "preference"
 msgid "Active State as Icon"
 msgstr "以图标显示活动状态"
 
 #. subtitle
-#: data/interfaces/preferences.ui:112
+#: data/interfaces/preferences.ui:153
 msgctxt "preference"
 msgid "Preserve the Filters across application restarts"
 msgstr "应用重启后保留筛选条件"
 
 #. title
-#: data/interfaces/preferences.ui:113
+#: data/interfaces/preferences.ui:154
 msgctxt "preference"
 msgid "Preserve Filters"
 msgstr "保留筛选条件"
 
 #. group
-#: data/interfaces/preferences.ui:120
+#: data/interfaces/preferences.ui:161
 msgctxt "preference"
 msgid "Unit Status"
 msgstr "单元状态"
 
 #. subtitle
-#: data/interfaces/preferences.ui:123
+#: data/interfaces/preferences.ui:164
 msgctxt "preference"
 msgid "Wrap the unit status long text lines"
 msgstr "对单元状态中的长文本行自动换行"
 
 #. title
-#: data/interfaces/preferences.ui:124
+#: data/interfaces/preferences.ui:165
 msgctxt "preference"
 msgid "Wrap unit status text"
 msgstr "单元状态文本自动换行"
 
 #. subtitle
-#: data/interfaces/preferences.ui:129
+#: data/interfaces/preferences.ui:170
 msgctxt "preference"
 msgid "Otherwise those buttons are displayed according to context"
 msgstr "否则，这些按钮会根据上下文显示"
 
 #. title
-#: data/interfaces/preferences.ui:130
+#: data/interfaces/preferences.ui:171
 msgctxt "preference"
 msgid "Always shows Start and Stop Buttons"
 msgstr "始终显示“启动”和“停止”按钮"
 
 #. group
-#: data/interfaces/preferences.ui:137
+#: data/interfaces/preferences.ui:178
 msgctxt "preference"
 msgid "Unit File"
 msgstr "单元文件"
 
 #. subtitle
-#: data/interfaces/preferences.ui:140
+#: data/interfaces/preferences.ui:181
 msgctxt "preference"
 msgid "Display unit file line number"
 msgstr "显示单元文件行号"
 
 #. title
-#: data/interfaces/preferences.ui:141
+#: data/interfaces/preferences.ui:182
 msgctxt "preference"
 msgid "Line number"
 msgstr "显示行号"
 
 #. subtitle
-#: data/interfaces/preferences.ui:146
+#: data/interfaces/preferences.ui:187
 msgctxt "preference"
 msgid "Unit file highlight style"
 msgstr "单元文件高亮样式"
 
 #. title
-#: data/interfaces/preferences.ui:147
+#: data/interfaces/preferences.ui:188
 msgctxt "preference"
 msgid "Text Highlight"
 msgstr "文本高亮"
 
-#: data/interfaces/preferences.ui:154
+#: data/interfaces/preferences.ui:195
 msgid "Journal"
 msgstr "日志"
 
 #. subtitle
-#: data/interfaces/preferences.ui:157
+#: data/interfaces/preferences.ui:198
 msgctxt "preference"
 msgid "To see the logs in color"
 msgstr "以彩色显示日志"
 
 #. title
-#: data/interfaces/preferences.ui:158
+#: data/interfaces/preferences.ui:199
 msgctxt "preference"
 msgid "Journal colors"
 msgstr "日志条目颜色"
 
-#: data/interfaces/preferences.ui:176
+#: data/interfaces/preferences.ui:217
 msgid ""
 "The maximum events fetch in a batch\n"
 "<i>0 means no size limit</i>"
@@ -1122,13 +1167,13 @@ msgstr ""
 "<i>0 表示不限制数量</i>"
 
 #. title
-#: data/interfaces/preferences.ui:179
+#: data/interfaces/preferences.ui:220
 msgctxt "preference"
 msgid "Journal's events batch size"
 msgstr "日志事件批次大小"
 
 #. subtitle
-#: data/interfaces/preferences.ui:192
+#: data/interfaces/preferences.ui:233
 msgctxt "preference"
 msgid ""
 "Journal's event maximum characters\n"
@@ -1138,206 +1183,206 @@ msgstr ""
 "<i>0 表示无限制</i>"
 
 #. title
-#: data/interfaces/preferences.ui:195
+#: data/interfaces/preferences.ui:236
 msgctxt "preference"
 msgid "Journal's event max size"
 msgstr "日志事件最大长度"
 
-#: data/interfaces/preferences.ui:202
+#: data/interfaces/preferences.ui:243
 msgid "Wrap text at word boundaries"
 msgstr "在词边界处换行"
 
-#: data/interfaces/preferences.ui:203
+#: data/interfaces/preferences.ui:244
 msgid "Wrap Word"
 msgstr "按词换行"
 
-#: data/interfaces/preferences.ui:219
+#: data/interfaces/preferences.ui:260
 msgctxt "preference"
 msgid "_Proxy Preferences"
 msgstr "代理首选项(_P)"
 
-#: data/interfaces/preferences.ui:225
+#: data/interfaces/preferences.ui:266
 msgid "Switch that controls other switches"
 msgstr "控制其他开关的总开关"
 
-#: data/interfaces/preferences.ui:226
+#: data/interfaces/preferences.ui:267
 msgid "All Actions and Methods"
 msgstr "所有操作和方法"
 
 #. group title
-#: data/interfaces/preferences.ui:233
+#: data/interfaces/preferences.ui:274
 msgctxt "preference"
 msgid "Systemd Manager Method Calls"
 msgstr "systemd 管理器方法调用"
 
-#: data/interfaces/preferences.ui:236
+#: data/interfaces/preferences.ui:277
 msgctxt "preference"
 msgid "<b>Start</b> method call through the Proxy"
 msgstr "通过代理调用<b>启动</b>方法"
 
-#: data/interfaces/preferences.ui:237
+#: data/interfaces/preferences.ui:278
 msgctxt "preference"
 msgid "Start"
 msgstr "启动"
 
-#: data/interfaces/preferences.ui:242
+#: data/interfaces/preferences.ui:283
 msgctxt "preference"
 msgid "<b>Stop</b> method call through the Proxy"
 msgstr "通过代理调用<b>停止</b>方法"
 
-#: data/interfaces/preferences.ui:243
+#: data/interfaces/preferences.ui:284
 msgctxt "preference"
 msgid "Stop"
 msgstr "停止"
 
-#: data/interfaces/preferences.ui:248
+#: data/interfaces/preferences.ui:289
 msgctxt "preference"
 msgid "<b>Restart</b> method call through the Proxy"
 msgstr "通过代理调用<b>重启</b>方法"
 
-#: data/interfaces/preferences.ui:249
+#: data/interfaces/preferences.ui:290
 msgctxt "preference"
 msgid "Restart"
 msgstr "重启"
 
-#: data/interfaces/preferences.ui:254
+#: data/interfaces/preferences.ui:295
 msgctxt "preference"
 msgid "<b>Reload Unit</b> method call through the Proxy"
 msgstr "通过代理调用<b>重载单元</b>方法"
 
-#: data/interfaces/preferences.ui:255
+#: data/interfaces/preferences.ui:296
 msgctxt "preference"
 msgid "Reload Unit"
 msgstr "重载单元"
 
-#: data/interfaces/preferences.ui:260
+#: data/interfaces/preferences.ui:301
 msgctxt "preference"
 msgid "<b>Clean</b> method call through the Proxy"
 msgstr "通过代理调用<b>清理</b>方法"
 
-#: data/interfaces/preferences.ui:261
+#: data/interfaces/preferences.ui:302
 msgctxt "preference"
 msgid "Clean"
 msgstr "清理"
 
-#: data/interfaces/preferences.ui:266
+#: data/interfaces/preferences.ui:307
 msgctxt "preference"
 msgid "<b>Freeze</b> method call through the Proxy"
 msgstr "通过代理调用 <b>冻结</b> 方法"
 
-#: data/interfaces/preferences.ui:267
+#: data/interfaces/preferences.ui:308
 msgctxt "preference"
 msgid "Freeze"
 msgstr "冻结"
 
-#: data/interfaces/preferences.ui:272
+#: data/interfaces/preferences.ui:313
 msgctxt "preference"
 msgid "<b>Thaw</b> method call through the Proxy"
 msgstr "通过代理调用 <b>解冻</b> 方法"
 
-#: data/interfaces/preferences.ui:273
+#: data/interfaces/preferences.ui:314
 msgctxt "preference"
 msgid "Thaw"
 msgstr "解冻"
 
-#: data/interfaces/preferences.ui:278
+#: data/interfaces/preferences.ui:319
 msgctxt "preference"
 msgid "<b>Enable Unit File</b> method call through the Proxy"
 msgstr "通过代理调用来<b>启用单元文件</b>"
 
-#: data/interfaces/preferences.ui:279
+#: data/interfaces/preferences.ui:320
 msgctxt "preference"
 msgid "Enable Unit File"
 msgstr "启用单元文件"
 
-#: data/interfaces/preferences.ui:284
+#: data/interfaces/preferences.ui:325
 msgctxt "preference"
 msgid "<b>Disable Unit File</b> method call through the Proxy"
 msgstr "通过代理调用来<b>停用单元文件</b>"
 
-#: data/interfaces/preferences.ui:285
+#: data/interfaces/preferences.ui:326
 msgctxt "preference"
 msgid "Disable Unit File"
 msgstr "禁用单元文件"
 
-#: data/interfaces/preferences.ui:290
+#: data/interfaces/preferences.ui:331
 msgctxt "preference"
 msgid ""
 "<b>Reload</b> Systemd Manager configuration method call through the Proxy"
 msgstr "通过代理调用来<b>重载</b>所有单元配置"
 
-#: data/interfaces/preferences.ui:291
+#: data/interfaces/preferences.ui:332
 msgctxt "preference"
 msgid "Daemon Reload"
 msgstr "重新加载守护进程配置"
 
-#: data/interfaces/preferences.ui:296
+#: data/interfaces/preferences.ui:337
 msgctxt "preference"
 msgid ""
 "<b>Revert Unit Files</b> to their vendor versions method call through the "
 "Proxy"
 msgstr "通过代理调用 来<b>恢复单元文件</b> 到其供应商版本"
 
-#: data/interfaces/preferences.ui:297
+#: data/interfaces/preferences.ui:338
 msgctxt "preference"
 msgid "Revert Unit Files"
 msgstr "恢复单元文件"
 
-#: data/interfaces/preferences.ui:304
+#: data/interfaces/preferences.ui:345
 msgctxt "preference"
 msgid "Actions"
 msgstr "操作"
 
-#: data/interfaces/preferences.ui:307
+#: data/interfaces/preferences.ui:348
 msgctxt "preference"
 msgid "Create a <b>Drop-in</b> file through the Proxy"
 msgstr "通过代理创建<b>附加配置</b>文件"
 
-#: data/interfaces/preferences.ui:308
+#: data/interfaces/preferences.ui:349
 msgctxt "preference"
 msgid "Create Drop-in"
 msgstr "创建附加配置"
 
-#: data/interfaces/preferences.ui:313
+#: data/interfaces/preferences.ui:354
 msgctxt "preference"
 msgid "<b>Save file</b> through the Proxy"
 msgstr "通过代理<b>保存文件</b>"
 
-#: data/interfaces/preferences.ui:314
+#: data/interfaces/preferences.ui:355
 msgctxt "preference"
 msgid "Save file"
 msgstr "保存文件"
 
-#: data/interfaces/preferences.ui:319
+#: data/interfaces/preferences.ui:360
 msgctxt "preference"
 msgid "<b>Create file</b> through the Proxy"
 msgstr "通过代理<b>创建文件</b>"
 
-#: data/interfaces/preferences.ui:320
+#: data/interfaces/preferences.ui:361
 msgctxt "preference"
 msgid "Create file"
 msgstr "创建文件"
 
-#: data/interfaces/preferences.ui:328
+#: data/interfaces/preferences.ui:369
 msgctxt "preference"
 msgid "Proxy Behaviors"
 msgstr "代理运行行为"
 
-#: data/interfaces/preferences.ui:331
+#: data/interfaces/preferences.ui:372
 msgid "Start the Proxy when starting SysD Manager"
 msgstr "启动 SysD Manager 时启动代理"
 
-#: data/interfaces/preferences.ui:332
+#: data/interfaces/preferences.ui:373
 msgctxt "preference"
 msgid "Start Proxy at Start up"
 msgstr "在软件启动时启动代理"
 
-#: data/interfaces/preferences.ui:337
+#: data/interfaces/preferences.ui:378
 msgctxt "preference"
 msgid "Stop the Proxy when closing SysD Manager"
 msgstr "关闭 SysD Manager 时停止代理"
 
-#: data/interfaces/preferences.ui:338
+#: data/interfaces/preferences.ui:379
 msgctxt "preference"
 msgid "Stop Proxy at Close"
 msgstr "关闭时停止代理"
@@ -2279,7 +2324,7 @@ msgid "{} seconds"
 msgstr "{} 秒"
 
 #. Just a simple log that it's all ok. Need to set env RUST_LOG="info" to see it
-#: src/main.rs:85
+#: src/main.rs:88
 msgid "Program starting up"
 msgstr "程序正在启动"
 
@@ -3120,78 +3165,88 @@ msgid "Add {} to Favorites"
 msgstr "将 {} 加入收藏"
 
 #. browser dbus option
-#: src/widget/preferences/data.rs:69
+#: src/widget/preferences/data.rs:70
 msgctxt "dbus"
 msgid "User Session Bus"
 msgstr "用户会话总线"
 
 #. browser dbus option
-#: src/widget/preferences/data.rs:71
+#: src/widget/preferences/data.rs:72
 msgctxt "dbus"
 msgid "System Bus"
 msgstr "系统总线"
 
 #. browser dbus option
-#: src/widget/preferences/data.rs:73
+#: src/widget/preferences/data.rs:74
 msgctxt "dbus"
 msgid "System & User Session Bus"
 msgstr "系统与用户会话总线"
 
 #. preference color scheme option
-#: src/widget/preferences/data.rs:166
+#: src/widget/preferences/data.rs:167
 msgctxt "color scheme"
 msgid "No Preference"
 msgstr "无偏好"
 
 #. preference color scheme option
-#: src/widget/preferences/data.rs:168
+#: src/widget/preferences/data.rs:169
 msgctxt "color scheme"
 msgid "Prefer Dark"
 msgstr "优先深色"
 
 #. preference color scheme option
-#: src/widget/preferences/data.rs:170
+#: src/widget/preferences/data.rs:171
 msgctxt "color scheme"
 msgid "Prefer Light"
 msgstr "优先浅色"
 
 #. preference color scheme option
-#: src/widget/preferences/data.rs:172
+#: src/widget/preferences/data.rs:173
 msgctxt "color scheme"
 msgid "Force Dark"
 msgstr "强制深色"
 
 #. preference color scheme option
-#: src/widget/preferences/data.rs:174
+#: src/widget/preferences/data.rs:175
 msgctxt "color scheme"
 msgid "Force Light"
 msgstr "强制浅色"
 
 #. preference application orientation option
-#: src/widget/preferences/data.rs:220
+#: src/widget/preferences/data.rs:221
 msgctxt "pref orientation"
 msgid "Automatic"
 msgstr "自动"
 
 #. preference application orientation option
-#: src/widget/preferences/data.rs:222
+#: src/widget/preferences/data.rs:223
 msgctxt "pref orientation"
 msgid "Side by Side"
 msgstr "并排"
 
 #. preference application orientation option
-#: src/widget/preferences/data.rs:224
+#: src/widget/preferences/data.rs:225
 msgctxt "pref orientation"
 msgid "Top Bottom"
 msgstr "上下"
 
-#: src/widget/preferences/imp.rs:201
+#: src/widget/preferences/imp.rs:220
 msgctxt "preference"
 msgid "Pick a Monospace Font"
 msgstr "选择等宽字体"
 
+#: src/widget/preferences/imp.rs:402
+msgctxt "preference"
+msgid "No user data directory available"
+msgstr "没有可用的用户数据目录"
+
+#: src/widget/preferences/imp.rs:442
+msgctxt "preference"
+msgid "System Default"
+msgstr "系统默认"
+
 #. unit file no preference style selected
-#: src/widget/preferences/imp.rs:462
+#: src/widget/preferences/imp.rs:625
 msgctxt "pref file style"
 msgid "None"
 msgstr "无"

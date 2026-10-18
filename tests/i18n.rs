@@ -1,5 +1,8 @@
 //! Locale mutation happens only in fresh, single-threaded subprocesses.
-#[path = "../src/i18n.rs"]
+// The source modules also contain unit tests; this executable uses its own
+// single-threaded probe harness rather than Rust's threaded test harness.
+#![allow(dead_code, unused_imports)]
+#[path = "../src/i18n/mod.rs"]
 mod i18n;
 
 use gettextrs::{gettext, pgettext};
@@ -30,7 +33,15 @@ fn main() {
         for (key, _) in env::vars_os() {
             if key.to_str().is_some_and(|key| {
                 key.starts_with("LC_")
-                    || ["LANG", "LANGUAGE", "LOCPATH", "TEXTDOMAINDIR"].contains(&key)
+                    || [
+                        "LANG",
+                        "LANGUAGE",
+                        "LOCPATH",
+                        "TEXTDOMAINDIR",
+                        "XDG_DATA_HOME",
+                        "XDG_CACHE_HOME",
+                    ]
+                    .contains(&key)
             }) {
                 command.env_remove(key);
             }
@@ -44,7 +55,9 @@ fn main() {
             .env("LANG", &locale.english);
         command
             .env("TEXTDOMAINDIR", &catalogs)
-            .env("SYSD_EXPECTED_CATALOG_DIR", &catalogs);
+            .env("SYSD_EXPECTED_CATALOG_DIR", &catalogs)
+            .env("XDG_DATA_HOME", fixture.path().join("xdg-data-empty"))
+            .env("XDG_CACHE_HOME", fixture.path().join("xdg-cache"));
         if let Some(directory) = directory {
             command
                 .env("TEXTDOMAINDIR", directory)
@@ -93,6 +106,68 @@ fn main() {
             None,
         );
     }
+    let dropin_data = fixture.path().join("xdg-data");
+    let dropin = dropin_data.join("sysd-manager/translations");
+    fs::create_dir_all(&dropin).unwrap();
+    fs::copy(
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("po/zh_Hans.po"),
+        dropin.join("xx.po"),
+    )
+    .unwrap();
+    let dropin_data = dropin_data.to_string_lossy().into_owned();
+    let dropin_cache = fixture
+        .path()
+        .join("xdg-cache/sysd-manager/locale")
+        .to_string_lossy()
+        .into_owned();
+    let dropin_variables = [
+        ("XDG_DATA_HOME", dropin_data.as_str()),
+        ("SYSD_EXPECTED_CATALOG_DIR", dropin_cache.as_str()),
+    ];
+    run(
+        "user drop-in .po catalog",
+        "dropin",
+        &dropin_variables,
+        None,
+        None,
+    );
+    run(
+        "user drop-in catalog listed for the preferences dialog",
+        "list",
+        &dropin_variables,
+        None,
+        None,
+    );
+    run(
+        "user drop-in catalog selected through LANGUAGE",
+        "dropin-env",
+        &[
+            ("XDG_DATA_HOME", dropin_data.as_str()),
+            ("SYSD_EXPECTED_CATALOG_DIR", dropin_cache.as_str()),
+            ("LANGUAGE", "xx"),
+        ],
+        None,
+        None,
+    );
+    run(
+        "missing preferred catalog falls back to the system language",
+        "missing-pref",
+        &[],
+        None,
+        None,
+    );
+    run(
+        "explicit preference overrides a C message locale",
+        "dropin-c",
+        &[
+            ("XDG_DATA_HOME", dropin_data.as_str()),
+            ("SYSD_EXPECTED_CATALOG_DIR", dropin_cache.as_str()),
+            ("LC_ALL", "C"),
+            ("LANG", "C"),
+        ],
+        None,
+        None,
+    );
     run(
         "native Chinese LANG",
         "zh",
@@ -285,9 +360,34 @@ impl TestLocales {
 }
 
 fn probe(language: &str) {
+    if language == "list" {
+        let languages = i18n::available_languages();
+        let dropped = languages
+            .iter()
+            .find(|language| language.code == "xx")
+            .expect("drop-in catalog");
+        assert_eq!(dropped.name, "Chinese (Simplified Han script)");
+        assert!(dropped.label().ends_with("xx"));
+        assert!(languages.iter().any(|language| language.code == "zh_Hans"));
+        // zh_CN and zh_SG are byte-identical shortcuts of zh_Hans and must not
+        // be offered as separate entries in the language selector.
+        assert!(!languages.iter().any(|language| language.code == "zh_CN"));
+        assert!(!languages.iter().any(|language| language.code == "zh_SG"));
+        return;
+    }
     let start = Instant::now();
     // SAFETY: this is a fresh, single-threaded process.
-    let result = unsafe { i18n::init() };
+    let preferred = match language {
+        "dropin" | "dropin-c" => Some("xx"),
+        "missing-pref" => Some("zz"),
+        _ => None,
+    };
+    let result = unsafe {
+        match preferred {
+            Some(code) => i18n::init_with(Some(code)),
+            None => i18n::init(),
+        }
+    };
     if language == "invalid" {
         assert_eq!(result.unwrap_err().kind(), std::io::ErrorKind::InvalidInput);
         assert_eq!(gettext("Search"), "Search");
@@ -314,7 +414,7 @@ fn probe(language: &str) {
         return;
     }
 
-    let chinese = language == "zh";
+    let chinese = language == "zh" || language.starts_with("dropin");
     assert_eq!(gettext("Search"), if chinese { "搜索" } else { "Search" });
     assert_eq!(
         pgettext("controls", "Start"),

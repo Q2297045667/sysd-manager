@@ -130,6 +130,11 @@ The `RunMode` enum (`sysd-manager-base/src/lib.rs`) controls dev vs. production 
 - `transtools` CLI regenerates the `.pot` template and updates `.po` files
 - Development locale dir is `target/locale/` (set via `.env`)
 - Translations managed on [Weblate](https://hosted.weblate.org/engage/sysd-manager/)
+- Runtime discovery lives in `src/i18n/`: installed catalogs plus user drop-ins
+  in `$XDG_DATA_HOME/sysd-manager/translations/*.{po,mo}`. `.po` files are
+  compiled by `src/i18n/catalog.rs` without `msgfmt`. Preferences lists the
+  discovered catalogs (no hardcoded language list) and stores the choice in the
+  `pref-language` GSettings key; a change applies after restart.
 
 ## Features Flags
 

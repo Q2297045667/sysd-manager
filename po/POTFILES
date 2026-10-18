@@ -45,7 +45,9 @@ data/interfaces/unit_status_panel.ui
 src/analyze/mod.rs
 src/consts.rs
 src/errors.rs
-src/i18n.rs
+src/i18n/catalog.rs
+src/i18n/discovery.rs
+src/i18n/mod.rs
 src/main.rs
 src/systemd_gui.rs
 src/utils/font_management.rs

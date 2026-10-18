@@ -302,8 +302,45 @@ Contributions are welcome. Please contact the project maintainer on [GitHub](htt
 
 SysD Manager supports multiple languages through community translations.
 
-The interface follows your system language. Simplified Chinese is available as
-`zh_Hans`, `zh_CN`, and `zh_SG`. To run in Chinese from the source tree:
+The interface follows your system language by default. You can also select an
+available language in **Preferences → Main → General → Language**. The list is
+built from the translation catalogs that are actually present; no language list
+is hardcoded in the application. A language change is applied the next time the
+application starts, and the preferences page shows a reminder.
+
+### Adding a language without rebuilding
+
+Any gettext catalog can be dropped into the user translations folder:
+
+```
+~/.local/share/sysd-manager/translations/
+```
+
+The folder accepts flat `<language>.po` and `<language>.mo` files, for example
+`ja.po`, `zh_Hant.po` or `de.mo`. A `.po` file (the format produced by Weblate)
+is compiled to a `.mo` catalog at startup in pure Rust, so gettext tools are not
+required on the user's machine. User catalogs override an installed catalog with
+the same language code, while the other installed languages stay available. An
+override of a canonical catalog is also used by the locale shortcuts generated
+for it (for example `zh_CN` for `zh_Hans`).
+
+For the Flatpak build the sandbox data directory is used; on the host this is
+`~/.var/app/io.github.plrigaux.sysd-manager/data/sysd-manager/translations`.
+
+The preferences page has buttons to open that folder and to rescan it, so a file
+copied while the application is running appears in the language list without a
+restart. The selected language is stored in GSettings and applied when the
+application starts; if the chosen catalog was removed in the meantime, the
+system language is used and the preferences page clears the stale choice.
+English source text is used when a catalog is missing or not translatable.
+
+Installed catalogs are discovered in `/usr/share/locale`
+(`/app/share/locale` for Flatpak, or the AppImage launcher path) and in the
+development build's Cargo target `locale` folder. `TEXTDOMAINDIR` can override
+the installed catalog directory.
+
+Simplified Chinese is available as `zh_Hans`, `zh_CN`, and `zh_SG`. To run in
+Chinese from the source tree, use:
 
 ```bash
 LANGUAGE=zh_CN cargo run
@@ -312,15 +349,14 @@ LANGUAGE=zh_CN cargo run
 Use an installed non-C UTF-8 locale (for example
 `LC_ALL=zh_CN.UTF-8 LANGUAGE=zh_CN cargo run`) if your shell uses `C`/`POSIX` or
 `C.UTF-8`, which can disable gettext translations. Set
-`LANGUAGE=en` to use English. `TEXTDOMAINDIR` can override the catalog directory;
-development builds otherwise use the Cargo target directory's `locale` folder
-(including custom `--target-dir` paths), and installed builds use
-`/usr/share/locale` (`/app/share/locale` for Flatpak, or AppImage's launcher path).
+`LANGUAGE=en` to use English. An explicit in-app language selection overrides
+the environment; the "System Default" entry follows it.
 
 Rust messages use `gettext`/`pgettext`; GTK presentation text uses
 `translatable="yes"` and an optional context. Keep systemd directives, D-Bus
 identifiers, stored filter codes and user data independent of display labels.
-Catalogs are compiled during the build and cached by gettext at runtime.
+Bundled catalogs are compiled during the build; user catalogs are compiled and
+cached at startup. gettext caches the catalogs it loads.
 
 After adding or changing messages, update and validate the Chinese catalog:
 
@@ -332,8 +368,10 @@ cargo test --test i18n
 
 The check verifies coverage, format placeholders, markup, mnemonics and source
 extraction. The runtime test covers locale precedence, Chinese aliases, English
-fallback, contextual messages, three-form plurals, catalog path overrides,
-daylight-saving transitions and stable filtering identifiers in isolated processes.
+fallback, contextual messages, three-form plurals, catalog path overrides, user
+drop-in discovery and `.po` compilation, explicit preferences under a C message
+locale, daylight-saving transitions and stable filtering identifiers in isolated
+processes.
 With a display available, run
 `SYSD_I18N_UI_TEST=1 cargo test --test i18n` to also check GTK Builder translation.
 Set `SYSD_I18N_BENCH=1` to print startup, cached lookup and duration formatting
