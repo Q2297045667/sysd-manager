@@ -20,7 +20,7 @@
                     <property name="halign">start</property>
                     <property name="icon-name">check-round-outline2-symbolic</property>
                     <property name="label" translatable="yes" context="control" comments="button">Enable Unit File ➚</property>
-                    <property name="tooltip-text">Send a signal to a process or a group of processes</property>
+                    <property name="tooltip-text" translatable="yes">Send a signal to a process or a group of processes</property>
                     <property name="use-underline">True</property>
                   </object>
                 </property>
@@ -97,7 +97,7 @@
                   <object class="AdwButtonContent">
                     <property name="halign">start</property>
                     <property name="icon-name">snow-symbolic</property>
-                    <property name="label">Freeze</property>
+                    <property name="label" translatable="yes">Freeze</property>
                     <property name="tooltip-text" translatable="yes" context="control" comments="button">Freeze the specified unit using cgroup freezer</property>
                   </object>
                 </child>

@@ -79,7 +79,7 @@ You can set the application's Dbus level to &lt;u&gt;System&lt;/u&gt; if you wan
             </child>
             <child>
               <object class="AdwActionRow">
-                <property name="title">Columns Display Parameters</property>
+                <property name="title" translatable="yes">Columns Display Parameters</property>
                 <child>
                   <object class="GtkButton" id="show_customize_button">
                     <property name="action-name">app.properties_selector_general</property>
@@ -88,7 +88,7 @@ You can set the application's Dbus level to &lt;u&gt;System&lt;/u&gt; if you wan
                     <child>
                       <object class="AdwButtonContent">
                         <property name="icon-name">columns-symbolic</property>
-                        <property name="label">Columns</property>
+                        <property name="label" translatable="yes">Columns</property>
                       </object>
                     </child>
                   </object>
@@ -151,7 +151,7 @@ You can set the application's Dbus level to &lt;u&gt;System&lt;/u&gt; if you wan
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title">Journal</property>
+            <property name="title" translatable="yes">Journal</property>
             <child>
               <object class="AdwActionRow">
                 <property name="subtitle" translatable="yes" context="preference" comments="subtitle">To see the logs in color</property>
@@ -173,7 +173,7 @@ You can set the application's Dbus level to &lt;u&gt;System&lt;/u&gt; if you wan
                     <property name="value">50.0</property>
                   </object>
                 </property>
-                <property name="subtitle">The maximum events fetch in a batch
+                <property name="subtitle" translatable="yes">The maximum events fetch in a batch
 &lt;i&gt;0 means no size limit&lt;/i&gt;</property>
                 <property name="subtitle-lines">2</property>
                 <property name="title" translatable="yes" context="preference" comments="title">Journal's events batch size</property>
@@ -194,16 +194,13 @@ You can set the application's Dbus level to &lt;u&gt;System&lt;/u&gt; if you wan
                 <property name="subtitle-lines">2</property>
                 <property name="title" translatable="yes" context="preference" comments="title">Journal's event max size</property>
                 <signal name="changed" handler="journal_event_max_size_changed" swapped="True"/>
-                <child>
-                  <object class="AdwSwitchRow"/>
-                </child>
               </object>
             </child>
             <child>
               <object class="AdwSwitchRow">
                 <property name="action-name">win.pref-journal-wrap-word</property>
-                <property name="subtitle">Wrap text at word boundaries</property>
-                <property name="title">Wrap Word</property>
+                <property name="subtitle" translatable="yes">Wrap text at word boundaries</property>
+                <property name="title" translatable="yes">Wrap Word</property>
               </object>
             </child>
           </object>
@@ -226,7 +223,7 @@ You can set the application's Dbus level to &lt;u&gt;System&lt;/u&gt; if you wan
             <child>
               <object class="AdwSwitchRow" id="proxy_all_switch">
                 <property name="subtitle" translatable="yes">Switch that controls other switches</property>
-                <property name="title">All Actions and Methods</property>
+                <property name="title" translatable="yes">All Actions and Methods</property>
               </object>
             </child>
           </object>

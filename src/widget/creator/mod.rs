@@ -3,6 +3,8 @@ mod creator_page_mount;
 mod creator_page_service;
 mod creator_page_timer;
 mod first_page;
+#[cfg(test)]
+pub(crate) mod i18n_tests;
 mod imp;
 mod launch_creator_page;
 pub mod mydropdown;

@@ -42,7 +42,7 @@
                 <property name="margin-end">5</property>
                 <property name="margin-start">5</property>
                 <property name="margin-top">5</property>
-                <property name="title">Stop</property>
+                <property name="title" translatable="yes">Stop</property>
                 <child>
                   <object class="AdwSwitchRow" id="stop_now_switch">
                     <property name="subtitle" translatable="yes" context="mask" comments="subtitle">Ensure that the unit will be also stopped</property>

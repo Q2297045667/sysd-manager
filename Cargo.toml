@@ -35,6 +35,16 @@ default-run = "sysd-manager"
 name = "sysd-manager"
 path = "src/main.rs"
 
+[[test]]
+name = "i18n"
+path = "tests/i18n.rs"
+harness = false
+
+[[test]]
+name = "ui"
+path = "tests/ui.rs"
+harness = false
+
 [features]
 default = ["systemd/default", "base/default"]
 flatpak = ["systemd/flatpak", "base/flatpak"]
@@ -96,7 +106,6 @@ dotenv.workspace = true
 enumflags2.workspace = true
 formatx.workspace = true
 foreign-types-shared = "0.3.1"
-freedesktop_entry_parser = "2"
 futures-util = "0.3"
 gettext-rs.workspace = true
 indexmap.workspace = true
@@ -120,6 +129,7 @@ zvariant.workspace = true
 
 [dev-dependencies]
 test-base.workspace = true
+zbus.workspace = true
 
 
 [build-dependencies]

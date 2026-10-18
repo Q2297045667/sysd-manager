@@ -45,6 +45,7 @@ data/interfaces/unit_status_panel.ui
 src/analyze/mod.rs
 src/consts.rs
 src/errors.rs
+src/i18n.rs
 src/main.rs
 src/systemd_gui.rs
 src/utils/font_management.rs
@@ -73,6 +74,7 @@ src/widget/creator/creator_page_timer/validator.rs
 src/widget/creator/creator_page_timer.rs
 src/widget/creator/dropdown.rs
 src/widget/creator/first_page.rs
+src/widget/creator/i18n_tests.rs
 src/widget/creator/imp.rs
 src/widget/creator/launch_creator_page.rs
 src/widget/creator/mod.rs
@@ -139,6 +141,7 @@ src/widget/unit_properties_selector/unit_properties_selection/mod.rs
 src/widget/unit_properties_selector/unit_properties_selection/row.rs
 src/widget/unit_status/construct_info.rs
 src/widget/unit_status/imp.rs
+src/widget/unit_status/labels.rs
 src/widget/unit_status/mod.rs
 sysd-manager-comcontroler/src/analyze.rs
 sysd-manager-comcontroler/src/boots.rs

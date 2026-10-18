@@ -1097,6 +1097,15 @@ pub enum StrMatchType {
 }
 
 impl StrMatchType {
+    pub fn label(&self) -> String {
+        match self {
+            Self::Contains => pgettext("filter", "Contains"),
+            Self::StartWith => pgettext("filter", "Starts with"),
+            Self::EndWith => pgettext("filter", "Ends with"),
+            Self::Equals => pgettext("filter", "Equals"),
+        }
+    }
+
     pub fn as_str(&self) -> &'static str {
         let enum_value: &glib::EnumValue = self.to_value().get().expect("it's an enum");
         enum_value.name()
@@ -1145,6 +1154,16 @@ pub enum NumMatchType {
 }
 
 impl NumMatchType {
+    pub fn label(&self) -> String {
+        match self {
+            Self::Equals => pgettext("filter", "Equals"),
+            Self::Greater => pgettext("filter", "Greater than"),
+            Self::Smaller => pgettext("filter", "Less than"),
+            Self::GreaterEquals => pgettext("filter", "Greater than or equal to"),
+            Self::SmallerEquals => pgettext("filter", "Less than or equal to"),
+        }
+    }
+
     pub fn as_str(&self) -> &'static str {
         let enum_value: &glib::EnumValue = self.to_value().get().expect("it's an enum");
         enum_value.name()

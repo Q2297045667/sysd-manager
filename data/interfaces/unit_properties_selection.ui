@@ -8,7 +8,7 @@
     <child>
       <object class="GtkLabel">
         <property name="css-classes">title-2</property>
-        <property name="label">Unit Property Columns</property>
+        <property name="label" translatable="yes">Unit Property Columns</property>
         <property name="margin-end">5</property>
         <property name="margin-top">5</property>
       </object>
@@ -34,7 +34,7 @@
         <child>
           <object class="GtkLabel">
             <property name="halign">start</property>
-            <property name="label">Columns</property>
+            <property name="label" translatable="yes">Columns</property>
           </object>
         </child>
         <child>
@@ -45,7 +45,7 @@
             <child>
               <object class="GtkButton">
                 <property name="halign">baseline-fill</property>
-                <property name="label">Reset</property>
+                <property name="label" translatable="yes">Reset</property>
                 <signal name="clicked" handler="reset_clicked" swapped="True"/>
               </object>
             </child>
@@ -53,7 +53,7 @@
               <object class="GtkButton" id="apply_button">
                 <property name="css-classes">suggested-action</property>
                 <property name="halign">start</property>
-                <property name="label">Apply</property>
+                <property name="label" translatable="yes">Apply</property>
                 <signal name="clicked" handler="apply_clicked" swapped="True"/>
               </object>
             </child>
@@ -61,7 +61,7 @@
               <object class="GtkButton" id="ok_button">
                 <property name="css-classes">suggested-action</property>
                 <property name="halign">start</property>
-                <property name="label">Ok</property>
+                <property name="label" translatable="yes">Ok</property>
                 <signal name="clicked" handler="ok_clicked" swapped="True"/>
               </object>
             </child>

@@ -293,8 +293,9 @@ impl CreatorPageTimerImp {
     }
 
     fn select_add_realtime(&self, calendar_type: RealTimeTimer) {
+        let label = pgettext("timer", "Add {}");
         self.realtime_timer_adder
-            .set_label(&format!("Add {}", calendar_type.label()));
+            .set_label(&systemd::format2!(label, calendar_type.label()));
         self.realtime_type.set(calendar_type);
     }
 
@@ -407,8 +408,9 @@ impl CreatorPageTimerImp {
     }
 
     fn select_add_monotonic(&self, timer: MonotonicTimer) {
+        let label = pgettext("timer", "Add {}");
         self.monotonic_timer_adder
-            .set_label(&format!("Add {}", timer.label()));
+            .set_label(&systemd::format2!(label, timer.label()));
         self.monotonic_type.set(timer);
     }
 

@@ -229,7 +229,8 @@ fn clean_li<'a>(li: &'a str) -> Cow<'a, str> {
     for capture in it {
         let m = capture.get_match();
         let m1 = capture.get(1).unwrap();
-        out_string.push_str(&li[start..m1.end() + 1]);
+        out_string.push_str(&li[start..m.start()]);
+        out_string.push_str(m1.as_str());
         start = m.end();
 
         let label = &capture[1];
@@ -351,6 +352,23 @@ mod tests {
         let input = "Fix [crash](https://example.com/1) and [ui](https://example.com/2)";
 
         assert_eq!(clean_li(input), "Fix crash and ui");
+    }
+
+    #[test]
+    fn clean_li_preserves_unicode_and_non_link_brackets() {
+        for (input, expected) in [
+            ("[修复](https://example.com/1)后的中文", "修复后的中文"),
+            ("前缀 [a](one)[b](two) 后缀", "前缀 ab 后缀"),
+            ("[32] plain [text]", "[32] plain [text]"),
+            ("[start](url)", "start"),
+            ("", ""),
+        ] {
+            assert_eq!(clean_li(input), expected, "{input}");
+        }
+        assert!(matches!(
+            clean_li("unmodified"),
+            std::borrow::Cow::Borrowed(_)
+        ));
     }
 
     #[test]

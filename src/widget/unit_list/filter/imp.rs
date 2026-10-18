@@ -489,7 +489,8 @@ fn common_text_filter(
         .halign(gtk::Align::Start)
         .build();
 
-    let model_str: Vec<&str> = StrMatchType::iter().map(|x| x.as_str()).collect();
+    let labels: Vec<String> = StrMatchType::iter().map(|x| x.label()).collect();
+    let model_str: Vec<&str> = labels.iter().map(String::as_str).collect();
     let model = gtk::StringList::new(&model_str);
 
     grid.attach(&label, 0, 0, 1, 1);
@@ -881,9 +882,12 @@ where
 
     container.append(&merge_box);
 
-    let label = gtk::Label::builder().label("Match type").build();
+    let label = gtk::Label::builder()
+        .label(pgettext("filter", "Match Type"))
+        .build();
 
-    let model_str: Vec<&str> = NumMatchType::iter().map(|x| x.as_str()).collect();
+    let labels: Vec<String> = NumMatchType::iter().map(|x| x.label()).collect();
+    let model_str: Vec<&str> = labels.iter().map(String::as_str).collect();
     let model = gtk::StringList::new(&model_str);
 
     let dropdown = gtk::DropDown::builder()

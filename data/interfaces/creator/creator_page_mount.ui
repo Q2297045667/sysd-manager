@@ -37,7 +37,7 @@ circular</property>
                     <property name="title" translatable="yes" context="create_unit" comments="Preference section title">Unit</property>
                     <child>
                       <object class="AdwEntryRow" id="description_entry">
-                        <property name="title">Description</property>
+                        <property name="title" translatable="yes">Description</property>
                       </object>
                     </child>
                   </object>
@@ -55,12 +55,12 @@ flat</property>
                     <property name="title" translatable="yes" context="create_unit" comments="Preference section title">Mount</property>
                     <child>
                       <object class="SuggestionRow" id="what_entry">
-                        <property name="title">What</property>
+                        <property name="title" translatable="yes">What</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwEntryRow" id="where_entry">
-                        <property name="title">Where</property>
+                        <property name="title" translatable="yes">Where</property>
                         <property name="title-selectable">True</property>
                         <property name="use-underline">True</property>
                         <child>
@@ -75,12 +75,12 @@ flat</property>
                     </child>
                     <child>
                       <object class="SuggestionRow" id="mount_type_suggestion">
-                        <property name="title">Type</property>
+                        <property name="title" translatable="yes">Type</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwEntryRow" id="mount_options_entry">
-                        <property name="title">Options</property>
+                        <property name="title" translatable="yes">Options</property>
                       </object>
                     </child>
                   </object>
@@ -98,32 +98,32 @@ flat</property>
                     <property name="title" translatable="yes" context="create_unit" comments="Preference Section title">Mount Advanced</property>
                     <child>
                       <object class="AdwEntryRow" id="directory_mode_entry">
-                        <property name="title">DirectoryMode</property>
+                        <property name="title" translatable="yes">DirectoryMode</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwEntryRow" id="timeout_sec_entry">
-                        <property name="title">TimeoutSec</property>
+                        <property name="title" translatable="yes">TimeoutSec</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwSwitchRow" id="lazy_unmount_switch">
-                        <property name="title">LazyUnmount</property>
+                        <property name="title" translatable="yes">LazyUnmount</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwSwitchRow" id="sloppy_options_switch">
-                        <property name="title">SloppyOptions</property>
+                        <property name="title" translatable="yes">SloppyOptions</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwSwitchRow" id="read_write_only_switch">
-                        <property name="title">ReadWriteOnly</property>
+                        <property name="title" translatable="yes">ReadWriteOnly</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwSwitchRow" id="force_unmount_switch">
-                        <property name="title">ForceUnmount</property>
+                        <property name="title" translatable="yes">ForceUnmount</property>
                       </object>
                     </child>
                   </object>
@@ -142,7 +142,7 @@ flat</property>
                     <child>
                       <object class="SuggestionRow" id="wanted_by_entry">
                         <property name="text">multi-user.target</property>
-                        <property name="title">WantedBy</property>
+                        <property name="title" translatable="yes">WantedBy</property>
                       </object>
                     </child>
                   </object>
@@ -154,7 +154,7 @@ flat</property>
       </object>
     </property>
     <property name="tag">service_base</property>
-    <property name="title">Service Creation</property>
+    <property name="title" translatable="yes">Service Creation</property>
   </template>
   <object class="GtkDropTarget"/>
 </interface>

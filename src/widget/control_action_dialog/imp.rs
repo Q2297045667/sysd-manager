@@ -19,6 +19,7 @@ use base::{
     proxy::{DisEnAbleUnitFiles, DisEnAbleUnitFilesResponse},
 };
 use enumflags2::BitFlag;
+use gettextrs::pgettext;
 use gio::glib::BoolError;
 use gtk::{
     glib::{self},
@@ -552,8 +553,8 @@ impl EnableUnitDialogImp {
     #[template_callback]
     fn file_browser_clicked(&self, _button: gtk::Button) {
         let file_dialog = gtk::FileDialog::builder()
-            .title("Select a unit file")
-            .accept_label("Select")
+            .title(pgettext("action unit file", "Select a unit file"))
+            .accept_label(pgettext("action unit file", "Select"))
             .build();
 
         let enable_unit_dialog = self.obj().clone();

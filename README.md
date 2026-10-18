@@ -233,7 +233,42 @@ sh uninstall.sh
 
 ## Testing
 
-Test SysD Manager safely using the included **tiny_daemon** web server service:
+Run all automated checks from the project root:
+
+```bash
+scripts/test_i18n.sh
+```
+
+This runs catalog validation and its negative tests, workspace tests, isolated
+locale probes, English and Chinese window tests, formatting, Clippy, Flatpak and
+AppImage compile checks, and metadata generation. In addition to the build
+dependencies, install Python 3, gettext tools, `dbus-daemon`,
+`glib-compile-schemas`, and `gtk4-broadwayd`. Locale probes use installed UTF-8
+locales or generate temporary ones with `localedef` and the glibc locale sources.
+
+Window tests use a private Broadway display, D-Bus daemon, in-memory GSettings,
+and temporary XDG directories. A mock systemd service verifies start, stop,
+restart, reload, job completion/failure, and enable/disable requests without
+changing host services. The windows exercise preferences, columns, filters,
+status text, service/timer/mount creation, signal monitoring, and file editing
+in both languages. Existing tests that require a real systemd installation
+remain explicitly ignored; run those separately only in a disposable environment.
+
+GTK warnings are fatal. A generic window/popover/dialog preflight detects runtime
+failures before application widgets are constructed. GTK 4.24.1/libadwaita 1.10
+can fail this preflight with a frame-timing warning under Broadway; the suite was
+also verified with GTK 4.22.5/libadwaita 1.9.4. To use a separate compatible
+runtime without changing installed libraries:
+
+```bash
+SYSD_GTK_RUNTIME=/path/to/runtime scripts/test_i18n.sh
+```
+
+The prefix must contain `usr/lib` and the matching `usr/bin/gtk4-broadwayd`.
+For checks that do not need a display, run
+`cargo test --workspace --lib --bins` and `cargo test --test i18n`.
+
+For manual testing, the included **tiny_daemon** web server service is available:
 
 ```bash
 cd packaging
@@ -264,6 +299,45 @@ Contributions are welcome. Please contact the project maintainer on [GitHub](htt
 ## Internationalization
 
 SysD Manager supports multiple languages through community translations.
+
+The interface follows your system language. Simplified Chinese is available as
+`zh_Hans`, `zh_CN`, and `zh_SG`. To run in Chinese from the source tree:
+
+```bash
+LANGUAGE=zh_CN cargo run
+```
+
+Use an installed non-C UTF-8 locale (for example
+`LC_ALL=zh_CN.UTF-8 LANGUAGE=zh_CN cargo run`) if your shell uses `C`/`POSIX` or
+`C.UTF-8`, which can disable gettext translations. Set
+`LANGUAGE=en` to use English. `TEXTDOMAINDIR` can override the catalog directory;
+development builds otherwise use the Cargo target directory's `locale` folder
+(including custom `--target-dir` paths), and installed builds use
+`/usr/share/locale` (`/app/share/locale` for Flatpak, or AppImage's launcher path).
+
+Rust messages use `gettext`/`pgettext`; GTK presentation text uses
+`translatable="yes"` and an optional context. Keep systemd directives, D-Bus
+identifiers, stored filter codes and user data independent of display labels.
+Catalogs are compiled during the build and cached by gettext at runtime.
+
+After adding or changing messages, update and validate the Chinese catalog:
+
+```bash
+cargo run -p transtools -- expo --lang zh_Hans
+python3 scripts/check_i18n.py
+cargo test --test i18n
+```
+
+The check verifies coverage, format placeholders, markup, mnemonics and source
+extraction. The runtime test covers locale precedence, Chinese aliases, English
+fallback, contextual messages, three-form plurals, catalog path overrides,
+daylight-saving transitions and stable filtering identifiers in isolated processes.
+With a display available, run
+`SYSD_I18N_UI_TEST=1 cargo test --test i18n` to also check GTK Builder translation.
+Set `SYSD_I18N_BENCH=1` to print startup, cached lookup and duration formatting
+timings. Translations and status label widths are cached after locale setup;
+elapsed durations use UTC arithmetic while timestamp displays keep their selected
+format and timezone.
 
 <div align="center">
 <a href="https://hosted.weblate.org/engage/sysd-manager/" target="_blank">

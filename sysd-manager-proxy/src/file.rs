@@ -96,14 +96,48 @@ pub async fn create(file_path: &str, content: &str) -> zbus::fdo::Result<u64> {
 
 #[cfg(test)]
 mod test {
-    use std::path::PathBuf;
+    use super::*;
+    use test_base::TempDir;
+
+    #[tokio::test]
+    async fn create_and_save_preserve_utf8_content_and_truncate_old_data() {
+        let directory = TempDir::new().unwrap();
+        let path = directory.path().join("子目录/示例.service");
+        let content = "[Unit]\nDescription=中文服务 🚀\n[Service]\nExecStart=/bin/true\n";
+        let written = create(path.to_str().unwrap(), content).await.unwrap();
+        assert_eq!(written, content.len() as u64);
+        assert_eq!(std::fs::read_to_string(&path).unwrap(), content);
+        let replacement = "[Unit]\nDescription=更新\n";
+        let written = save(path.to_str().unwrap(), replacement).await.unwrap();
+        assert_eq!(written, replacement.len() as u64);
+        assert_eq!(std::fs::read_to_string(&path).unwrap(), replacement);
+    }
+
+    #[tokio::test]
+    async fn save_missing_file_reports_error_without_creating_it() {
+        let directory = TempDir::new().unwrap();
+        let path = directory.path().join("missing.service");
+        assert!(matches!(
+            save(path.to_str().unwrap(), "内容").await,
+            Err(zbus::fdo::Error::IOError(_))
+        ));
+        assert!(!path.exists());
+    }
 
     #[test]
-    fn test_parent_dir() {
-        let p = PathBuf::from("/home/plr/../.config");
-
-        println!("p {} {}", p.display(), p.is_absolute());
-
-        println!("p {}", p.canonicalize().unwrap().display())
+    fn filesystem_errors_keep_their_dbus_error_categories() {
+        for (kind, expected) in [
+            (std::io::ErrorKind::PermissionDenied, "access"),
+            (std::io::ErrorKind::InvalidData, "invalid"),
+            (std::io::ErrorKind::NotFound, "io"),
+        ] {
+            let result: Result<(), _> = transform_error(Err(std::io::Error::from(kind)));
+            assert!(matches!(
+                (expected, result),
+                ("access", Err(zbus::fdo::Error::AccessDenied(_)))
+                    | ("invalid", Err(zbus::fdo::Error::InvalidArgs(_)))
+                    | ("io", Err(zbus::fdo::Error::IOError(_)))
+            ));
+        }
     }
 }

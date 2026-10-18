@@ -5,7 +5,7 @@
 		<description>
 			<p>Added</p>
 			<ul>
-				<li>[Issue 80] Preserve Filters on the appplication restart</li>
+				<li>Issue 80 Preserve Filters on the appplication restart</li>
 			</ul>
 			<p>Changed</p>
 			<ul>
@@ -13,7 +13,7 @@
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 81] Flathub Image Title showcasing Status are labeled File</li>
+				<li>Issue 81 Flathub Image Title showcasing Status are labeled File</li>
 			</ul>
 		</description>
 		<issues>
@@ -79,7 +79,7 @@
 			</ul>
 			<p>Changed</p>
 			<ul>
-				<li>[Issue 70] Change sort order of columns &quot;Unit File State&quot; and &quot;Load State&quot;</li>
+				<li>Issue 70 Change sort order of columns &quot;Unit File State&quot; and &quot;Load State&quot;</li>
 				<li>Set default bus selection to &quot;System &amp; User session Bus&quot;</li>
 			</ul>
 			<p>Fixed</p>
@@ -123,7 +123,7 @@
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 78] Now display journal events when new events arrives and when originally
+				<li>Issue 78 Now display journal events when new events arrives and when originally
 there were no displayed events</li>
 				<li>Fixed some toast messages</li>
 			</ul>
@@ -136,7 +136,7 @@ there were no displayed events</li>
 		<description>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 76] Use the checkbox&apos;s label for the Follow option and improve UX</li>
+				<li>Issue 76 Use the checkbox&apos;s label for the Follow option and improve UX</li>
 			</ul>
 		</description>
 		<issues>
@@ -172,15 +172,15 @@ there were no displayed events</li>
 			</ul>
 			<p>Changed</p>
 			<ul>
-				<li>Journal&apos;s follow switch has been replaced by a checkbox. This fixes [Issue 48]</li>
+				<li>Journal&apos;s follow switch has been replaced by a checkbox. This fixes Issue 48</li>
 				<li>Unit Info tab changed to Status</li>
 				<li>Find in text improvement</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 71] Application Freeze</li>
-				<li>[Issue 69] Message toast color contrast for better visibility</li>
-				<li>[Issue 67] Journal&apos;s follow auto-scroll to new journal entries when Descending is
+				<li>Issue 71 Application Freeze</li>
+				<li>Issue 69 Message toast color contrast for better visibility</li>
+				<li>Issue 67 Journal&apos;s follow auto-scroll to new journal entries when Descending is
 enabled </li>
 			</ul>
 		</description>
@@ -196,7 +196,7 @@ enabled </li>
 			<p>Fixed</p>
 			<ul>
 				<li>PARTIAL FIX Follow does not auto-scroll to new journal entries when Descending is
-enabled [Issue 67]</li>
+enabled Issue 67</li>
 			</ul>
 		</description>
 		<issues>
@@ -216,7 +216,7 @@ enabled [Issue 67]</li>
 		<description>
 			<p>Added</p>
 			<ul>
-				<li>Unit Creation Wizard: Add time validators [Issue 44]</li>
+				<li>Unit Creation Wizard: Add time validators Issue 44</li>
 			</ul>
 		</description>
 		<issues>
@@ -227,7 +227,7 @@ enabled [Issue 67]</li>
 		<description>
 			<p>Added</p>
 			<ul>
-				<li>Create Unit Wizard new options [Issue 44]</li>
+				<li>Create Unit Wizard new options Issue 44</li>
 			</ul>
 		</description>
 		<issues>
@@ -238,11 +238,11 @@ enabled [Issue 67]</li>
 		<description>
 			<p>Added</p>
 			<ul>
-				<li>Wizard to create Timer and Service Units as requested by [Issue 44]</li>
+				<li>Wizard to create Timer and Service Units as requested by Issue 44</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 56] Laggy filtering, delay set at 350ms</li>
+				<li>Issue 56 Laggy filtering, delay set at 350ms</li>
 			</ul>
 		</description>
 		<issues>
@@ -266,8 +266,8 @@ enabled [Issue 67]</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 56] Remember the sorting column order</li>
-				<li>[Issue 65] Journal events was always displaying horizontal scrollbar</li>
+				<li>Issue 56 Remember the sorting column order</li>
+				<li>Issue 65 Journal events was always displaying horizontal scrollbar</li>
 			</ul>
 		</description>
 		<issues>
@@ -279,15 +279,15 @@ enabled [Issue 67]</li>
 		<description>
 			<p>Added</p>
 			<ul>
-				<li>[Issue 62] Add word wrap option for the journal events</li>
+				<li>Issue 62 Add word wrap option for the journal events</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 58] Services in currated list - Fix include unit files</li>
-				<li>[Issue 64] Unit File Color palette when switching Color Scheme Mode (Light and
+				<li>Issue 58 Services in currated list - Fix include unit files</li>
+				<li>Issue 64 Unit File Color palette when switching Color Scheme Mode (Light and
 Dark)</li>
-				<li>[Issue 63] Unit Description and Unit Dependencies text color palette when
-switching Color Scheme Mode (Light and Dark)</li>
+				<li>Issue 63 Unit Description and Unit Dependencies text color palette when switching
+Color Scheme Mode (Light and Dark)</li>
 			</ul>
 		</description>
 		<issues>
@@ -302,15 +302,15 @@ switching Color Scheme Mode (Light and Dark)</li>
 			<p>Added</p>
 			<ul>
 				<li>Create Unit wizard (under construction)</li>
-				<li>[Issue 59] Keyboard shortcuts Ctrl+W and Esc to close sub-windows, and Ctrl+Q to
+				<li>Issue 59 Keyboard shortcuts Ctrl+W and Esc to close sub-windows, and Ctrl+Q to
 quit the application</li>
-				<li>[Issue 58] Add Services in currated list (Shift+Ctrl+S)</li>
+				<li>Issue 58 Add Services in currated list (Shift+Ctrl+S)</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>[Issue 49] Put focus on search entry when appearing</li>
-				<li>[Issue 60] Fixed analyze behavior blame in Flatpak</li>
-				<li>[Issue 61] Keep font choice when switching between light and dark mode</li>
+				<li>Issue 49 Put focus on search entry when appearing</li>
+				<li>Issue 60 Fixed analyze behavior blame in Flatpak</li>
+				<li>Issue 61 Keep font choice when switching between light and dark mode</li>
 			</ul>
 		</description>
 		<issues>
@@ -331,7 +331,7 @@ quit the application</li>
 			<ul>
 				<li>Fix Unit File List</li>
 				<li>UX Review space ratio between the unit browser and the content to persist in all
-time [Issue 52] and [Issue 53]</li>
+time Issue 52 and Issue 53</li>
 			</ul>
 		</description>
 		<issues>
@@ -343,21 +343,21 @@ time [Issue 52] and [Issue 53]</li>
 		<description>
 			<p>Added</p>
 			<ul>
-				<li>Esc key to clear Text Search and Unit Search Entries [Issue 46] and [Issue 49]</li>
+				<li>Esc key to clear Text Search and Unit Search Entries Issue 46 and Issue 49</li>
 				<li>Unit browser add or remove units when loaded in systemd</li>
 				<li>Translation strings</li>
 			</ul>
 			<p>Changed</p>
 			<ul>
-				<li>Hide Start, Stop and Restart buttons according to unit active state [Issue 50]</li>
+				<li>Hide Start, Stop and Restart buttons according to unit active state Issue 50</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>UX Ellipsize File Link [Issue 51]</li>
-				<li>UX better separation between tab navigator and bellow context [Issue 47]</li>
-				<li>UX Text Search Entry get focus when Text Search Panel Open [Issue 46]</li>
+				<li>UX Ellipsize File Link Issue 51</li>
+				<li>UX better separation between tab navigator and bellow context Issue 47</li>
+				<li>UX Text Search Entry get focus when Text Search Panel Open Issue 46</li>
 				<li>UX Make Space ratio between the unit browser and the content to persist in all
-time [Issue 52]</li>
+time Issue 52</li>
 			</ul>
 		</description>
 		<issues>
@@ -509,7 +509,7 @@ panel</li>
 		<description>
 			<p>Fixed</p>
 			<ul>
-				<li>Start option icon missing [Issue 41]</li>
+				<li>Start option icon missing Issue 41</li>
 			</ul>
 		</description>
 		<issues>
@@ -546,10 +546,10 @@ panel</li>
 			<p>Fixed</p>
 			<ul>
 				<li>Proxy now starts automatically when a privileged operation is triggered (Save,
-Enable/Disable, Daemon Reload, etc.) [Issue 37]</li>
-				<li>&quot;Start proxy at Startup&quot; option not working [Issue 37]</li>
+Enable/Disable, Daemon Reload, etc.) Issue 37</li>
+				<li>&quot;Start proxy at Startup&quot; option not working Issue 37</li>
 				<li>&quot;Stop proxy at Close&quot; no longer prompts for password when proxy was never started
-[Issue 37]</li>
+Issue 37</li>
 			</ul>
 		</description>
 		<issues>
@@ -566,7 +566,7 @@ Enable/Disable, Daemon Reload, etc.) [Issue 37]</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>Save unit files with privilege elevation on a Flatpack build [Issue 38]</li>
+				<li>Save unit files with privilege elevation on a Flatpack build Issue 38</li>
 			</ul>
 		</description>
 		<issues>
@@ -660,7 +660,7 @@ Enable/Disable, Daemon Reload, etc.) [Issue 37]</li>
 			<p>Fix</p>
 			<ul>
 				<li>Fix Flatpak save file in home directory (make a warning)</li>
-				<li>Password dialog gets overlapped by Sysd Manager on every start [Issue 35]</li>
+				<li>Password dialog gets overlapped by Sysd Manager on every start Issue 35</li>
 			</ul>
 		</description>
 		<issues>
@@ -691,7 +691,7 @@ Enable/Disable, Daemon Reload, etc.) [Issue 37]</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>Improve Spacing in Top-Bottom Layout [Issue 31]</li>
+				<li>Improve Spacing in Top-Bottom Layout Issue 31</li>
 			</ul>
 		</description>
 		<issues>
@@ -766,7 +766,7 @@ Enable/Disable, Daemon Reload, etc.) [Issue 37]</li>
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>UI consistency [Issue 28]</li>
+				<li>UI consistency Issue 28</li>
 				<li>Show no unit file when unit isn&apos;t selected</li>
 			</ul>
 		</description>
@@ -827,7 +827,7 @@ Property Selector or wipe out the config file
 			</ul>
 			<p>Fixed</p>
 			<ul>
-				<li>Missing Icon in &quot;More...&quot; Button Issue [Issue 27]</li>
+				<li>Missing Icon in &quot;More...&quot; Button Issue Issue 27</li>
 			</ul>
 		</description>
 		<issues>
@@ -838,7 +838,7 @@ Property Selector or wipe out the config file
 		<description>
 			<p>Fixed</p>
 			<ul>
-				<li>Unit journal events displayed twice. Issue [Issue 26]</li>
+				<li>Unit journal events displayed twice. Issue Issue 26</li>
 			</ul>
 		</description>
 		<issues>
@@ -849,7 +849,7 @@ Property Selector or wipe out the config file
 		<description>
 			<p>Fixed</p>
 			<ul>
-				<li>System unit takes precedence on User Session units. Issue [Issue 25]</li>
+				<li>System unit takes precedence on User Session units. Issue Issue 25</li>
 			</ul>
 		</description>
 		<issues>
@@ -951,7 +951,7 @@ column order</li>
 		<description>
 			<p>Added</p>
 			<ul>
-				<li>Journal ANSI color codes parsing and rendering [Issue 23]</li>
+				<li>Journal ANSI color codes parsing and rendering Issue 23</li>
 				<li>Save full browser column context in a user config file</li>
 			</ul>
 		</description>
@@ -983,7 +983,7 @@ column order</li>
 			<p>Fixed</p>
 			<ul>
 				<li>Saving file (without privilege elevation) doesn&apos;t overwrite completely the old
-file. [Issue 21]</li>
+file. Issue 21</li>
 			</ul>
 		</description>
 		<issues>

@@ -6,6 +6,7 @@ extern crate tracing;
 mod analyze;
 mod consts;
 mod errors;
+mod i18n;
 mod systemd_gui;
 mod utils;
 mod widget;
@@ -25,10 +26,9 @@ use gtk::{
     glib,
     prelude::*,
 };
-use std::env;
 use systemd::data::UnitInfo;
 use systemd_gui::new_settings;
-use tracing::{debug, error, info, warn};
+use tracing::{debug, info, warn};
 use tracing_subscriber::EnvFilter;
 use widget::{
     app_window::{AppWindow, menu},
@@ -38,12 +38,14 @@ use widget::{
     },
 };
 
-const DOMAIN_NAME: &str = "sysd-manager";
 fn main() -> glib::ExitCode {
     #[cfg(all(feature = "flatpak", feature = "appimage"))]
     compile_error!("Features flatpack and appimage can't be combined");
 
     dotenv().ok();
+
+    // SAFETY: no GTK, D-Bus, async runtime or worker threads have started yet.
+    let locale_setup = unsafe { i18n::init() };
 
     let timer = tracing_subscriber::fmt::time::ChronoLocal::new("%Y-%m-%d %H:%M:%S%.3f".to_owned());
     tracing_subscriber::fmt()
@@ -52,6 +54,11 @@ fn main() -> glib::ExitCode {
         .with_env_filter(EnvFilter::from_default_env())
         .with_ansi(true)
         .init();
+
+    match locale_setup {
+        Ok(path) => info!("Translation catalog directory: {}", path.display()),
+        Err(error) => warn!("Unable to initialize translations: {error}"),
+    }
 
     let (unit, level, run_mode, args) = handle_args();
 
@@ -72,44 +79,6 @@ fn main() -> glib::ExitCode {
 
         _ => {}
     }
-
-    info!("LANGUAGE {:?}", env::var("LANGUAGE"));
-    let textdomain_dir = env::var("TEXTDOMAINDIR");
-    info!("env TEXTDOMAINDIR {textdomain_dir:?}");
-    let locale_dir = if let Ok(domain_dir) = textdomain_dir {
-        domain_dir
-    } else {
-        #[cfg(feature = "flatpak")]
-        let domain_dir = "/app/share/locale".to_owned();
-
-        #[cfg(not(feature = "flatpak"))]
-        let domain_dir = "/usr/share/locale".to_owned();
-
-        domain_dir
-    };
-
-    unsafe { gettextrs::setlocale(gettextrs::LocaleCategory::LcAll, "") };
-
-    // Set up gettext translations
-    let path =
-        gettextrs::bindtextdomain(DOMAIN_NAME, locale_dir).expect("Unable to bind the text domain");
-    info!("bindtextdomain path {path:?}");
-
-    match gettextrs::bind_textdomain_codeset(DOMAIN_NAME, "UTF-8") {
-        Ok(v) => info!("bind_textdomain_codeset {v:?}"),
-        Err(error) => error!("Unable to set the text domain encoding Error: {error:?}"),
-    }
-
-    // Specify the name of the .mo file to use.
-    match gettextrs::textdomain(DOMAIN_NAME) {
-        Ok(v) => info!("textdomain {:?}", String::from_utf8_lossy(&v)),
-        Err(error) => error!("Unable to switch to the text domain Error: {error:?}"),
-    }
-
-    // Ask gettext for UTF-8 strings. THIS CRATE CAN'T HANDLE NON-UTF-8 DATA!
-    if let Err(error) = gettextrs::bind_textdomain_codeset(DOMAIN_NAME, "UTF-8") {
-        error!("bind_textdomain_codeset Error: {error:?}");
-    };
 
     info!("Program starting up");
     // Just a simple log that it's all ok. Need to set env RUST_LOG="info" to see it

@@ -34,7 +34,7 @@
             <child>
               <object class="AdwButtonContent">
                 <property name="icon-name">go-previous-symbolic</property>
-                <property name="label">Previous</property>
+                <property name="label" translatable="yes">Previous</property>
               </object>
             </child>
           </object>
@@ -54,7 +54,7 @@
             <child>
               <object class="AdwButtonContent">
                 <property name="icon-name">document-text</property>
-                <property name="label">File</property>
+                <property name="label" translatable="yes">File</property>
               </object>
             </child>
           </object>
@@ -71,7 +71,7 @@
                 <property name="spacing">5</property>
                 <child>
                   <object class="GtkLabel">
-                    <property name="label">Next</property>
+                    <property name="label" translatable="yes">Next</property>
                   </object>
                 </child>
                 <child>
@@ -92,7 +92,7 @@
         <property name="css-classes">pill
 suggested-action</property>
         <property name="halign">end</property>
-        <property name="label">Create</property>
+        <property name="label" translatable="yes">Create</property>
         <property name="valign">center</property>
         <property name="visible">False</property>
       </object>

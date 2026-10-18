@@ -55,7 +55,14 @@ fn generate_mo() -> Result<(), TransError> {
 
     check_linguas()?;
 
-    translating::generate_mo()?;
+    let out_dir = env::var_os("OUT_DIR").expect("Cargo sets OUT_DIR");
+    let locale_dir = translating::cargo_locale_dir(
+        Path::new(&out_dir),
+        &env::var("TARGET").expect("Cargo sets TARGET"),
+    )
+    .expect("Cargo OUT_DIR has a target and profile directory");
+    translating::generate_mo_in(Path::new(PO_DIR), &locale_dir)?;
+    println!("cargo::rustc-env=SYSD_LOCALE_DIR={}", locale_dir.display());
 
     Ok(())
 }

@@ -1,5 +1,6 @@
 mod construct_info;
 mod imp;
+mod labels;
 
 use super::{InterPanelMessage, app_window::AppWindow};
 use crate::widget::text_search::TextSearchEntry;

@@ -1,3 +1,5 @@
+use super::labels::{KEY_WIDTH, key as translated_key, text as status_text};
+use gettextrs::pgettext;
 use std::collections::{BTreeMap, HashMap};
 use std::fmt::{Debug, Write};
 
@@ -11,15 +13,14 @@ use crate::utils::writer::{
     HyperLinkType, SPECIAL_GLYPH_TREE_BRANCH, SPECIAL_GLYPH_TREE_RIGHT, SPECIAL_GLYPH_TREE_SPACE,
     SPECIAL_GLYPH_TREE_VERTICAL, UnitInfoWriter,
 };
-use crate::widget::{
-    preferences::data::PREFERENCES, unit_status::construct_info::systemd::timestamp_is_set,
-};
+use crate::widget::preferences::data::PREFERENCES;
 use base::enums::UnitDBusLevel;
 use systemd::time_handling::calc_next_elapse;
 use systemd::{
     enums::ActiveState,
     swrite,
     time_handling::{self, TimestampStyle},
+    timestamp_is_set,
 };
 use tracing::{debug, warn};
 use zvariant::{DynamicType, OwnedValue, Str, Value};
@@ -73,8 +74,6 @@ fn fill_name_description(unit_writer: &mut UnitInfoWriter, unit: &UnitInfo) {
     fill_row(unit_writer, "Name:", &unit.primary())
 }
 
-const KEY_WIDTH: usize = 15;
-
 macro_rules! get_value {
     ($map:expr, $key:expr) => {
         get_value!($map, $key, ())
@@ -110,12 +109,14 @@ macro_rules! clean_message {
 }
 
 fn write_key(unit_writer: &mut UnitInfoWriter, key_label: &str) {
-    let s = format!("{key_label:>KEY_WIDTH$} ");
+    let (key_label, width) = translated_key(key_label);
+    let s = format!("{key_label:>width$} ");
     unit_writer.insert(&s);
 }
 
 fn fill_row(unit_writer: &mut UnitInfoWriter, key_label: &str, value: &str) {
-    let s = format!("{key_label:>KEY_WIDTH$} {value}\n");
+    let (key_label, width) = translated_key(key_label);
+    let s = format!("{key_label:>width$} {value}\n");
     unit_writer.insert(&s);
 }
 
@@ -149,7 +150,8 @@ fn fill_dropin(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValu
             ""
         };
 
-        let s = format!("{key_label:>KEY_WIDTH$} {prefix}\n");
+        let (key_label, width) = translated_key(key_label);
+        let s = format!("{key_label:>width$} {prefix}\n");
         unit_writer.insert(&s);
 
         let mut is_first = true;
@@ -195,7 +197,8 @@ fn fill_active_state(
     };
 
     if let Some(since) = add_since(map, state.as_str(), timestamp_style) {
-        unit_writer.insert(&format!(" since {}; {}\n", since.0, since.1));
+        let template = pgettext("unit status", " since {}; {}\n");
+        unit_writer.insert(&systemd::format2!(template, since.0, since.1));
         fill_duration(unit_writer, map, unit);
     } else {
         unit_writer.newline();
@@ -325,7 +328,7 @@ fn fill_load_state(
             if pad_left {
                 unit_writer.insert("; ");
             }
-            unit_writer.insert("preset: ");
+            unit_writer.insert(status_text("preset: "));
             let unit_file_preset: &str = value_to(unit_file_preset);
             let preset: Preset = unit_file_preset.into();
             unit.set_preset(preset);
@@ -354,7 +357,8 @@ fn fill_follows(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedVal
         return;
     }
 
-    let s = format!("unit currently follows state of {value}");
+    let template = pgettext("unit status", "unit currently follows state of {}");
+    let s = systemd::format2!(template, value);
     fill_row(unit_writer, "Follows:", &s);
 }
 
@@ -365,7 +369,7 @@ fn fill_transient(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedV
 
     if transient {
         let value = if transient { "yes" } else { "no" };
-        fill_row(unit_writer, "Transient:", value);
+        fill_row(unit_writer, "Transient:", status_text(value));
     }
 }
 
@@ -374,8 +378,7 @@ fn fill_status(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValu
     let value: &str = value_to(value);
 
     if !value.is_empty() {
-        let s = format!("{:>KEY_WIDTH$} ", "Status:");
-        unit_writer.insert(&s);
+        write_key(unit_writer, "Status:");
         unit_writer.insert_status(value);
         unit_writer.newline();
     }
@@ -520,7 +523,8 @@ fn fill_fd_store(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedVa
     write_key(unit_writer, "FD Store:");
 
     unit_writer.insert(&n_fd_store.to_string());
-    unit_writer.insert_grey(&format!(" (limit: {fd_store_max})\n"));
+    let template = pgettext("unit status", " (limit: {})\n");
+    unit_writer.insert_grey(&systemd::format2!(template, fd_store_max));
 }
 
 fn fill_memory(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValue>) {
@@ -612,7 +616,7 @@ fn fill_memory(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValu
             out.push_str(", ");
         }
 
-        out.push_str(label);
+        out.push_str(status_text(label));
         let mem_human = human_bytes(value);
         out.push_str(&mem_human);
     }
@@ -743,11 +747,12 @@ fn fill_ip(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValue>) 
         return;
     }
 
+    let template = pgettext("unit status", "{} in, {} out");
     fill_row(
         unit_writer,
         "IP:",
-        &format!(
-            "{} in, {} out",
+        &systemd::format2!(
+            template,
             human_bytes(ip_ingress_bytes),
             human_bytes(ip_egress_bytes)
         ),
@@ -762,11 +767,12 @@ fn fill_io(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValue>) 
         return;
     }
 
+    let template = pgettext("unit status", "{} read, {} written");
     fill_row(
         unit_writer,
         "IP:",
-        &format!(
-            "{} read, {} written",
+        &systemd::format2!(
+            template,
             human_bytes(io_read_bytes),
             human_bytes(io_write_bytes)
         ),
@@ -787,7 +793,8 @@ fn fill_tasks(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValue
 
     let tasks_max = value_to_def(map.get("TasksMax"), U64MAX);
     if tasks_max != U64MAX {
-        unit_writer.insert_grey(&format!(" (limit: {tasks_max})"));
+        let template = pgettext("unit status", " (limit: {})");
+        unit_writer.insert_grey(&systemd::format2!(template, tasks_max));
     }
 
     unit_writer.newline();
@@ -853,7 +860,7 @@ fn fill_trigger(
 
         format!("{first}; {second}")
     } else {
-        "n/a".to_owned()
+        status_text("n/a").to_owned()
     };
 
     fill_row(unit_writer, "Trigger:", &trigger_msg);
@@ -978,7 +985,8 @@ fn fill_accept(unit_writer: &mut UnitInfoWriter, map: &HashMap<String, OwnedValu
         let n_accepted: u32 = value_some(map.get("NAccepted"));
         let n_connections: u32 = value_some(map.get("NConnections"));
 
-        let line = format!("{n_accepted}; Connected: {n_connections};");
+        let template = pgettext("unit status", "{}; Connected: {};");
+        let line = systemd::format2!(template, n_accepted, n_connections);
         fill_row(unit_writer, "Accepted:", &line);
         let n_refused: u32 = value_some(map.get("NRefused"));
         if n_refused != 0 {

@@ -177,10 +177,10 @@ impl BoolFilter {
 
     fn label(&self) -> String {
         match self {
-            BoolFilter::True => "True".to_owned(),
-            BoolFilter::False => "False".to_owned(),
-            BoolFilter::Set => "<i>Set</i>".to_owned(),
-            BoolFilter::Unset => "<i>Unset</i>".to_owned(),
+            BoolFilter::True => gettextrs::pgettext("filter", "True"),
+            BoolFilter::False => gettextrs::pgettext("filter", "False"),
+            BoolFilter::Set => gettextrs::pgettext("filter", "<i>Set</i>"),
+            BoolFilter::Unset => gettextrs::pgettext("filter", "<i>Unset</i>"),
         }
     }
 

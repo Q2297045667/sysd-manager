@@ -178,7 +178,8 @@ impl InfoWindowImp {
             warn!("Store not supposed to be None");
         };
 
-        self.obj().set_title(Some("Systemd Info"));
+        self.obj()
+            .set_title(Some(&gettextrs::gettext("Systemd Info")));
     }
 
     fn create_filter(&self) -> gtk::CustomFilter {

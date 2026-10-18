@@ -18,7 +18,7 @@
                 <child>
                   <object class="AdwEntryRow" id="unit_name_prefix_entry">
                     <property name="input-hints">lowercase</property>
-                    <property name="title">Unit Name Prefix</property>
+                    <property name="title" translatable="yes">Unit Name Prefix</property>
                     <property name="use-underline">True</property>
                   </object>
                 </child>
@@ -26,7 +26,7 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup">
-                <property name="title">Unit Type</property>
+                <property name="title" translatable="yes">Unit Type</property>
                 <child>
                   <object class="AdwActionRow" id="radio_button_service">
                     <property name="focusable">False</property>
@@ -141,6 +141,6 @@
     </property>
     <property name="hexpand">True</property>
     <property name="tag">first-page</property>
-    <property name="title">First Page</property>
+    <property name="title" translatable="yes">First Page</property>
   </template>
 </interface>

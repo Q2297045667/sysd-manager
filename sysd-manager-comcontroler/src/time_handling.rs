@@ -1,11 +1,12 @@
 use chrono::{DateTime, Local, TimeDelta, TimeZone, Utc};
-use gettextrs::pgettext;
+use gettextrs::{npgettext, pgettext};
 use glib;
 use strum::EnumIter;
 
 use std::{
     ffi::CStr,
     fmt::{Display, Write},
+    sync::LazyLock,
 };
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, EnumIter)]
@@ -178,24 +179,37 @@ fn get_date_utc(timestamp_usec: u64) -> DateTime<Utc> {
     }
 }
 
-macro_rules! plur {
-    ($num:expr, $single:expr, $plur:expr) => {{ if $num > 1 { $plur } else { $single } }};
+// Timer columns are refreshed frequently: cache the translated vocabulary once.
+struct TimeWords {
+    month: String,
+    ago: String,
+    left: String,
+    now: String,
+    infinity: String,
 }
 
-macro_rules! plur_year {
-    ($num:expr) => {{ plur!($num, "year", "years") }};
+static TIME_WORDS: LazyLock<TimeWords> = LazyLock::new(|| TimeWords {
+    month: pgettext("time unit", "month"),
+    ago: pgettext("time", "ago"),
+    left: pgettext("time", "left"),
+    now: pgettext("time", "now"),
+    infinity: pgettext("time", "infinity"),
+});
+
+fn year_word(count: u64) -> String {
+    npgettext("time", "year", "years", count.min(u32::MAX as u64) as u32)
 }
 
-macro_rules! plur_month {
-    ($num:expr) => {{ plur!($num, "month", "months") }};
+fn month_word(count: u64) -> String {
+    npgettext("time", "month", "months", count.min(u32::MAX as u64) as u32)
 }
 
-macro_rules! plur_week {
-    ($num:expr) => {{ plur!($num, "week", "weeks") }};
+fn week_word(count: u64) -> String {
+    npgettext("time", "week", "weeks", count.min(u32::MAX as u64) as u32)
 }
 
-macro_rules! plur_day {
-    ($num:expr) => {{ plur!($num, "day", "days") }};
+fn day_word(count: u64) -> String {
+    npgettext("time", "day", "days", count.min(u32::MAX as u64) as u32)
 }
 
 #[macro_export]
@@ -237,12 +251,7 @@ pub const USEC_PER_MSEC: u64 = 1000;
 pub const NSEC_PER_USEC: u64 = 1_000;
 
 pub fn format_timestamp_relative_full(timestamp_usec: u64) -> String {
-    let since_time = get_date_local(timestamp_usec);
-
-    let now = Local::now();
-
-    let delta = now.signed_duration_since(since_time);
-
+    let delta = Utc::now().signed_duration_since(get_date_utc(timestamp_usec));
     format_timestamp_relative_full_delta(delta, true)
 }
 
@@ -250,20 +259,21 @@ pub fn format_timestamp_relative_duration(
     begin_timestamp_usec: u64,
     finish_timestamp_usec: u64,
 ) -> String {
-    let since_time = get_date_local(begin_timestamp_usec);
-
-    let to_time = get_date_local(finish_timestamp_usec);
-
-    let delta = to_time.signed_duration_since(since_time);
-
+    // Elapsed time is independent of local timezone and daylight-saving rules.
+    let delta = get_date_utc(finish_timestamp_usec)
+        .signed_duration_since(get_date_utc(begin_timestamp_usec));
     format_timestamp_relative_full_delta(delta, false)
 }
 
 ///from systemd
 fn format_timestamp_relative_full_delta(delta: TimeDelta, show_suffix: bool) -> String {
-    let is_ago = delta.num_seconds() >= 0;
+    let is_ago = delta >= TimeDelta::zero();
     let suffix = if show_suffix {
-        if is_ago { "ago" } else { "left" }
+        if is_ago {
+            TIME_WORDS.ago.as_str()
+        } else {
+            TIME_WORDS.left.as_str()
+        }
     } else {
         ""
     };
@@ -272,7 +282,7 @@ fn format_timestamp_relative_full_delta(delta: TimeDelta, show_suffix: bool) -> 
 
     let d = delta.num_seconds() as u64;
 
-    let mut out = String::with_capacity(256);
+    let mut out = String::with_capacity(64);
 
     if d >= SEC_PER_YEAR {
         let years = d / SEC_PER_YEAR;
@@ -282,9 +292,9 @@ fn format_timestamp_relative_full_delta(delta: TimeDelta, show_suffix: bool) -> 
             out,
             "{} {} {} {} {suffix}",
             years,
-            plur_year!(years),
+            year_word(years),
             months,
-            plur_month!(months)
+            month_word(months)
         );
     } else if d >= SEC_PER_MONTH {
         let months = d / SEC_PER_MONTH;
@@ -294,9 +304,9 @@ fn format_timestamp_relative_full_delta(delta: TimeDelta, show_suffix: bool) -> 
             out,
             "{} {} {} {} {suffix}",
             months,
-            plur_month!(months),
+            month_word(months),
             days,
-            plur_day!(days)
+            day_word(days)
         );
     } else if d >= SEC_PER_WEEK {
         let weeks = d / SEC_PER_WEEK;
@@ -306,16 +316,16 @@ fn format_timestamp_relative_full_delta(delta: TimeDelta, show_suffix: bool) -> 
             out,
             "{} {} {} {} {suffix}",
             weeks,
-            plur_week!(weeks),
+            week_word(weeks),
             days,
-            plur_day!(days)
+            day_word(days)
         );
     } else if d >= 2 * SEC_PER_DAY {
         let days = d / SEC_PER_DAY;
-        swrite!(out, "{days} {} {suffix}", plur_day!(days));
+        swrite!(out, "{days} {} {suffix}", day_word(days));
     } else if d >= 25 * SEC_PER_HOUR {
         let hours = (d - SEC_PER_DAY) / SEC_PER_HOUR;
-        swrite!(out, "1 {} {hours}h {suffix}", plur_day!(1));
+        swrite!(out, "1 {} {hours}h {suffix}", day_word(1));
     } else if d >= 6 * SEC_PER_HOUR {
         let hours = d / SEC_PER_HOUR;
         swrite!(out, "{hours}h {suffix}");
@@ -340,10 +350,10 @@ fn format_timestamp_relative_full_delta(delta: TimeDelta, show_suffix: bool) -> 
         } else if d_us > 0 {
             swrite!(out, "{d_us}μs {suffix}");
         } else {
-            out.push_str("now");
+            out.push_str(&TIME_WORDS.now);
         }
     } else {
-        out.push_str("now");
+        out.push_str(&TIME_WORDS.now);
     }
 
     out
@@ -372,7 +382,7 @@ pub fn format_timespan(mut duration: u64, accuracy: u64) -> String {
     let mut out = String::with_capacity(64);
 
     if duration == u64::MAX {
-        out.push_str("infinity");
+        out.push_str(&TIME_WORDS.infinity);
         return out;
     }
 
@@ -409,6 +419,11 @@ pub fn format_timespan(mut duration: u64, accuracy: u64) -> String {
             continue;
         }
 
+        let suffix = if suffix == "month" {
+            TIME_WORDS.month.as_str()
+        } else {
+            suffix
+        };
         let a = duration / unit_magnitute_in_usec;
         let mut b = duration % unit_magnitute_in_usec;
 
@@ -498,6 +513,52 @@ mod tests {
     use chrono::{Duration, TimeDelta};
 
     use super::*;
+
+    #[test]
+    fn relative_time_handles_subsecond_future_and_past_without_a_live_clock() {
+        for (microseconds, expected) in [
+            (0, "now"),
+            (1, "1μs ago"),
+            (-1, "1μs left"),
+            (999, "999μs ago"),
+            (-999, "999μs left"),
+            (1000, "1ms ago"),
+            (-1000, "1ms left"),
+            (999_999, "999ms ago"),
+            (-999_999, "999ms left"),
+            (1_000_000, "1s ago"),
+            (-1_000_000, "1s left"),
+        ] {
+            assert_eq!(
+                format_timestamp_relative_full_delta(TimeDelta::microseconds(microseconds), true),
+                expected
+            );
+        }
+    }
+
+    #[test]
+    fn relative_time_keeps_duration_and_plural_boundaries() {
+        for (seconds, expected) in [
+            (60, "1min 0s ago"),
+            (300, "5min ago"),
+            (3600, "1h 0min ago"),
+            (21600, "6h ago"),
+            (90000, "1 day 1h ago"),
+            (172800, "2 days ago"),
+            (604800, "1 week 0 days ago"),
+            (2_629_800, "1 month 0 days ago"),
+            (31_557_600, "1 year 0 months ago"),
+        ] {
+            assert_eq!(
+                format_timestamp_relative_full_delta(TimeDelta::seconds(seconds), true),
+                expected
+            );
+        }
+        assert_eq!(
+            format_timestamp_relative_full_delta(TimeDelta::days(2), false),
+            "2 days "
+        );
+    }
 
     #[test]
     fn test_since() {

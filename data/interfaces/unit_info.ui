@@ -6,7 +6,7 @@
   <template class="InfoWindow" parent="GtkWindow">
     <property name="default-height">600</property>
     <property name="default-width">600</property>
-    <property name="title">Unit Info</property>
+    <property name="title" translatable="yes">Unit Info</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="headerbar">
         <child>
@@ -16,7 +16,7 @@
                 <property name="icon-name">edit-copy</property>
               </object>
             </property>
-            <property name="tooltip-text">Copy data</property>
+            <property name="tooltip-text" translatable="yes">Copy data</property>
             <signal name="clicked" handler="handle_copy_click" swapped="yes"/>
           </object>
         </child>

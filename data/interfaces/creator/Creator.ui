@@ -42,12 +42,12 @@ You need to &lt;b&gt;jailbreak&lt;/b&gt; your Flatpak application to allow it to
             <property name="title-widget">
               <object class="AdwWindowTitle" id="window_title">
                 <property name="subtitle">Love</property>
-                <property name="title">Create Unit</property>
+                <property name="title" translatable="yes">Create Unit</property>
               </object>
             </property>
             <child>
               <object class="GtkCheckButton" id="advanced_mode">
-                <property name="label">Advanced Mode </property>
+                <property name="label" translatable="yes">Advanced Mode </property>
               </object>
             </child>
           </object>

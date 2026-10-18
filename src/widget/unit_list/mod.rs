@@ -1,5 +1,8 @@
 pub mod column;
 mod filter;
+#[cfg(test)]
+#[allow(unused_imports)]
+pub(crate) use filter::UnitListFilterWindow;
 pub mod imp;
 pub mod menus;
 mod search_controls;

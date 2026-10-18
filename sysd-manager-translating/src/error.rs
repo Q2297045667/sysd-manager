@@ -10,6 +10,7 @@ pub enum TransError {
         Vec<(OsString, Option<OsString>)>,
         std::io::Error,
     ),
+    CommandFailed(String, std::process::ExitStatus, String),
     BoxError(Box<dyn std::error::Error>),
     LanguageNotSet,
     PathNotExist(String),

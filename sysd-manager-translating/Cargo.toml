@@ -14,3 +14,7 @@ repository = { workspace = true }
 [dependencies]
 constcat.workspace = true
 tracing.workspace = true
+
+[dev-dependencies]
+test-base.workspace = true
+quick-xml = "0.42"

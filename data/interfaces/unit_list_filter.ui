@@ -22,7 +22,7 @@
                 <property name="margin-end">7</property>
                 <property name="margin-start">7</property>
                 <property name="margin-top">7</property>
-                <property name="title">Content</property>
+                <property name="title" translatable="yes">Content</property>
               </object>
             </property>
             <property name="sidebar">
@@ -56,7 +56,7 @@
                     </child>
                   </object>
                 </property>
-                <property name="title">Side</property>
+                <property name="title" translatable="yes">Side</property>
               </object>
             </property>
           </object>
@@ -65,7 +65,7 @@
           <object class="AdwHeaderBar">
             <property name="title-widget">
               <object class="AdwWindowTitle">
-                <property name="title">Unit Property Filter</property>
+                <property name="title" translatable="yes">Unit Property Filter</property>
               </object>
             </property>
           </object>
@@ -73,6 +73,6 @@
       </object>
     </property>
     <property name="default-height">400</property>
-    <property name="title">Filter</property>
+    <property name="title" translatable="yes">Filter</property>
   </template>
 </interface>

@@ -26,8 +26,8 @@
                 </child>
                 <child>
                   <object class="AdwSwitchRow" id="enable_switch">
-                    <property name="subtitle">Enable Unit after creation</property>
-                    <property name="title">Enable</property>
+                    <property name="subtitle" translatable="yes">Enable Unit after creation</property>
+                    <property name="title" translatable="yes">Enable</property>
                   </object>
                 </child>
                 <child>
@@ -46,6 +46,6 @@
       </object>
     </property>
     <property name="tag">launch-page</property>
-    <property name="title">Launchd</property>
+    <property name="title" translatable="yes">Launchd</property>
   </template>
 </interface>

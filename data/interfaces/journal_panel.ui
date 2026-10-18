@@ -47,7 +47,7 @@
               <object class="AdwButtonContent">
                 <property name="halign">baseline-fill</property>
                 <property name="icon-name">view-sort-ascending</property>
-                <property name="label">Ascending</property>
+                <property name="label" translatable="yes">Ascending</property>
               </object>
             </property>
             <property name="halign">start</property>
@@ -70,7 +70,7 @@
         </child>
         <child>
           <object class="GtkMenuButton">
-            <property name="label">Boot</property>
+            <property name="label" translatable="yes">Boot</property>
             <property name="popover">
               <object class="GtkPopover">
                 <property name="width-request">350</property>

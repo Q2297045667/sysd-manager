@@ -61,13 +61,13 @@ pub fn on_startup(app: &adw::Application) {
 
                     if let Some(resp) = resp {
                         let alert = adw::AlertDialog::builder()
-                            .heading("Unavailable")
+                            .heading(gettext("Unavailable"))
                             .body_use_markup(true)
                             .body(resp)
                             .close_response("close")
                             .build();
 
-                        alert.add_response("close", "Close");
+                        alert.add_response("close", &gettext("Close"));
 
                         let firt_window = wins.first();
                         alert.present(firt_window);
@@ -236,11 +236,13 @@ fn daemon_reload_with_dialog(
             const USER: &str = "user";
             const CLOSE: &str = "zclose";
 
-            let body = "Need to determine the bus to use for daemon reload.\n\n\
-                        Please select either <b>System</b> or <b>User\u{00A0}Session</b> bus.";
+            let body = gettext(
+                "Need to determine the bus to use for daemon reload.\n\n\
+                        Please select either <b>System</b> or <b>User\u{00A0}Session</b> bus.",
+            );
 
             let alert = adw::AlertDialog::builder()
-                .heading("Select bus")
+                .heading(gettext("Select bus"))
                 .body_use_markup(true)
                 .body(body)
                 .close_response(CLOSE)
@@ -248,9 +250,9 @@ fn daemon_reload_with_dialog(
                 .build();
 
             alert.add_responses(&[
-                (CLOSE, "_Cancel"),
-                (USER, "_User Session"),
-                (SYSTEM, "_System"),
+                (CLOSE, &gettext("_Cancel")),
+                (USER, &gettext("_User Session")),
+                (SYSTEM, &gettext("_System")),
             ]);
 
             alert.set_response_appearance(SYSTEM, adw::ResponseAppearance::Suggested);

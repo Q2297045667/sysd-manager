@@ -198,7 +198,7 @@ impl PreferencesDialogImpl {
         let font_dialog = gtk::FontDialog::builder()
             .modal(false)
             .filter(&filter)
-            .title("Pick a Monospace Font")
+            .title(pgettext("preference", "Pick a Monospace Font"))
             .build();
 
         let parent = self.app_window.get();

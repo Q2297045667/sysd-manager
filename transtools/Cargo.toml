@@ -13,3 +13,6 @@ clap.workspace = true
 tracing.workspace = true
 dotenv.workspace = true
 tracing-subscriber.workspace = true
+
+[dev-dependencies]
+test-base.workspace = true

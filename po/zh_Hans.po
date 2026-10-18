@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: sysd-manager 2.24.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-17 00:15-0400\n"
-"PO-Revision-Date: 2026-09-11 01:51+0000\n"
+"POT-Creation-Date: 2026-10-19 02:39+0800\n"
+"PO-Revision-Date: 2026-10-19 00:00+0800\n"
 "Last-Translator: CGuo <CGuoXYZ@163.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/sysd-manager/translation/zh_Hans/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: data/applications/io.github.plrigaux.sysd-manager.desktop:3
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:9
 msgid "SysD Manager"
-msgstr "SysD 管理器"
+msgstr "SysD Manager"
 
 #. Desktop File GenericName
 #: data/applications/io.github.plrigaux.sysd-manager.desktop:6
@@ -34,7 +34,7 @@ msgstr "服务管理器"
 #: data/applications/io.github.plrigaux.sysd-manager.desktop:9
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:10
 msgid "A user-friendly application to manage systemd's units"
-msgstr "一个用于管理 systemd 单元，用户友好的应用程序"
+msgstr "易于使用的 systemd 单元管理应用"
 
 #. Desktop File Keywords
 #: data/applications/io.github.plrigaux.sysd-manager.desktop:12
@@ -52,9 +52,8 @@ msgstr ""
 
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:40
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:45
-#, fuzzy
 msgid "Unit Status"
-msgstr "停用单元文件"
+msgstr "单元状态"
 
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:50
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:55
@@ -63,6 +62,9 @@ msgstr "单元依赖"
 
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:60
 #: data/metainfo/io.github.plrigaux.sysd-manager.metainfo.xml:65
+#: data/interfaces/creator/unit_file_creator_page.ui:27
+#: data/interfaces/creator/unit_file_creator_page.ui:35
+#: data/interfaces/unit_file_panel.ui:36
 msgid "Unit File"
 msgstr "单元文件"
 
@@ -75,7 +77,7 @@ msgstr "单元日志"
 msgid ""
 "Authentication is required to run privileged systemd calls via the SysD "
 "Manager Proxy"
-msgstr "通过SysD管理器代理运行特权 ，Systemd调用需要进行身份验证。"
+msgstr "通过 SysD Manager 代理执行需要特权的 systemd 调用时，必须进行身份验证"
 
 #: data/interfaces/app_window.ui:43
 msgctxt "top button tooltip"
@@ -109,7 +111,12 @@ msgstr "刷新单元列表"
 #: src/widget/clean_dialog/imp.rs:96
 msgctxt "clean"
 msgid "Clean"
-msgstr "清空"
+msgstr "清理"
+
+#: data/interfaces/control_action_dialog.ui:24
+#: data/interfaces/creator/creator_end_page.ui:30
+msgid "Enable"
+msgstr "启用"
 
 #. entry title
 #: data/interfaces/control_action_dialog.ui:28
@@ -177,11 +184,15 @@ msgctxt "enable unit file"
 msgid "Portable"
 msgstr "便携"
 
+#: data/interfaces/control_action_dialog.ui:84
+msgid "Start"
+msgstr "启动"
+
 #. subtitle
 #: data/interfaces/control_action_dialog.ui:87
 msgctxt "enable unit file"
 msgid "Start Unit just after being enabled"
-msgstr "在启用后立即启动单元"
+msgstr "启用后立即启动单元"
 
 #. title
 #: data/interfaces/control_action_dialog.ui:88
@@ -220,17 +231,32 @@ msgid ""
 "You need to <b>jailbreak</b> your Flatpak application to allow it to run sub-"
 "programs or to save files on the host system."
 msgstr ""
-"“创建单元”功能需要具备一定的访问权限才能正常运行。\n"
+"<b>创建单元</b>功能需要相应的访问权限才能正常使用。\n"
 "\n"
-"你需要对 Flatpak 应用程序进行“越狱”，以允许其运行子程序或在宿主系统上保存文"
+"请为 Flatpak 应用<b>开放沙盒权限</b>，以允许运行子程序或在主机系统上保存文"
 "件。"
+
+#: data/interfaces/creator/Creator.ui:45
+msgid "Create Unit"
+msgstr "创建单元"
+
+#: data/interfaces/creator/Creator.ui:50
+msgid "Advanced Mode "
+msgstr "高级模式"
+
+#: data/interfaces/creator/create_first.ui:21
+msgid "Unit Name Prefix"
+msgstr "单元名称前缀"
+
+#: data/interfaces/creator/create_first.ui:29
+msgid "Unit Type"
+msgstr "单元类型"
 
 #. info subtitle
 #: data/interfaces/creator/create_first.ui:33
-#, fuzzy
 msgctxt "create_unit"
 msgid "Create a task"
-msgstr "创建Drop-in 文件"
+msgstr "创建任务"
 
 #. Unit type selection
 #. Panel title
@@ -238,28 +264,24 @@ msgstr "创建Drop-in 文件"
 #: data/interfaces/creator/create_first.ui:34
 #: data/interfaces/creator/creator_page_service.ui:24
 #: data/interfaces/creator/creator_page_service.ui:65
-#, fuzzy
 msgctxt "create_unit"
 msgid "Service"
-msgstr "服务管理器"
+msgstr "服务"
 
 #. info subtitle
 #: data/interfaces/creator/create_first.ui:47
-#, fuzzy
 msgctxt "create_unit"
 msgid "Create a scheduled task"
 msgstr "创建计划任务"
 
 #. Unit type selection
 #: data/interfaces/creator/create_first.ui:48
-#, fuzzy
 msgctxt "create_unit"
 msgid "Timer with Service"
-msgstr "带服务的计时器"
+msgstr "定时器及配套服务"
 
 #. info subtitle
 #: data/interfaces/creator/create_first.ui:61
-#, fuzzy
 msgctxt "create_unit"
 msgid "Trigger an existing task (service)"
 msgstr "触发现有任务（服务）"
@@ -268,17 +290,15 @@ msgstr "触发现有任务（服务）"
 #. Prefererence group
 #: data/interfaces/creator/create_first.ui:62
 #: data/interfaces/creator/creator_page_timer.ui:94
-#, fuzzy
 msgctxt "create_unit"
 msgid "Timer"
-msgstr "计时器"
+msgstr "定时器"
 
 #. info subtitle
 #: data/interfaces/creator/create_first.ui:75
-#, fuzzy
 msgctxt "unit creation"
 msgid "Create a mount unit"
-msgstr "创建Drop-in 文件"
+msgstr "创建挂载单元"
 
 #. Unit type selection
 #. Panel Title
@@ -288,84 +308,88 @@ msgstr "创建Drop-in 文件"
 #: data/interfaces/creator/creator_page_mount.ui:55
 msgctxt "create_unit"
 msgid "Mount"
-msgstr ""
+msgstr "挂载"
 
 #. Group title
 #: data/interfaces/creator/create_first.ui:90
 msgctxt "create_unit"
 msgid "Process Management Modes"
-msgstr ""
+msgstr "进程管理模式"
 
 #. Unit type selection
 #: data/interfaces/creator/create_first.ui:95
 msgctxt "create_unit"
 msgid "Create unit at System level"
-msgstr ""
+msgstr "创建系统级单元"
 
 #: data/interfaces/creator/create_first.ui:96
-#, fuzzy
 msgid "System"
-msgstr "Systemd 信息"
+msgstr "系统"
 
 #. Unit type selection
 #: data/interfaces/creator/create_first.ui:109
 msgctxt "create_unit"
 msgid "Create unit at User level"
-msgstr ""
+msgstr "创建用户级单元"
 
 #. Unit type selection
 #: data/interfaces/creator/create_first.ui:110
-#, fuzzy
 msgctxt "create_unit"
 msgid "User Session"
 msgstr "用户会话"
 
 #. info subtitle
 #: data/interfaces/creator/create_first.ui:127
-#, fuzzy
 msgctxt "create_unit"
 msgid "Runtime units are discarded at next reboot"
-msgstr "运行时单元将在下次重启时被丢弃"
+msgstr "运行时单元将在下次重启时丢弃"
 
 #. info subtitle
 #: data/interfaces/creator/create_first.ui:128
-#, fuzzy
 msgctxt "create_unit"
 msgid "Runtime"
 msgstr "运行时"
+
+#: data/interfaces/creator/create_first.ui:144
+msgid "First Page"
+msgstr "首页"
 
 #. Prefererence group after creation options
 #: data/interfaces/creator/creator_end_page.ui:18
 msgctxt "create_unit"
 msgid "After creation"
-msgstr ""
+msgstr "创建后"
 
 #. switch row subtitle
 #: data/interfaces/creator/creator_end_page.ui:23
-#, fuzzy
 msgctxt "create_unit"
 msgid "Reload systemd config"
-msgstr "重载所有单元配置"
+msgstr "重新加载 systemd 配置"
 
 #. switch row title
 #: data/interfaces/creator/creator_end_page.ui:24
-#, fuzzy
 msgctxt "create_unit"
 msgid "Daemon Reload"
-msgstr "重载所有单元配置"
+msgstr "重新加载守护进程配置"
+
+#: data/interfaces/creator/creator_end_page.ui:29
+msgid "Enable Unit after creation"
+msgstr "创建后启用单元"
 
 #. Switch row subtitle
 #: data/interfaces/creator/creator_end_page.ui:35
-#, fuzzy
 msgctxt "create_unit"
 msgid "Start Unit after creation"
-msgstr "在启用后立即启动单元"
+msgstr "创建后启动单元"
 
 #. Option to start after creation
 #: data/interfaces/creator/creator_end_page.ui:36
-#, fuzzy
 msgctxt "create_unit"
 msgid "Start"
+msgstr "启动"
+
+#: data/interfaces/creator/creator_end_page.ui:49
+msgid "Launchd"
 msgstr "启动"
 
 #. Preference section title
@@ -375,16 +399,61 @@ msgstr "启动"
 #: data/interfaces/creator/creator_page_service.ui:37
 #: data/interfaces/creator/creator_page_timer.ui:37
 #: src/widget/creator/launch_creator_page.rs:393
-#, fuzzy
 msgctxt "create_unit"
 msgid "Unit"
-msgstr "服务单元文件"
+msgstr "单元"
+
+#: data/interfaces/creator/creator_page_mount.ui:40
+#: data/interfaces/creator/creator_page_service.ui:40
+#: data/interfaces/creator/creator_page_timer.ui:40
+msgid "Description"
+msgstr "描述"
+
+#: data/interfaces/creator/creator_page_mount.ui:58
+msgid "What"
+msgstr "挂载源"
+
+#: data/interfaces/creator/creator_page_mount.ui:63
+msgid "Where"
+msgstr "挂载点"
+
+#: data/interfaces/creator/creator_page_mount.ui:78
+msgid "Type"
+msgstr "类型"
+
+#: data/interfaces/creator/creator_page_mount.ui:83
+msgid "Options"
+msgstr "选项"
 
 #. Preference Section title
 #: data/interfaces/creator/creator_page_mount.ui:98
 msgctxt "create_unit"
 msgid "Mount Advanced"
-msgstr ""
+msgstr "高级挂载选项"
+
+#: data/interfaces/creator/creator_page_mount.ui:101
+msgid "DirectoryMode"
+msgstr "目录权限（DirectoryMode）"
+
+#: data/interfaces/creator/creator_page_mount.ui:106
+msgid "TimeoutSec"
+msgstr "超时秒数（TimeoutSec）"
+
+#: data/interfaces/creator/creator_page_mount.ui:111
+msgid "LazyUnmount"
+msgstr "延迟卸载（LazyUnmount）"
+
+#: data/interfaces/creator/creator_page_mount.ui:116
+msgid "SloppyOptions"
+msgstr "忽略未知选项（SloppyOptions）"
+
+#: data/interfaces/creator/creator_page_mount.ui:121
+msgid "ReadWriteOnly"
+msgstr "仅允许读写挂载（ReadWriteOnly）"
+
+#: data/interfaces/creator/creator_page_mount.ui:126
+msgid "ForceUnmount"
+msgstr "强制卸载（ForceUnmount）"
 
 #. Preference Section title
 #. Prefererence group
@@ -394,35 +463,126 @@ msgstr ""
 #: data/interfaces/creator/creator_page_timer.ui:118
 msgctxt "create_unit"
 msgid "Install"
-msgstr ""
+msgstr "安装"
+
+#: data/interfaces/creator/creator_page_mount.ui:145
+#: data/interfaces/creator/creator_page_service.ui:206
+#: data/interfaces/creator/creator_page_timer.ui:122
+msgid "WantedBy"
+msgstr "所需目标（WantedBy）"
+
+#: data/interfaces/creator/creator_page_mount.ui:157
+#: data/interfaces/creator/creator_page_service.ui:218
+msgid "Service Creation"
+msgstr "创建服务"
+
+#: data/interfaces/creator/creator_page_service.ui:45
+msgid "After"
+msgstr "之后"
+
+#: data/interfaces/creator/creator_page_service.ui:50
+msgid "Wants"
+msgstr "弱依赖（Wants）"
+
+#: data/interfaces/creator/creator_page_service.ui:68
+msgid "Environment"
+msgstr "环境变量"
+
+#: data/interfaces/creator/creator_page_service.ui:84
+msgid "ExecStart"
+msgstr "启动命令（ExecStart）"
+
+#: data/interfaces/creator/creator_page_service.ui:99
+msgid "ExecReload"
+msgstr "重载命令（ExecReload）"
+
+#: data/interfaces/creator/creator_page_service.ui:114
+msgid "Restart"
+msgstr "重启"
+
+#: data/interfaces/creator/creator_page_service.ui:129
+msgid "Exec"
+msgstr "执行"
+
+#: data/interfaces/creator/creator_page_service.ui:132
+msgid "Working Directory"
+msgstr "工作目录"
+
+#: data/interfaces/creator/creator_page_service.ui:145
+msgid "User"
+msgstr "用户"
+
+#: data/interfaces/creator/creator_page_service.ui:152
+msgid "Group"
+msgstr "用户组"
+
+#: data/interfaces/creator/creator_page_service.ui:159
+msgid "StandardOutput"
+msgstr "标准输出（StandardOutput）"
+
+#: data/interfaces/creator/creator_page_service.ui:164
+msgid "StandardError"
+msgstr "标准错误（StandardError）"
 
 #. Prefererence group
 #: data/interfaces/creator/creator_page_service.ui:179
 msgctxt "create_unit"
 msgid "Resource Control"
-msgstr ""
+msgstr "资源控制"
+
+#: data/interfaces/creator/creator_page_service.ui:182
+msgid "CPUQuota"
+msgstr "CPU 配额（CPUQuota）"
+
+#: data/interfaces/creator/creator_page_service.ui:187
+msgid "MemoryHigh"
+msgstr "内存软限制（MemoryHigh）"
+
+#: data/interfaces/creator/creator_page_timer.ui:24
+msgid "Timer"
+msgstr "定时器"
+
+#: data/interfaces/creator/creator_page_timer.ui:49
+msgid "Monotonic Timer"
+msgstr "单调时钟定时器"
 
 #. Button to add Monotonic timer
 #: data/interfaces/creator/creator_page_timer.ui:52
 msgctxt "create_unit"
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #. Button to add Realtime timer
 #: data/interfaces/creator/creator_page_timer.ui:60
 msgctxt "create_unit"
 msgid "Real-time Timer"
-msgstr ""
+msgstr "实时时钟定时器"
+
+#: data/interfaces/creator/creator_page_timer.ui:63
+msgid "Add"
+msgstr "添加"
 
 #. Prefererence group title
 #: data/interfaces/creator/creator_page_timer.ui:81
 msgctxt "create_unit"
 msgid "Timer Triggers"
-msgstr ""
+msgstr "定时触发条件"
+
+#: data/interfaces/creator/creator_page_timer.ui:97
+msgid "Unit"
+msgstr "单元"
 
 #: data/interfaces/creator/creator_page_timer.ui:102
 msgid "Catch up missed runs after boot "
-msgstr "开机后重启错过的任务 "
+msgstr "系统启动后补执行错过的任务"
+
+#: data/interfaces/creator/creator_page_timer.ui:103
+msgid "Persistant"
+msgstr "持久化"
+
+#: data/interfaces/creator/creator_page_timer.ui:134
+msgid "Timer Creation"
+msgstr "创建定时器"
 
 #. Translators: placeholder text of the search entry from AdwComboRow.
 #. It should be phrased as a verb
@@ -430,7 +590,7 @@ msgstr "开机后重启错过的任务 "
 #. It should be phrased as a verb
 #: data/interfaces/creator/mydrop.ui:30 src/widget/creator/dropdown.rs:459
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: data/interfaces/creator/nav_row.ui:23
 msgid ""
@@ -440,10 +600,34 @@ msgstr ""
 "🙏🏻 请捐赠——您的每一份支持都能帮我向妻子证明，这个项目不仅仅是“又一个编程爱"
 "好”"
 
+#: data/interfaces/creator/nav_row.ui:37
+msgid "Previous"
+msgstr "上一步"
+
+#: data/interfaces/creator/nav_row.ui:57
+msgid "File"
+msgstr "文件"
+
+#: data/interfaces/creator/nav_row.ui:74
+msgid "Next"
+msgstr "下一步"
+
+#: data/interfaces/creator/nav_row.ui:95
+msgid "Create"
+msgstr "创建"
+
+#: data/interfaces/ex_menu_button.ui:17
+msgid "Custom Menu"
+msgstr "自定义菜单"
+
 #: data/interfaces/ex_menu_button.ui:40
 msgctxt "extented menu button"
 msgid "Clear"
-msgstr "清空"
+msgstr "清除"
+
+#: data/interfaces/ex_menu_button.ui:41
+msgid "Clear filter selection"
+msgstr "清除筛选选择"
 
 #. toggle button tooltip text
 #: data/interfaces/journal_panel.ui:19
@@ -476,6 +660,10 @@ msgctxt "journal"
 msgid "Enable new entries continuous print as they are appended to the journal"
 msgstr "实时显示新增日志"
 
+#: data/interfaces/journal_panel.ui:50
+msgid "Ascending"
+msgstr "升序"
+
 #. tooltip
 #: data/interfaces/journal_panel.ui:55
 msgctxt "journal"
@@ -493,6 +681,10 @@ msgstr "列出系统上的引导日志"
 msgctxt "journal"
 msgid "List Boots"
 msgstr "列出引导日志"
+
+#: data/interfaces/journal_panel.ui:73
+msgid "Boot"
+msgstr "启动记录"
 
 #. button
 #: data/interfaces/journal_panel.ui:87
@@ -655,6 +847,10 @@ msgctxt "mask"
 msgid "Force"
 msgstr "强制"
 
+#: data/interfaces/mask_unit_dialog.ui:45
+msgid "Stop"
+msgstr "停止"
+
 #. subtitle
 #: data/interfaces/mask_unit_dialog.ui:48
 msgctxt "mask"
@@ -669,10 +865,9 @@ msgstr "立即停止"
 
 #. subtitle
 #: data/interfaces/mask_unit_dialog.ui:54
-#, fuzzy
 msgctxt "mask"
 msgid "Argument for the stopping mode"
-msgstr "停止模式的参数"
+msgstr "停止模式参数"
 
 #. title
 #: data/interfaces/mask_unit_dialog.ui:55
@@ -690,7 +885,7 @@ msgstr "重置"
 #: data/interfaces/mask_unit_dialog.ui:89
 msgctxt "mask"
 msgid "Mask Unit"
-msgstr "屏蔽该单元"
+msgstr "屏蔽单元"
 
 #. First connection message
 #: data/interfaces/preferences.ui:12
@@ -700,13 +895,13 @@ msgid ""
 "You can set the application's Dbus level to <u>System</u> if you want to see "
 "all Systemd units."
 msgstr ""
-"这是您的首次连接\n"
-"如果您想查看所有 Systemd 单元，可以将应用程序的 D-Bus 级别设置为\"系统\"。"
+"这是您首次启动本应用。\n"
+"如果需要查看所有 systemd 单元，可以将应用的 D-Bus 级别设为<u>系统</u>。"
 
 #: data/interfaces/preferences.ui:19
 msgctxt "preference"
 msgid "_Main"
-msgstr "_主选项"
+msgstr "主选项(_M)"
 
 #. group
 #: data/interfaces/preferences.ui:23
@@ -759,7 +954,7 @@ msgstr "文本字体"
 #: data/interfaces/preferences.ui:48
 msgctxt "preference"
 msgid "Default"
-msgstr "恢复默认"
+msgstr "默认"
 
 #. button
 #: data/interfaces/preferences.ui:56
@@ -797,6 +992,15 @@ msgctxt "preference"
 msgid "Display Totals Summary"
 msgstr "显示统计摘要"
 
+#: data/interfaces/preferences.ui:82
+msgid "Columns Display Parameters"
+msgstr "列显示参数"
+
+#: data/interfaces/preferences.ui:91
+#: data/interfaces/unit_properties_selection.ui:37
+msgid "Columns"
+msgstr "列"
+
 #. subtitle
 #: data/interfaces/preferences.ui:100
 msgctxt "preference"
@@ -807,7 +1011,7 @@ msgstr "搜索与筛选默认不区分大小写"
 #: data/interfaces/preferences.ui:101
 msgctxt "preference"
 msgid "Case Insensitive"
-msgstr "不区分大小写"
+msgstr "忽略大小写"
 
 #. subtitle
 #: data/interfaces/preferences.ui:106
@@ -817,44 +1021,39 @@ msgstr "以图标显示单元活动状态，而非文本"
 
 #. title
 #: data/interfaces/preferences.ui:107
-#, fuzzy
 msgctxt "preference"
 msgid "Active State as Icon"
-msgstr "操作"
+msgstr "以图标显示活动状态"
 
 #. subtitle
 #: data/interfaces/preferences.ui:112
 msgctxt "preference"
 msgid "Preserve the Filters across application restarts"
-msgstr ""
+msgstr "应用重启后保留筛选条件"
 
 #. title
 #: data/interfaces/preferences.ui:113
-#, fuzzy
 msgctxt "preference"
 msgid "Preserve Filters"
-msgstr "服务管理器"
+msgstr "保留筛选条件"
 
 #. group
 #: data/interfaces/preferences.ui:120
-#, fuzzy
 msgctxt "preference"
 msgid "Unit Status"
-msgstr "停用单元文件"
+msgstr "单元状态"
 
 #. subtitle
 #: data/interfaces/preferences.ui:123
-#, fuzzy
 msgctxt "preference"
 msgid "Wrap the unit status long text lines"
-msgstr "自动换行单元描述的长文本行"
+msgstr "对单元状态中的长文本行自动换行"
 
 #. title
 #: data/interfaces/preferences.ui:124
-#, fuzzy
 msgctxt "preference"
 msgid "Wrap unit status text"
-msgstr "自动换行单元描述"
+msgstr "单元状态文本自动换行"
 
 #. subtitle
 #: data/interfaces/preferences.ui:129
@@ -866,19 +1065,19 @@ msgstr "否则，这些按钮会根据上下文显示"
 #: data/interfaces/preferences.ui:130
 msgctxt "preference"
 msgid "Always shows Start and Stop Buttons"
-msgstr "始终显示“开始”和“停止”按钮"
+msgstr "始终显示“启动”和“停止”按钮"
 
 #. group
 #: data/interfaces/preferences.ui:137
 msgctxt "preference"
 msgid "Unit File"
-msgstr "单元文件显示配置"
+msgstr "单元文件"
 
 #. subtitle
 #: data/interfaces/preferences.ui:140
 msgctxt "preference"
 msgid "Display unit file line number"
-msgstr "显示单元文件行数"
+msgstr "显示单元文件行号"
 
 #. title
 #: data/interfaces/preferences.ui:141
@@ -898,6 +1097,10 @@ msgctxt "preference"
 msgid "Text Highlight"
 msgstr "文本高亮"
 
+#: data/interfaces/preferences.ui:154
+msgid "Journal"
+msgstr "日志"
+
 #. subtitle
 #: data/interfaces/preferences.ui:157
 msgctxt "preference"
@@ -909,6 +1112,14 @@ msgstr "以彩色显示日志"
 msgctxt "preference"
 msgid "Journal colors"
 msgstr "日志条目颜色"
+
+#: data/interfaces/preferences.ui:176
+msgid ""
+"The maximum events fetch in a batch\n"
+"<i>0 means no size limit</i>"
+msgstr ""
+"每批最多获取的事件数\n"
+"<i>0 表示不限制数量</i>"
 
 #. title
 #: data/interfaces/preferences.ui:179
@@ -932,201 +1143,201 @@ msgctxt "preference"
 msgid "Journal's event max size"
 msgstr "日志事件最大长度"
 
-#: data/interfaces/preferences.ui:222
-#, fuzzy
+#: data/interfaces/preferences.ui:202
+msgid "Wrap text at word boundaries"
+msgstr "在词边界处换行"
+
+#: data/interfaces/preferences.ui:203
+msgid "Wrap Word"
+msgstr "按词换行"
+
+#: data/interfaces/preferences.ui:219
 msgctxt "preference"
 msgid "_Proxy Preferences"
-msgstr "首选项"
+msgstr "代理首选项(_P)"
 
-#: data/interfaces/preferences.ui:228
+#: data/interfaces/preferences.ui:225
 msgid "Switch that controls other switches"
 msgstr "控制其他开关的总开关"
 
+#: data/interfaces/preferences.ui:226
+msgid "All Actions and Methods"
+msgstr "所有操作和方法"
+
 #. group title
-#: data/interfaces/preferences.ui:236
+#: data/interfaces/preferences.ui:233
 msgctxt "preference"
 msgid "Systemd Manager Method Calls"
-msgstr "Systemd Manager方法调用"
+msgstr "systemd 管理器方法调用"
 
-#: data/interfaces/preferences.ui:239
-#, fuzzy
+#: data/interfaces/preferences.ui:236
 msgctxt "preference"
 msgid "<b>Start</b> method call through the Proxy"
-msgstr "通过代理调用 <b>解冻</b> 方法"
+msgstr "通过代理调用<b>启动</b>方法"
 
-#: data/interfaces/preferences.ui:240
+#: data/interfaces/preferences.ui:237
 msgctxt "preference"
 msgid "Start"
 msgstr "启动"
 
-#: data/interfaces/preferences.ui:245
-#, fuzzy
+#: data/interfaces/preferences.ui:242
 msgctxt "preference"
 msgid "<b>Stop</b> method call through the Proxy"
-msgstr "通过代理调用 <b>解冻</b> 方法"
+msgstr "通过代理调用<b>停止</b>方法"
 
-#: data/interfaces/preferences.ui:246
-#, fuzzy
+#: data/interfaces/preferences.ui:243
 msgctxt "preference"
 msgid "Stop"
-msgstr "立即停止"
+msgstr "停止"
 
-#: data/interfaces/preferences.ui:251
-#, fuzzy
+#: data/interfaces/preferences.ui:248
 msgctxt "preference"
 msgid "<b>Restart</b> method call through the Proxy"
-msgstr "通过代理调用 <b>清空</b> 方法"
+msgstr "通过代理调用<b>重启</b>方法"
 
-#: data/interfaces/preferences.ui:252
+#: data/interfaces/preferences.ui:249
 msgctxt "preference"
 msgid "Restart"
 msgstr "重启"
 
-#: data/interfaces/preferences.ui:257
-#, fuzzy
+#: data/interfaces/preferences.ui:254
 msgctxt "preference"
 msgid "<b>Reload Unit</b> method call through the Proxy"
-msgstr "通过代理调用 <b>清空</b> 方法"
+msgstr "通过代理调用<b>重载单元</b>方法"
 
-#: data/interfaces/preferences.ui:258
-#, fuzzy
+#: data/interfaces/preferences.ui:255
 msgctxt "preference"
 msgid "Reload Unit"
-msgstr "重新加载所有服务单元"
+msgstr "重载单元"
 
-#: data/interfaces/preferences.ui:263
+#: data/interfaces/preferences.ui:260
 msgctxt "preference"
 msgid "<b>Clean</b> method call through the Proxy"
-msgstr "通过代理调用 <b>清空</b> 方法"
+msgstr "通过代理调用<b>清理</b>方法"
 
-#: data/interfaces/preferences.ui:264
+#: data/interfaces/preferences.ui:261
 msgctxt "preference"
 msgid "Clean"
-msgstr "清空"
+msgstr "清理"
 
-#: data/interfaces/preferences.ui:269
+#: data/interfaces/preferences.ui:266
 msgctxt "preference"
 msgid "<b>Freeze</b> method call through the Proxy"
 msgstr "通过代理调用 <b>冻结</b> 方法"
 
-#: data/interfaces/preferences.ui:270
+#: data/interfaces/preferences.ui:267
 msgctxt "preference"
 msgid "Freeze"
 msgstr "冻结"
 
-#: data/interfaces/preferences.ui:275
+#: data/interfaces/preferences.ui:272
 msgctxt "preference"
 msgid "<b>Thaw</b> method call through the Proxy"
 msgstr "通过代理调用 <b>解冻</b> 方法"
 
-#: data/interfaces/preferences.ui:276
+#: data/interfaces/preferences.ui:273
 msgctxt "preference"
 msgid "Thaw"
 msgstr "解冻"
 
-#: data/interfaces/preferences.ui:281
+#: data/interfaces/preferences.ui:278
 msgctxt "preference"
 msgid "<b>Enable Unit File</b> method call through the Proxy"
 msgstr "通过代理调用来<b>启用单元文件</b>"
 
-#: data/interfaces/preferences.ui:282
+#: data/interfaces/preferences.ui:279
 msgctxt "preference"
 msgid "Enable Unit File"
 msgstr "启用单元文件"
 
-#: data/interfaces/preferences.ui:287
+#: data/interfaces/preferences.ui:284
 msgctxt "preference"
 msgid "<b>Disable Unit File</b> method call through the Proxy"
 msgstr "通过代理调用来<b>停用单元文件</b>"
 
-#: data/interfaces/preferences.ui:288
+#: data/interfaces/preferences.ui:285
 msgctxt "preference"
 msgid "Disable Unit File"
-msgstr "停用单元文件"
+msgstr "禁用单元文件"
 
-#: data/interfaces/preferences.ui:293
+#: data/interfaces/preferences.ui:290
 msgctxt "preference"
 msgid ""
 "<b>Reload</b> Systemd Manager configuration method call through the Proxy"
 msgstr "通过代理调用来<b>重载</b>所有单元配置"
 
-#: data/interfaces/preferences.ui:294
-#, fuzzy
+#: data/interfaces/preferences.ui:291
 msgctxt "preference"
 msgid "Daemon Reload"
-msgstr "重载所有单元配置"
+msgstr "重新加载守护进程配置"
 
-#: data/interfaces/preferences.ui:299
+#: data/interfaces/preferences.ui:296
 msgctxt "preference"
 msgid ""
 "<b>Revert Unit Files</b> to their vendor versions method call through the "
 "Proxy"
 msgstr "通过代理调用 来<b>恢复单元文件</b> 到其供应商版本"
 
-#: data/interfaces/preferences.ui:300
+#: data/interfaces/preferences.ui:297
 msgctxt "preference"
 msgid "Revert Unit Files"
 msgstr "恢复单元文件"
 
-#: data/interfaces/preferences.ui:307
+#: data/interfaces/preferences.ui:304
 msgctxt "preference"
 msgid "Actions"
 msgstr "操作"
 
-#: data/interfaces/preferences.ui:310
+#: data/interfaces/preferences.ui:307
 msgctxt "preference"
 msgid "Create a <b>Drop-in</b> file through the Proxy"
-msgstr "通过代理创建 <b>Drop-in</b> 文件"
+msgstr "通过代理创建<b>附加配置</b>文件"
 
-#: data/interfaces/preferences.ui:311
+#: data/interfaces/preferences.ui:308
 msgctxt "preference"
 msgid "Create Drop-in"
-msgstr "创建Drop-in 文件"
+msgstr "创建附加配置"
 
-#: data/interfaces/preferences.ui:316
+#: data/interfaces/preferences.ui:313
 msgctxt "preference"
 msgid "<b>Save file</b> through the Proxy"
 msgstr "通过代理<b>保存文件</b>"
 
-#: data/interfaces/preferences.ui:317
+#: data/interfaces/preferences.ui:314
 msgctxt "preference"
 msgid "Save file"
 msgstr "保存文件"
 
-#: data/interfaces/preferences.ui:322
-#, fuzzy
+#: data/interfaces/preferences.ui:319
 msgctxt "preference"
 msgid "<b>Create file</b> through the Proxy"
-msgstr "通过代理<b>保存文件</b>"
+msgstr "通过代理<b>创建文件</b>"
 
-#: data/interfaces/preferences.ui:323
-#, fuzzy
+#: data/interfaces/preferences.ui:320
 msgctxt "preference"
 msgid "Create file"
-msgstr "保存文件"
+msgstr "创建文件"
 
-#: data/interfaces/preferences.ui:331
+#: data/interfaces/preferences.ui:328
 msgctxt "preference"
 msgid "Proxy Behaviors"
 msgstr "代理运行行为"
 
-#: data/interfaces/preferences.ui:334
-#, fuzzy
+#: data/interfaces/preferences.ui:331
 msgid "Start the Proxy when starting SysD Manager"
-msgstr "启动 Sysd Manager 时启动代理"
+msgstr "启动 SysD Manager 时启动代理"
 
-#: data/interfaces/preferences.ui:335
+#: data/interfaces/preferences.ui:332
 msgctxt "preference"
 msgid "Start Proxy at Start up"
 msgstr "在软件启动时启动代理"
 
-#: data/interfaces/preferences.ui:340
-#, fuzzy
+#: data/interfaces/preferences.ui:337
 msgctxt "preference"
 msgid "Stop the Proxy when closing SysD Manager"
-msgstr "启动 Sysd Manager 时启动代理"
+msgstr "关闭 SysD Manager 时停止代理"
 
-#: data/interfaces/preferences.ui:341
+#: data/interfaces/preferences.ui:338
 msgctxt "preference"
 msgid "Stop Proxy at Close"
 msgstr "关闭时停止代理"
@@ -1135,7 +1346,7 @@ msgstr "关闭时停止代理"
 #: data/interfaces/shortcuts.ui:10
 msgctxt "shortcut window"
 msgid "General"
-msgstr "一般"
+msgstr "常规"
 
 #: data/interfaces/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -1154,10 +1365,9 @@ msgstr "显示偏好设置"
 
 #. Section name
 #: data/interfaces/shortcuts.ui:33
-#, fuzzy
 msgctxt "shortcut window"
 msgid "SysD Manager"
-msgstr "SysD 管理器"
+msgstr "SysD Manager"
 
 #. subtitle
 #: data/interfaces/shortcuts.ui:37
@@ -1166,10 +1376,9 @@ msgid "Allow configuring each proxy operation individually"
 msgstr "允许单独配置每个代理操作"
 
 #: data/interfaces/shortcuts.ui:38
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Proxy Preferences"
-msgstr "首选项"
+msgstr "显示代理首选项"
 
 #: data/interfaces/shortcuts.ui:44
 msgctxt "shortcut window"
@@ -1182,10 +1391,9 @@ msgid "Open Unit Property Filter"
 msgstr "打开单元属性筛选器"
 
 #: data/interfaces/shortcuts.ui:56
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Open Analyze Blame"
-msgstr "分析启动耗时"
+msgstr "打开启动耗时分析"
 
 #: data/interfaces/shortcuts.ui:62
 msgctxt "shortcut window"
@@ -1198,10 +1406,9 @@ msgid "Open columns manager"
 msgstr "打开列管理器"
 
 #: data/interfaces/shortcuts.ui:74
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Deamon Reload"
-msgstr "重载所有单元配置"
+msgstr "重新加载守护进程配置"
 
 #: data/interfaces/shortcuts.ui:80
 msgctxt "shortcut window"
@@ -1215,10 +1422,9 @@ msgid "Create Timer or Service Unit Type"
 msgstr "创建计时器或服务单元类型"
 
 #: data/interfaces/shortcuts.ui:87
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Create Unit"
-msgstr "创建Drop-in 文件"
+msgstr "创建单元"
 
 #. Section name
 #: data/interfaces/shortcuts.ui:94
@@ -1227,175 +1433,169 @@ msgid "Pages"
 msgstr "页面"
 
 #: data/interfaces/shortcuts.ui:98
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Unit Status"
-msgstr "停用单元文件"
+msgstr "显示单元状态"
 
 #: data/interfaces/shortcuts.ui:104
 msgctxt "shortcut window"
 msgid "Display Unit Dependencies"
-msgstr ""
+msgstr "显示单元依赖关系"
 
 #: data/interfaces/shortcuts.ui:110
 msgctxt "shortcut window"
 msgid "Display Unit Definition File"
-msgstr ""
+msgstr "显示单元定义文件"
 
 #: data/interfaces/shortcuts.ui:116
 msgctxt "shortcut window"
 msgid "Display Unit Journal Events"
-msgstr ""
+msgstr "显示单元日志事件"
 
 #. Section name
 #: data/interfaces/shortcuts.ui:123
 msgctxt "shortcut window"
 msgid "Unit"
-msgstr ""
+msgstr "单元"
 
 #: data/interfaces/shortcuts.ui:127
 msgctxt "shortcut window"
 msgid "Show unit properties"
-msgstr ""
+msgstr "显示单元属性"
 
 #. In the shortcut Window description
 #: data/interfaces/shortcuts.ui:133
 msgctxt "shortcut window"
 msgid "Save the selected unit file"
-msgstr ""
+msgstr "保存所选单元文件"
 
 #. Section name
 #: data/interfaces/shortcuts.ui:140
 msgctxt "shortcut window"
 msgid "Curated Lists"
-msgstr ""
+msgstr "精选列表"
 
 #. subtitle
 #: data/interfaces/shortcuts.ui:144
 msgctxt "shortcut window"
 msgid "Merge Loaded Units with Unit Files"
-msgstr ""
+msgstr "合并已加载单元与单元文件"
 
 #: data/interfaces/shortcuts.ui:145
 msgctxt "shortcut window"
 msgid "Display SysD Manager Original List"
-msgstr ""
+msgstr "显示 SysD Manager 默认列表"
 
 #. subtitle
 #: data/interfaces/shortcuts.ui:151
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display only Loaded Units"
-msgstr "重新加载所有服务单元"
+msgstr "仅显示已加载单元"
 
 #: data/interfaces/shortcuts.ui:152
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Loaded Units"
-msgstr "重新加载所有服务单元"
+msgstr "显示已加载单元"
 
 #. subtitle
 #: data/interfaces/shortcuts.ui:158
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display only Unit Files"
-msgstr "停用单元文件"
+msgstr "仅显示单元文件"
 
 #: data/interfaces/shortcuts.ui:159
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Unit Files"
-msgstr "停用单元文件"
+msgstr "显示单元文件"
 
 #: data/interfaces/shortcuts.ui:165
 msgctxt "shortcut window"
 msgid "Display User Customised Units list"
-msgstr ""
+msgstr "显示用户自定义单元列表"
 
 #: data/interfaces/shortcuts.ui:171
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Favorite Units"
-msgstr "重新加载所有服务单元"
+msgstr "显示收藏单元"
 
 #. Section name
 #: data/interfaces/shortcuts.ui:178
 msgctxt "shortcut window"
 msgid "Special Lists"
-msgstr ""
+msgstr "专用列表"
 
 #: data/interfaces/shortcuts.ui:182
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Timers"
-msgstr "颜色指示"
+msgstr "显示定时器"
 
 #: data/interfaces/shortcuts.ui:188
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Sockets"
-msgstr "颜色指示"
+msgstr "显示套接字"
 
 #: data/interfaces/shortcuts.ui:194
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Paths"
-msgstr "颜色指示"
+msgstr "显示路径单元"
 
 #: data/interfaces/shortcuts.ui:200
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Display Automounts"
-msgstr "颜色指示"
+msgstr "显示自动挂载"
 
 #. button
 #: data/interfaces/side_control_panel.ui:22
 msgctxt "control"
 msgid "Enable Unit File ➚"
-msgstr ""
+msgstr "启用单元文件 ➚"
+
+#: data/interfaces/side_control_panel.ui:23
+msgid "Send a signal to a process or a group of processes"
+msgstr "向进程或进程组发送信号"
 
 #. button
 #: data/interfaces/side_control_panel.ui:39
 msgctxt "control"
 msgid "_Disable Unit File ➚"
-msgstr ""
+msgstr "禁用单元文件(_D) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:40
 #: data/interfaces/side_control_panel.ui:146
 msgctxt "control"
 msgid "Unmask the selected unit file. This will undo the effect of <b>Mask</b>"
-msgstr ""
+msgstr "取消屏蔽所选单元文件，撤销<b>屏蔽</b>操作的效果。"
 
 #. button
 #: data/interfaces/side_control_panel.ui:52
 msgctxt "control"
 msgid "Send _Kill Signal ➚"
-msgstr ""
+msgstr "发送终止信号(_K) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:53
 msgctxt "control"
 msgid "Send a signal to a process or a group of processes"
-msgstr ""
+msgstr "向进程或进程组发送信号"
 
 #. button
 #: data/interfaces/side_control_panel.ui:67
 msgctxt "control"
 msgid "_Queue Signal ➚"
-msgstr ""
+msgstr "将信号入队(_Q) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:68
 msgctxt "control"
 msgid "Queue a signal to a process or a group of processes"
-msgstr ""
+msgstr "将发往进程或进程组的信号加入队列"
 
 #. button
 #: data/interfaces/side_control_panel.ui:82
 msgctxt "control"
 msgid "_Clean ➚"
-msgstr ""
+msgstr "清理(_C) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:87
@@ -1405,30 +1605,36 @@ msgid ""
 "specified unit. \n"
 "<u>Note:</u> the unit must be <b>inactive</b> to be cleaned."
 msgstr ""
+"移除指定单元的配置、状态、缓存、日志或运行时数据。\n"
+"<u>注意：</u>只有处于<b>非活动状态</b>的单元才能清理。"
+
+#: data/interfaces/side_control_panel.ui:100
+msgid "Freeze"
+msgstr "冻结"
 
 #. button
 #: data/interfaces/side_control_panel.ui:101
 msgctxt "control"
 msgid "Freeze the specified unit using cgroup freezer"
-msgstr ""
+msgstr "使用 cgroup 冻结功能冻结指定单元"
 
 #. button
 #: data/interfaces/side_control_panel.ui:114
 msgctxt "control"
 msgid "Thaw"
-msgstr ""
+msgstr "解冻"
 
 #. button
 #: data/interfaces/side_control_panel.ui:115
 msgctxt "control"
 msgid "Thaw (unfreeze) the specified unit"
-msgstr ""
+msgstr "解冻指定单元"
 
 #. button
 #: data/interfaces/side_control_panel.ui:128
 msgctxt "control"
 msgid "M_ask ➚"
-msgstr ""
+msgstr "屏蔽(_A) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:129
@@ -1440,42 +1646,45 @@ msgid ""
 "of activation of the unit, including enablement and manual activation. \n"
 "<b>Use this option with care.</b>"
 msgstr ""
+"屏蔽所选单元。此操作会将单元文件链接到 <u>/dev/null</u>，使其无法启动。\n"
+"屏蔽比<b>禁用</b>更彻底，会禁止任何方式的激活，包括启用和手动激活。\n"
+"<b>请谨慎使用此选项。</b>"
 
 #. button
 #: data/interfaces/side_control_panel.ui:145
 msgctxt "control"
 msgid "_UnMask"
-msgstr ""
+msgstr "取消屏蔽(_U)"
 
 #. button
 #: data/interfaces/side_control_panel.ui:161
 msgctxt "control"
 msgid "Reload Unit"
-msgstr ""
+msgstr "重载单元"
 
 #. button
 #: data/interfaces/side_control_panel.ui:162
 msgctxt "control"
 msgid "Ask the specified unit to reload its configuration"
-msgstr ""
+msgstr "请求指定单元重新加载其配置"
 
 #. button
 #: data/interfaces/side_control_panel.ui:175
 msgctxt "control"
 msgid "_Preset ➚"
-msgstr ""
+msgstr "应用预设(_P) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:176
 msgctxt "control"
 msgid "Enable or Disable one or more unit files according to the preset policy"
-msgstr ""
+msgstr "根据预设策略启用或禁用一个或多个单元文件"
 
 #. button
 #: data/interfaces/side_control_panel.ui:190
 msgctxt "control"
 msgid "_Reenable ➚"
-msgstr ""
+msgstr "重新启用(_R) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:191
@@ -1483,13 +1692,13 @@ msgctxt "control"
 msgid ""
 "Apply the changes to one or more units that would result from disabling and "
 "enabling the unit quickly one after the other in an atomic fashion"
-msgstr ""
+msgstr "以原子操作的方式依次禁用并启用一个或多个单元，以应用配置更改"
 
 #. button
 #: data/interfaces/side_control_panel.ui:205
 msgctxt "control"
 msgid "_Link ➚"
-msgstr ""
+msgstr "链接(_L) ➚"
 
 #. tooltip
 #: data/interfaces/side_control_panel.ui:206
@@ -1497,7 +1706,7 @@ msgctxt "control"
 msgid ""
 "Link unit files (that are located outside of the usual unit search paths) "
 "into the unit search path"
-msgstr ""
+msgstr "将常规单元搜索路径之外的单元文件链接到单元搜索路径中"
 
 #. description
 #: data/interfaces/signals_window.ui:24
@@ -1506,500 +1715,588 @@ msgid ""
 "No Systemd signals\n"
 "Start or Stop a Unit to see some appearing"
 msgstr ""
+"暂无 systemd 信号\n"
+"启动或停止一个单元后即可查看"
 
 #. title
 #: data/interfaces/signals_window.ui:27
 msgctxt "signals"
 msgid "No signals"
-msgstr ""
+msgstr "暂无信号"
 
 #. column title
 #: data/interfaces/signals_window.ui:55
 msgctxt "signals"
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 #. column title
 #: data/interfaces/signals_window.ui:62
 msgctxt "signals"
 msgid "Bus"
-msgstr ""
+msgstr "总线"
 
 #. column title
 #: data/interfaces/signals_window.ui:69
 msgctxt "signals"
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #. column title
 #: data/interfaces/signals_window.ui:76
 msgctxt "signals"
 msgid "Details"
-msgstr ""
+msgstr "详情"
 
 #. dialog title
 #: data/interfaces/signals_window.ui:95
 msgctxt "signals"
 msgid "Watch Signals"
-msgstr ""
+msgstr "监视信号"
 
 #. place holder text
 #: data/interfaces/text_search_entry.ui:11
 msgctxt "find_text"
 msgid "Find in Text"
-msgstr ""
+msgstr "在文本中查找"
 
 #. tooltip
 #: data/interfaces/text_search_entry.ui:25
 msgctxt "find_text"
 msgid "Match Case"
-msgstr ""
+msgstr "区分大小写"
 
 #. tooltip
 #: data/interfaces/text_search_entry.ui:32
 msgctxt "find_text"
 msgid "Match Whole Word"
-msgstr ""
+msgstr "全词匹配"
 
 #. tooltip
 #: data/interfaces/text_search_entry.ui:39
 msgctxt "find_text"
 msgid "Use Regular Expression"
-msgstr ""
+msgstr "使用正则表达式"
 
 #. tooltip
 #: data/interfaces/text_search_entry.ui:51
 msgctxt "find_text"
 msgid "Previous Match"
-msgstr ""
+msgstr "上一个匹配"
 
 #: data/interfaces/text_search_entry.ui:59
 msgctxt "find_text"
 msgid "Match Next"
-msgstr ""
+msgstr "下一个匹配"
 
 #: data/interfaces/unit_control_panel.ui:27
 msgctxt "control info"
 msgid "Enabled"
-msgstr ""
+msgstr "已启用"
 
 #: data/interfaces/unit_control_panel.ui:50
 msgctxt "control tooltip"
 msgid "Start unit"
-msgstr ""
+msgstr "启动单元"
 
 #. The start button
 #: data/interfaces/unit_control_panel.ui:54
 msgctxt "controls"
 msgid "_Start"
-msgstr ""
+msgstr "启动(_S)"
 
 #: data/interfaces/unit_control_panel.ui:63
 msgctxt "control tooltip"
 msgid "Stop Modes"
-msgstr ""
+msgstr "停止模式"
 
 #: data/interfaces/unit_control_panel.ui:73
 msgctxt "control tooltip"
 msgid "Stop unit"
-msgstr ""
+msgstr "停止单元"
 
 #: data/interfaces/unit_control_panel.ui:77
 msgctxt "controls"
 msgid "S_top"
-msgstr ""
+msgstr "停止(_T)"
 
 #: data/interfaces/unit_control_panel.ui:78
 msgctxt "controls tooltip"
 msgid "Stop unit"
-msgstr ""
+msgstr "停止单元"
 
 #: data/interfaces/unit_control_panel.ui:87
 msgctxt "control tooltip"
 msgid "Restart Modes"
-msgstr ""
+msgstr "重启模式"
 
 #: data/interfaces/unit_control_panel.ui:97
 #: data/interfaces/unit_control_panel.ui:119
 msgctxt "controls tooltip"
 msgid "Restart unit"
-msgstr ""
+msgstr "重启单元"
 
 #. unit popup menu
 #: data/interfaces/unit_control_panel.ui:101
 #: data/interfaces/unit_pop_menu.ui:64
 msgctxt "controls"
 msgid "Restart"
-msgstr ""
+msgstr "重启"
 
 #: data/interfaces/unit_control_panel.ui:109
-#, fuzzy
 msgctxt "control tooltip"
 msgid "Reload Unit Modes"
-msgstr "重新加载所有服务单元"
+msgstr "单元重载模式"
 
 #. unit popup menu
 #: data/interfaces/unit_control_panel.ui:125
 #: data/interfaces/unit_pop_menu.ui:78
-#, fuzzy
 msgctxt "controls"
 msgid "Reload Unit"
-msgstr "重新加载所有服务单元"
+msgstr "重载单元"
 
 #: data/interfaces/unit_control_panel.ui:145
 msgctxt "controls menu"
 msgid "_More…"
-msgstr ""
+msgstr "更多(_M)…"
 
 #. aka Unit Info
 #: data/interfaces/unit_control_panel.ui:187
 msgctxt "controls tab"
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: data/interfaces/unit_control_panel.ui:197
 msgctxt "controls tab"
 msgid "Dependencies"
-msgstr ""
+msgstr "依赖关系"
 
 #: data/interfaces/unit_control_panel.ui:207
 msgctxt "controls tab"
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 #: data/interfaces/unit_control_panel.ui:217
 msgctxt "controls tab"
 msgid "Journal"
-msgstr ""
+msgstr "日志"
 
 #. label
 #: data/interfaces/unit_dependencies_panel.ui:33
 msgctxt "dependency"
 msgid "plain"
-msgstr ""
+msgstr "平铺"
 
 #. label
 #: data/interfaces/unit_dependencies_panel.ui:53
 msgctxt "dependency"
 msgid "No dependencies"
-msgstr ""
+msgstr "无依赖关系"
+
+#: data/interfaces/unit_file_panel.ui:54
+msgid "Drop-in"
+msgstr "附加配置"
+
+#: data/interfaces/unit_file_panel.ui:56
+msgid "Drop-in operations"
+msgstr "附加配置操作"
 
 #. button
 #: data/interfaces/unit_file_panel.ui:66
 msgctxt "file"
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #. description
 #: data/interfaces/unit_file_panel.ui:96
 msgctxt "file"
 msgid "The unit has no file associated"
-msgstr ""
+msgstr "该单元没有关联文件"
 
 #. title
 #: data/interfaces/unit_file_panel.ui:98
 msgctxt "file"
 msgid "No Unit File"
-msgstr ""
+msgstr "无单元文件"
 
 #. Unit file drop-in operations menu item
 #: data/interfaces/unit_file_panel.ui:110
-#, fuzzy
 msgctxt "menu"
 msgid "Revert Drop-in"
-msgstr "创建Drop-in 文件"
+msgstr "还原附加配置"
 
 #. Unit file drop-in operations menu section
 #: data/interfaces/unit_file_panel.ui:113
-#, fuzzy
 msgctxt "menu"
 msgid "Create Drop-in"
-msgstr "创建Drop-in 文件"
+msgstr "创建附加配置"
 
 #. Unit file drop-in operations menu item
 #: data/interfaces/unit_file_panel.ui:116
 msgctxt "menu"
 msgid "Permanent"
-msgstr ""
+msgstr "永久"
 
 #. Unit file drop-in operations menu item
 #: data/interfaces/unit_file_panel.ui:120
-#, fuzzy
 msgctxt "menu"
 msgid "Runtime"
 msgstr "运行时"
+
+#: data/interfaces/unit_info.ui:9
+msgid "Unit Info"
+msgstr "单元信息"
+
+#: data/interfaces/unit_info.ui:19
+msgid "Copy data"
+msgstr "复制数据"
+
+#: data/interfaces/unit_list_filter.ui:25
+msgid "Content"
+msgstr "内容"
 
 #. Unit property filter button
 #: data/interfaces/unit_list_filter.ui:52
 #: data/interfaces/unit_list_panel.ui:166
 msgid "Clear Filters"
-msgstr ""
+msgstr "清除筛选条件"
+
+#: data/interfaces/unit_list_filter.ui:59
+msgid "Side"
+msgstr "侧边"
+
+#: data/interfaces/unit_list_filter.ui:68
+msgid "Unit Property Filter"
+msgstr "单元属性筛选"
+
+#: data/interfaces/unit_list_filter.ui:76
+#: data/interfaces/unit_properties_selector.ui:97
+msgid "Filter"
+msgstr "筛选"
 
 #: data/interfaces/unit_list_panel.ui:40
 msgctxt "list tooltip"
 msgid "Loaded Units Retrieved"
-msgstr ""
+msgstr "已获取的已加载单元"
 
 #: data/interfaces/unit_list_panel.ui:45
 msgctxt "list info"
 msgid "Loaded Units Retrieved"
-msgstr ""
+msgstr "已获取的已加载单元"
 
 #: data/interfaces/unit_list_panel.ui:56
 msgctxt "list tooltip"
 msgid "Unit Files Retrieved"
-msgstr ""
+msgstr "已获取的单元文件"
 
 #: data/interfaces/unit_list_panel.ui:61
 msgctxt "list info"
 msgid "Unit Files Retrieved"
-msgstr ""
+msgstr "已获取的单元文件"
 
 #: data/interfaces/unit_list_panel.ui:72
 msgctxt "list tooltip"
 msgid "Units displayed"
-msgstr ""
+msgstr "显示的单元数"
 
 #: data/interfaces/unit_list_panel.ui:77
 msgctxt "list info"
 msgid "Units Displayed"
-msgstr ""
+msgstr "显示的单元数"
 
 #: data/interfaces/unit_list_panel.ui:87
 msgctxt "list info tooltip"
 msgid "Hide Total Summary"
-msgstr ""
+msgstr "隐藏总计"
 
 #. short version
 #: data/interfaces/unit_list_panel.ui:99
 msgctxt "list info"
 msgid "Loaded"
-msgstr ""
+msgstr "已加载"
 
 #. short version
 #: data/interfaces/unit_list_panel.ui:100
 msgctxt "list info"
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #. short version
 #: data/interfaces/unit_list_panel.ui:101
 msgctxt "list info"
 msgid "Units"
-msgstr ""
+msgstr "单元"
 
 #: data/interfaces/unit_list_panel.ui:132
 msgctxt "list page description"
 msgid ""
 "No units returned, set environment variable <b>RUST_LOG=info</b> to see what "
 "happened."
-msgstr ""
+msgstr "未返回任何单元。请设置环境变量 <b>RUST_LOG=info</b> 以查看详细信息。"
 
 #: data/interfaces/unit_list_panel.ui:134
 msgctxt "list page title"
 msgid "Something went wrong"
-msgstr ""
+msgstr "发生错误"
 
 #. Button label
 #: data/interfaces/unit_list_panel.ui:155
-#, fuzzy
 msgctxt "unit search"
 msgid "Edit Filters"
-msgstr "单元文件"
+msgstr "编辑筛选条件"
 
 #. When the filter is too restrictive
 #: data/interfaces/unit_list_panel.ui:171
 msgctxt "list page description"
 msgid "Overly restrictive filter"
-msgstr ""
+msgstr "筛选条件过于严格"
 
 #: data/interfaces/unit_list_panel.ui:173
-#, fuzzy
 msgctxt "list page title"
 msgid "No Filtered Units"
-msgstr "重新加载所有服务单元"
+msgstr "没有符合筛选条件的单元"
 
 #. Search entry place holder text
 #: data/interfaces/unit_list_search.ui:13
 msgctxt "unit search"
 msgid "Filter Units by their Names"
-msgstr ""
+msgstr "按名称筛选单元"
 
 #. button's tooltips
 #: data/interfaces/unit_list_search.ui:19
 msgctxt "button's tooltips"
 msgid "Configure displayed Columns"
-msgstr ""
+msgstr "配置显示的列"
 
 #. Button label
 #: data/interfaces/unit_list_search.ui:23
 msgctxt "unit search"
 msgid "Columns"
-msgstr ""
+msgstr "列"
 
 #. button's tooltips
 #: data/interfaces/unit_list_search.ui:31
 msgctxt "unit search"
 msgid "More filtering Options"
-msgstr ""
+msgstr "更多筛选选项"
 
 #. Button label
 #: data/interfaces/unit_list_search.ui:35
 msgctxt "unit search"
 msgid "Filters"
-msgstr ""
+msgstr "筛选条件"
 
 #. Button label
 #: data/interfaces/unit_list_search.ui:50
 msgctxt "unit search"
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #. button's tooltips
 #: data/interfaces/unit_list_search.ui:51
 msgctxt "unit search"
 msgid "Clear applied Filters"
-msgstr ""
+msgstr "清除已应用的筛选条件"
 
 #. unit popup menu
 #: data/interfaces/unit_pop_menu.ui:36
 msgctxt "controls"
 msgid "Start"
-msgstr ""
+msgstr "启动"
 
 #. unit popup menu
 #: data/interfaces/unit_pop_menu.ui:50
 msgctxt "controls"
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #. unit popup menu
 #: data/interfaces/unit_pop_menu.ui:95
 msgctxt "controls"
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 #. unit popup menu
 #: data/interfaces/unit_pop_menu.ui:109
 msgctxt "controls"
 msgid "Disable"
-msgstr ""
+msgstr "禁用"
 
 #. unit popup menu
 #: data/interfaces/unit_pop_menu.ui:123
 msgctxt "controls"
 msgid "Reenable"
-msgstr ""
+msgstr "重新启用"
 
 #. unit popup menu
 #: data/interfaces/unit_pop_menu.ui:140
 msgctxt "controls"
 msgid "Favorite"
-msgstr ""
+msgstr "收藏"
 
 #. unit list pop up menu item
 #: data/interfaces/unit_pop_menu.ui:154
 msgctxt "controls"
 msgid "Toggle Totals Summary"
-msgstr ""
+msgstr "切换总计显示"
 
 #. in the pop menu
 #: data/interfaces/unit_pop_menu.ui:167
 msgctxt "controls"
 msgid "Curated Lists"
-msgstr ""
+msgstr "精选列表"
 
 #. Show all properties
 #: data/interfaces/unit_properties.ui:29
 msgctxt "unit properties"
 msgid "Show all"
-msgstr ""
+msgstr "显示全部"
 
 #. Show all properties tooltip
 #: data/interfaces/unit_properties.ui:30
 msgctxt "unit properties"
 msgid "Show empty properties"
-msgstr ""
+msgstr "显示空属性"
 
 #. window title
 #: data/interfaces/unit_properties.ui:55
 msgctxt "unit properties"
 msgid "Unit Properties"
-msgstr ""
+msgstr "单元属性"
 
 #. Button tooltip-text
 #: data/interfaces/unit_properties.ui:61
 msgctxt "unit properties"
 msgid "Copy all properties to clipboard"
-msgstr ""
+msgstr "将所有属性复制到剪贴板"
+
+#: data/interfaces/unit_properties_selection.ui:11
+msgid "Unit Property Columns"
+msgstr "单元属性列"
+
+#: data/interfaces/unit_properties_selection.ui:48
+msgid "Reset"
+msgstr "重置"
+
+#: data/interfaces/unit_properties_selection.ui:56
+msgid "Apply"
+msgstr "应用"
+
+#: data/interfaces/unit_properties_selection.ui:64
+msgid "Ok"
+msgstr "确定"
+
+#: data/interfaces/unit_properties_selection_row.ui:63
+msgid "Visible"
+msgstr "可见"
+
+#: data/interfaces/unit_properties_selection_row.ui:77
+msgid "Width"
+msgstr "宽度"
+
+#: data/interfaces/unit_properties_selection_row.ui:89
+msgid "Resizable"
+msgstr "可调整大小"
+
+#: data/interfaces/unit_properties_selection_row.ui:99
+msgid "Expands"
+msgstr "扩展"
+
+#: data/interfaces/unit_properties_selection_row.ui:109
+msgid "Title"
+msgstr "标题"
+
+#: data/interfaces/unit_properties_selector.ui:31
+msgid "Interface"
+msgstr "接口"
+
+#: data/interfaces/unit_properties_selector.ui:38
+msgid "Property"
+msgstr "属性"
+
+#: data/interfaces/unit_properties_selector.ui:45
+msgid "Signature"
+msgstr "类型签名"
+
+#: data/interfaces/unit_properties_selector.ui:52
+msgid "Access"
+msgstr "访问权限"
+
+#: data/interfaces/unit_properties_selector.ui:67
+msgid "Unit Property Selector"
+msgstr "单元属性选择器"
+
+#: data/interfaces/unit_properties_selector.ui:73
+#: src/widget/unit_properties_selector/imp.rs:122
+msgid "Expand all interfaces"
+msgstr "展开所有接口"
 
 #. button
 #: data/interfaces/unit_status_panel.ui:29
 msgctxt "unit info"
 msgid "_Refresh"
-msgstr ""
+msgstr "刷新(_R)"
 
 #. button
 #: data/interfaces/unit_status_panel.ui:42
 msgctxt "unit info"
 msgid "Show all _Properties"
-msgstr ""
+msgstr "显示所有属性(_P)"
 
 #: src/analyze/mod.rs:26
-#, fuzzy
 msgctxt "analyze blame"
 msgid "Analyze Blame"
-msgstr "分析启动耗时"
+msgstr "启动耗时分析"
 
 #. label total
 #: src/analyze/mod.rs:55
 msgctxt "analyze blame"
 msgid "Total Time:"
-msgstr ""
+msgstr "总耗时："
 
 #. place holder, lees likely to be displaied
 #: src/analyze/mod.rs:77
 msgctxt "analyze blame"
 msgid "seconds…"
-msgstr ""
+msgstr "秒…"
 
 #. column header
 #: src/analyze/mod.rs:154
 msgctxt "analyze blame"
 msgid "Init time (ms)"
-msgstr ""
+msgstr "初始化耗时（毫秒）"
 
 #. column header
 #: src/analyze/mod.rs:159
 msgctxt "analyze blame"
 msgid "Running units"
-msgstr ""
+msgstr "运行中的单元"
 
 #: src/analyze/mod.rs:216
 #, rust-format
 msgctxt "analyze blame"
 msgid "{} seconds"
-msgstr ""
+msgstr "{} 秒"
 
 #. Just a simple log that it's all ok. Need to set env RUST_LOG="info" to see it
-#: src/main.rs:116
+#: src/main.rs:85
 msgid "Program starting up"
-msgstr ""
+msgstr "程序正在启动"
 
 #: src/widget/app_window/imp.rs:264
 msgctxt "menu"
 msgid "Analyze Blame"
-msgstr "分析启动耗时"
+msgstr "启动耗时分析"
 
 #: src/widget/app_window/imp.rs:269
 msgctxt "menu"
 msgid "Daemon Reload"
-msgstr "重载所有单元配置"
+msgstr "重新加载守护进程配置"
 
 #: src/widget/app_window/imp.rs:274
 msgctxt "menu"
 msgid "Systemd Info"
-msgstr "Systemd 信息"
+msgstr "systemd 信息"
 
 #: src/widget/app_window/imp.rs:279
 msgctxt "menu"
@@ -2009,13 +2306,12 @@ msgstr "启动列表"
 #: src/widget/app_window/imp.rs:284
 msgctxt "menu"
 msgid "Watch Signals"
-msgstr "查看信号"
+msgstr "监视信号"
 
 #: src/widget/app_window/imp.rs:289
-#, fuzzy
 msgctxt "menu"
 msgid "Create Unit"
-msgstr "创建Drop-in 文件"
+msgstr "创建单元"
 
 #: src/widget/app_window/imp.rs:296
 msgctxt "menu"
@@ -2023,10 +2319,9 @@ msgid "Preferences"
 msgstr "首选项"
 
 #: src/widget/app_window/imp.rs:302
-#, fuzzy
 msgctxt "menu"
 msgid "Proxy Preferences"
-msgstr "首选项"
+msgstr "代理首选项"
 
 #: src/widget/app_window/imp.rs:307
 msgctxt "menu"
@@ -2041,57 +2336,101 @@ msgstr "关于"
 #: src/widget/app_window/imp.rs:689
 msgctxt "toast"
 msgid "Check Proxy"
-msgstr ""
+msgstr "检查代理"
 
-#: src/widget/app_window/menu.rs:321
-msgid "Daemon Reload failed!"
+#: src/widget/app_window/menu.rs:64
+msgid "Unavailable"
+msgstr "不可用"
+
+#: src/widget/app_window/menu.rs:70
+msgid "Close"
+msgstr "关闭"
+
+#: src/widget/app_window/menu.rs:240
+msgid ""
+"Need to determine the bus to use for daemon reload.\n"
+"\n"
+"Please select either <b>System</b> or <b>User Session</b> bus."
 msgstr ""
+"请指定重新加载守护进程配置时使用的总线。\n"
+"\n"
+"请选择<b>系统</b>或<b>用户会话</b>总线。"
+
+#: src/widget/app_window/menu.rs:245
+msgid "Select bus"
+msgstr "选择总线"
+
+#: src/widget/app_window/menu.rs:253
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: src/widget/app_window/menu.rs:254
+msgid "_User Session"
+msgstr "用户会话(_U)"
+
+#: src/widget/app_window/menu.rs:255
+msgid "_System"
+msgstr "系统(_S)"
+
+#: src/widget/app_window/menu.rs:323
+msgid "Daemon Reload failed!"
+msgstr "重新加载守护进程配置失败！"
 
 #. about dialogue
-#: src/widget/app_window/menu.rs:370
+#: src/widget/app_window/menu.rs:372
 msgid "Thank you for your support"
-msgstr ""
+msgstr "感谢您的支持"
 
 #: src/widget/clean_dialog/imp.rs:111
 msgctxt "clean"
 msgid "No Unit Selected"
-msgstr ""
+msgstr "未选择单元"
+
+#: src/widget/control_action_dialog/imp.rs:556
+msgctxt "action unit file"
+msgid "Select a unit file"
+msgstr "选择单元文件"
+
+#: src/widget/control_action_dialog/imp.rs:557
+msgctxt "action unit file"
+msgid "Select"
+msgstr "选择"
 
 #. Dialog title
 #: src/widget/control_action_dialog/mod.rs:54
 msgctxt "action unit file"
 msgid "Enable Unit File"
-msgstr ""
+msgstr "启用单元文件"
 
 #. Dialog title
 #: src/widget/control_action_dialog/mod.rs:56
 msgctxt "action unit file"
 msgid "Mask Unit"
-msgstr ""
+msgstr "屏蔽单元"
 
 #. Dialog title
 #: src/widget/control_action_dialog/mod.rs:58
 msgctxt "action unit file"
 msgid "Preset Unit File"
-msgstr ""
+msgstr "应用单元文件预设"
 
 #. Dialog title
 #: src/widget/control_action_dialog/mod.rs:60
 msgctxt "action unit file"
 msgid "Reenable Unit File"
-msgstr ""
+msgstr "重新启用单元文件"
 
 #. Dialog title
 #: src/widget/control_action_dialog/mod.rs:64
 msgctxt "action unit file"
 msgid "Disable Unit File"
-msgstr ""
+msgstr "禁用单元文件"
 
 #. Dialog title
 #: src/widget/control_action_dialog/mod.rs:67
 msgctxt "action unit file"
 msgid "Link Unit File"
-msgstr ""
+msgstr "链接单元文件"
 
 #. preference group title
 #. Button
@@ -2099,7 +2438,7 @@ msgstr ""
 #: src/widget/control_action_dialog/mod.rs:136
 msgctxt "action unit file"
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 #. preference group title
 #. Button
@@ -2107,7 +2446,7 @@ msgstr ""
 #: src/widget/control_action_dialog/mod.rs:142
 msgctxt "action unit file"
 msgid "Disable"
-msgstr ""
+msgstr "禁用"
 
 #. preference group title
 #. Button
@@ -2115,370 +2454,373 @@ msgstr ""
 #: src/widget/control_action_dialog/mod.rs:138
 msgctxt "action unit file"
 msgid "Mask"
-msgstr ""
+msgstr "屏蔽"
 
 #. second preference group title
 #: src/widget/control_action_dialog/mod.rs:86
 msgctxt "action unit file"
 msgid "Start"
-msgstr ""
+msgstr "启动"
 
 #: src/widget/control_action_dialog/mod.rs:89
 msgctxt "action unit file"
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #. Button
 #: src/widget/control_action_dialog/mod.rs:140
 msgctxt "action unit file"
 msgid "Preset"
-msgstr ""
+msgstr "预设"
 
 #. Button
 #: src/widget/control_action_dialog/mod.rs:144
 msgctxt "action unit file"
 msgid "Reenable"
-msgstr ""
+msgstr "重新启用"
 
 #. Button
 #: src/widget/control_action_dialog/mod.rs:146
 msgctxt "action unit file"
 msgid "Link"
-msgstr ""
+msgstr "链接"
 
 #. after action title
 #: src/widget/control_action_dialog/mod.rs:154
 msgctxt "action unit file"
 msgid "Run now"
-msgstr ""
+msgstr "立即运行"
 
 #. after action subtitle
 #: src/widget/control_action_dialog/mod.rs:156
 msgctxt "action unit file"
 msgid "Start Unit just after being enabled"
-msgstr ""
+msgstr "启用后立即启动单元"
 
 #. after action title
 #: src/widget/control_action_dialog/mod.rs:160
 msgctxt "action unit file"
 msgid "Stop now"
-msgstr ""
+msgstr "立即停止"
 
 #: src/widget/control_action_dialog/mod.rs:164
 msgctxt "action unit file"
 msgid "Ensure that the unit will also be stopped"
-msgstr ""
+msgstr "确保同时停止该单元"
 
 #. starts mode title
 #: src/widget/control_action_dialog/mod.rs:175
 msgctxt "action unit file"
 msgid "Run mode"
-msgstr ""
+msgstr "运行模式"
 
 #. starts mode subtitle
 #: src/widget/control_action_dialog/mod.rs:177
 msgctxt "action unit file"
 msgid "Starting mode options"
-msgstr ""
+msgstr "启动模式选项"
 
 #. starts mode title
 #: src/widget/control_action_dialog/mod.rs:181
 msgctxt "action unit file"
 msgid "Stop mode"
-msgstr ""
+msgstr "停止模式"
 
 #. starts mode subtitle
 #: src/widget/control_action_dialog/mod.rs:183
 msgctxt "action unit file"
 msgid "Stoping mode options"
-msgstr ""
+msgstr "停止模式选项"
 
 #. Title of the folder selection widget window
 #: src/widget/creator/creator_page_mount/imp.rs:234
-#, fuzzy
 msgctxt "create_unit"
 msgid "Select a mount point"
-msgstr "选择字体"
+msgstr "选择挂载点"
 
 #. Button title of the folder selection widget
 #. Button title of the executable selection widget
 #: src/widget/creator/creator_page_mount/imp.rs:236
 #: src/widget/creator/creator_page_service/imp.rs:593
 #: src/widget/creator/creator_page_service/imp.rs:634
-#, fuzzy
 msgctxt "create_unit"
 msgid "Select"
-msgstr "选择字体"
+msgstr "选择"
 
 #. Title of the folder selection widget window
 #: src/widget/creator/creator_page_service/imp.rs:591
 msgctxt "create_unit"
 msgid "Select a working directory"
-msgstr ""
+msgstr "选择工作目录"
 
 #. Title of the executable selection widget window
 #: src/widget/creator/creator_page_service/imp.rs:636
 msgctxt "create_unit"
 msgid "Select executable"
-msgstr ""
+msgstr "选择可执行文件"
 
-#: src/widget/creator/creator_page_timer/imp.rs:587
+#: src/widget/creator/creator_page_timer/imp.rs:296
+#: src/widget/creator/creator_page_timer/imp.rs:411
+#, rust-format
 msgctxt "timer"
-msgid "Custom"
-msgstr ""
-
-#: src/widget/creator/creator_page_timer/imp.rs:588
-msgctxt "timer"
-msgid "Minutely"
-msgstr ""
+msgid "Add {}"
+msgstr "添加 {}"
 
 #: src/widget/creator/creator_page_timer/imp.rs:589
 msgctxt "timer"
-msgid "Hourly"
-msgstr ""
+msgid "Custom"
+msgstr "自定义"
 
 #: src/widget/creator/creator_page_timer/imp.rs:590
 msgctxt "timer"
-msgid "Daily"
-msgstr ""
+msgid "Minutely"
+msgstr "每分钟"
 
 #: src/widget/creator/creator_page_timer/imp.rs:591
 msgctxt "timer"
-msgid "Monthly"
-msgstr ""
+msgid "Hourly"
+msgstr "每小时"
 
 #: src/widget/creator/creator_page_timer/imp.rs:592
 msgctxt "timer"
-msgid "Weekly"
-msgstr ""
+msgid "Daily"
+msgstr "每天"
 
 #: src/widget/creator/creator_page_timer/imp.rs:593
 msgctxt "timer"
-msgid "Yearly"
-msgstr ""
+msgid "Monthly"
+msgstr "每月"
 
 #: src/widget/creator/creator_page_timer/imp.rs:594
 msgctxt "timer"
-msgid "Quarterly"
-msgstr ""
+msgid "Weekly"
+msgstr "每周"
 
 #: src/widget/creator/creator_page_timer/imp.rs:595
 msgctxt "timer"
+msgid "Yearly"
+msgstr "每年"
+
+#: src/widget/creator/creator_page_timer/imp.rs:596
+msgctxt "timer"
+msgid "Quarterly"
+msgstr "每季度"
+
+#: src/widget/creator/creator_page_timer/imp.rs:597
+msgctxt "timer"
 msgid "Semiannually"
-msgstr ""
+msgstr "每半年"
 
 #: src/widget/creator/creator_page_timer.rs:80
 msgctxt "timer"
 msgid "OnActiveSec"
-msgstr ""
+msgstr "单元激活后（OnActiveSec）"
 
 #: src/widget/creator/creator_page_timer.rs:81
 msgctxt "timer"
 msgid "OnBootSec"
-msgstr ""
+msgstr "系统启动后（OnBootSec）"
 
 #: src/widget/creator/creator_page_timer.rs:82
 msgctxt "timer"
 msgid "OnStartupSec"
-msgstr ""
+msgstr "服务管理器启动后（OnStartupSec）"
 
 #: src/widget/creator/creator_page_timer.rs:83
 msgctxt "timer"
 msgid "OnUnitActiveSec"
-msgstr ""
+msgstr "关联单元上次激活后（OnUnitActiveSec）"
 
 #: src/widget/creator/creator_page_timer.rs:84
 msgctxt "timer"
 msgid "OnUnitInactiveSec"
-msgstr ""
+msgstr "关联单元上次停用后（OnUnitInactiveSec）"
 
 #. Entry title for unit name prefix
 #: src/widget/creator/first_page.rs:142
 msgctxt "creator"
 msgid "Unit Name Prefix"
-msgstr ""
+msgstr "单元名称前缀"
 
 #. Entry title for unit name prefix
 #: src/widget/creator/first_page.rs:146
 msgctxt "creator"
 msgid "(automatically generated )"
-msgstr ""
+msgstr "（自动生成）"
 
 #: src/widget/creator/imp.rs:394
 #, rust-format
 msgctxt "create"
 msgid "Unit {} Created!"
-msgstr ""
+msgstr "单元 {} 已创建！"
 
 #: src/widget/creator/imp.rs:401
 #, rust-format
 msgctxt "create"
 msgid "Creation Failed! {}"
-msgstr ""
+msgstr "创建失败！{}"
 
 #. Faild to reload manager at {System or User level}
 #: src/widget/creator/launch_creator_page.rs:173
 #, rust-format
 msgid "Daemon Reload failed at {} level"
-msgstr ""
+msgstr "在 {} 级别重新加载守护进程配置失败"
 
 #. Action Row New Unit title
 #: src/widget/creator/launch_creator_page.rs:253
 #: src/widget/creator/launch_creator_page.rs:262
 #: src/widget/creator/launch_creator_page.rs:272
 #: src/widget/creator/launch_creator_page.rs:279
-#, fuzzy
 msgctxt "create_unit"
 msgid "Service File"
-msgstr "服务管理器"
+msgstr "服务文件"
 
 #. Action Row New Unit title
 #: src/widget/creator/launch_creator_page.rs:289
-#, fuzzy
 msgctxt "create_unit"
 msgid "Mount File"
-msgstr "单元文件"
+msgstr "挂载文件"
 
 #. Tooltip Created new unit file
 #: src/widget/creator/launch_creator_page.rs:381
-#, fuzzy
 msgctxt "create_unit"
 msgid "Show Unit File"
-msgstr "单元文件"
+msgstr "显示单元文件"
 
 #. Tooltip Created new unit
 #: src/widget/creator/launch_creator_page.rs:396
 msgctxt "create_unit"
 msgid "Show Unit in Browser"
-msgstr ""
-
-#. Create Unit title
-#: src/widget/creator/mod.rs:143
-#, fuzzy
-msgctxt "create"
-msgid "Service"
-msgstr "服务管理器"
+msgstr "在单元列表中显示"
 
 #. Create Unit title
 #: src/widget/creator/mod.rs:145
 msgctxt "create"
-msgid "Timer"
-msgstr ""
+msgid "Service"
+msgstr "服务"
 
 #. Create Unit title
 #: src/widget/creator/mod.rs:147
 msgctxt "create"
-msgid "Timer with Service"
-msgstr ""
+msgid "Timer"
+msgstr "定时器"
 
 #. Create Unit title
 #: src/widget/creator/mod.rs:149
 msgctxt "create"
-msgid "Mount"
-msgstr ""
+msgid "Timer with Service"
+msgstr "定时器及配套服务"
 
-#. Field validation message
-#: src/widget/creator/mod.rs:225
-msgctxt "validator"
-msgid "Invalid character"
-msgstr ""
+#. Create Unit title
+#: src/widget/creator/mod.rs:151
+msgctxt "create"
+msgid "Mount"
+msgstr "挂载"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:227
 msgctxt "validator"
-msgid "Unit File already exists"
-msgstr ""
+msgid "Invalid character"
+msgstr "字符无效"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:229
 msgctxt "validator"
-msgid "Empty"
-msgstr ""
+msgid "Unit File already exists"
+msgstr "单元文件已存在"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:231
 msgctxt "validator"
-msgid "File does not exist"
-msgstr ""
+msgid "Empty"
+msgstr "为空"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:233
-#, fuzzy
 msgctxt "validator"
-msgid "Not a File"
-msgstr "单元文件"
+msgid "File does not exist"
+msgstr "文件不存在"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:235
 msgctxt "validator"
-msgid "Not an executable"
-msgstr ""
+msgid "Not a File"
+msgstr "不是文件"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:237
 msgctxt "validator"
-msgid "Malformed"
-msgstr ""
+msgid "Not an executable"
+msgstr "不是可执行文件"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:239
 msgctxt "validator"
-msgid "Not absolute path"
-msgstr ""
+msgid "Malformed"
+msgstr "格式错误"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:241
 msgctxt "validator"
-msgid "Not a directory"
-msgstr ""
+msgid "Not absolute path"
+msgstr "不是绝对路径"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:243
 msgctxt "validator"
-msgid "No path specified"
-msgstr ""
+msgid "Not a directory"
+msgstr "不是目录"
 
-#: src/widget/creator/mod.rs:246
+#. Field validation message
+#: src/widget/creator/mod.rs:245
+msgctxt "validator"
+msgid "No path specified"
+msgstr "未指定路径"
+
+#: src/widget/creator/mod.rs:248
 #, rust-format
 msgctxt "validator"
 msgid "Too short, under the limit of {} characters"
-msgstr ""
+msgstr "太短，少于 {} 个字符"
 
-#: src/widget/creator/mod.rs:251
+#: src/widget/creator/mod.rs:253
 #, rust-format
 msgctxt "validator"
 msgid "Too long, over the limit of {} characters"
-msgstr ""
+msgstr "太长，超过 {} 个字符"
 
-#: src/widget/creator/mod.rs:254
-msgctxt "validator"
-msgid "Mandatory field"
-msgstr ""
-
-#. Field validation message
 #: src/widget/creator/mod.rs:256
 msgctxt "validator"
-msgid "Unknown error"
-msgstr ""
+msgid "Mandatory field"
+msgstr "必填项"
 
 #. Field validation message
 #: src/widget/creator/mod.rs:258
-#, fuzzy
+msgctxt "validator"
+msgid "Unknown error"
+msgstr "未知错误"
+
+#. Field validation message
+#: src/widget/creator/mod.rs:260
 msgctxt "validator"
 msgid "Not a Unit"
-msgstr "重新加载所有服务单元"
+msgstr "不是单元"
+
+#: src/widget/info_window/imp.rs:182
+msgid "Systemd Info"
+msgstr "systemd 信息"
 
 #. Menu item label for status menu
 #: src/widget/journal/imp.rs:881 src/widget/unit_status/imp.rs:276
 msgctxt "menu"
 msgid "Wrap Word"
-msgstr ""
+msgstr "按词换行"
 
 #. Dialog subtitle
 #: src/widget/kill_panel/imp.rs:75
 msgctxt "kill"
 msgid "No Unit Selected"
-msgstr ""
+msgstr "未选择单元"
 
 #: src/widget/kill_panel/imp.rs:152
 #, rust-format
@@ -2487,12 +2829,14 @@ msgid ""
 "{}\n"
 "Default Action: {}"
 msgstr ""
+"{}\n"
+"默认操作：{}"
 
 #. Dialog title
 #: src/widget/kill_panel/imp.rs:192
 msgctxt "kill"
 msgid "Queue a Realtime Signal to Unit"
-msgstr ""
+msgstr "向单元发送排队实时信号"
 
 #. SIGRTMIN to SIGRTMAX default action
 #. kill signal default action
@@ -2506,44 +2850,44 @@ msgstr ""
 #: src/widget/kill_panel/imp.rs:669
 msgctxt "kill"
 msgid "Terminate"
-msgstr ""
+msgstr "终止"
 
 #. SIGRTMIN to SIGRTMAX default comment
 #: src/widget/kill_panel/imp.rs:220
 msgctxt "kill"
 msgid "Real-time signal"
-msgstr ""
+msgstr "实时信号"
 
 #. Dialog title
 #: src/widget/kill_panel/imp.rs:226
 msgctxt "kill"
 msgid "Send a Kill Signal to Unit"
-msgstr ""
+msgstr "向单元发送终止信号"
 
 #: src/widget/kill_panel/imp.rs:295
 #, rust-format
 msgctxt "kill"
 msgid "Queued signal {} with value {} to"
-msgstr ""
+msgstr "将信号 {}（值为 {}）加入队列，发送至"
 
 #. toast method name -- "Kill signal {signal_id} to"
 #: src/widget/kill_panel/imp.rs:311
 #, rust-format
 msgctxt "kill"
 msgid "Kill signal {} to"
-msgstr ""
+msgstr "发送终止信号 {} 至"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:420
 msgctxt "kill"
 msgid "Hang up controlling terminal or process"
-msgstr ""
+msgstr "挂断控制终端或进程"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:428
 msgctxt "kill"
 msgid "Interrupt from keyboard, Ctrl+C"
-msgstr ""
+msgstr "键盘中断，Ctrl+C"
 
 #. kill signal default action
 #: src/widget/kill_panel/imp.rs:434 src/widget/kill_panel/imp.rs:442
@@ -2554,298 +2898,303 @@ msgstr ""
 #: src/widget/kill_panel/imp.rs:677 src/widget/kill_panel/imp.rs:685
 msgctxt "kill"
 msgid "Dump"
-msgstr ""
+msgstr "生成核心转储"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:436
 msgctxt "kill"
 msgid "Quit from keyboard, Ctrl+\\"
-msgstr ""
+msgstr "从键盘退出，Ctrl+\\"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:444
 msgctxt "kill"
 msgid "Illegal instruction"
-msgstr ""
+msgstr "非法指令"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:452
 msgctxt "kill"
 msgid "Breakpoint for debugging"
-msgstr ""
+msgstr "调试断点"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:460
 msgctxt "kill"
 msgid "Abnormal termination"
-msgstr ""
+msgstr "异常终止"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:468
 msgctxt "kill"
 msgid "Equivalent to SIGABRT"
-msgstr ""
+msgstr "等同于 SIGABRT"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:476
 msgctxt "kill"
 msgid "Bus error"
-msgstr ""
+msgstr "总线错误"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:484
 msgctxt "kill"
 msgid "Floating-point exception"
-msgstr ""
+msgstr "浮点异常"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:492
 msgctxt "kill"
 msgid "Forced-process termination"
-msgstr ""
+msgstr "强制终止进程"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:500 src/widget/kill_panel/imp.rs:516
 msgctxt "kill"
 msgid "Available to processes"
-msgstr ""
+msgstr "可由进程使用"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:508
 msgctxt "kill"
 msgid "Invalid memory reference"
-msgstr ""
+msgstr "无效内存引用"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:524
 msgctxt "kill"
 msgid "Write to pipe with no readers"
-msgstr ""
+msgstr "向没有读取端的管道写入"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:532
 msgctxt "kill"
 msgid "Real-timer clock"
-msgstr ""
+msgstr "实时时钟定时器"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:540
 msgctxt "kill"
 msgid "Process termination"
-msgstr ""
+msgstr "进程终止"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:548
 msgctxt "kill"
 msgid "Coprocessor stack error"
-msgstr ""
+msgstr "协处理器栈错误"
 
 #. kill signal default action
 #: src/widget/kill_panel/imp.rs:554 src/widget/kill_panel/imp.rs:605
 #: src/widget/kill_panel/imp.rs:645
 msgctxt "kill"
 msgid "Ignore"
-msgstr ""
+msgstr "忽略"
 
 #: src/widget/kill_panel/imp.rs:558
 msgctxt "kill"
 msgid "Child process stopped or terminated or got a signal if traced"
-msgstr ""
+msgstr "子进程停止、终止，或在被跟踪时收到信号"
 
 #. kill signal default action
 #: src/widget/kill_panel/imp.rs:565
 msgctxt "kill"
 msgid "Continue"
-msgstr ""
+msgstr "继续"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:567
 msgctxt "kill"
 msgid "Resume execution, if stopped"
-msgstr ""
+msgstr "若已停止则恢复执行"
 
 #. kill signal default action
 #: src/widget/kill_panel/imp.rs:573 src/widget/kill_panel/imp.rs:581
 #: src/widget/kill_panel/imp.rs:589 src/widget/kill_panel/imp.rs:597
 msgctxt "kill"
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:575
 msgctxt "kill"
 msgid "Stop process execution, Ctrl+Z"
-msgstr ""
+msgstr "停止进程执行，Ctrl+Z"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:583
 msgctxt "kill"
 msgid "Stop process issued from tty"
-msgstr ""
+msgstr "终端发出的停止进程请求"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:591
 msgctxt "kill"
 msgid "Background process requires input"
-msgstr ""
+msgstr "后台进程需要输入"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:599
 msgctxt "kill"
 msgid "Background process requires output"
-msgstr ""
+msgstr "后台进程需要输出"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:607
 msgctxt "kill"
 msgid "Urgent condition on socket"
-msgstr ""
+msgstr "套接字上有紧急数据"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:615
 msgctxt "kill"
 msgid "CPU time limit exceeded"
-msgstr ""
+msgstr "超出 CPU 时间限制"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:623
 msgctxt "kill"
 msgid "File size limit exceeded"
-msgstr ""
+msgstr "超出文件大小限制"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:631
 msgctxt "kill"
 msgid "Virtual timer clock"
-msgstr ""
+msgstr "虚拟时钟定时器"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:639
 msgctxt "kill"
 msgid "Profile timer clock"
-msgstr ""
+msgstr "性能分析定时器"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:647
 msgctxt "kill"
 msgid "Window resizing"
-msgstr ""
+msgstr "窗口大小发生变化"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:655
 msgctxt "kill"
 msgid "I/O now possible"
-msgstr ""
+msgstr "可以进行 I/O 操作"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:663
 msgctxt "kill"
 msgid "Equivalent to SIGIO"
-msgstr ""
+msgstr "等同于 SIGIO"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:671
 msgctxt "kill"
 msgid "Power supply failure"
-msgstr ""
+msgstr "电源故障"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:679
 msgctxt "kill"
 msgid "Bad system call"
-msgstr ""
+msgstr "无效系统调用"
 
 #. kill signal description
 #: src/widget/kill_panel/imp.rs:687
 msgctxt "kill"
 msgid "Equivalent to SIGSYS"
-msgstr ""
+msgstr "等同于 SIGSYS"
 
 #. tooltip for action button
 #: src/widget/mod.rs:56
 #, rust-format
 msgctxt "controls"
 msgid "Remove {} from Favorites"
-msgstr ""
+msgstr "从收藏中移除 {}"
 
 #. tooltip for action button
 #: src/widget/mod.rs:62
 #, rust-format
 msgctxt "controls"
 msgid "Add {} to Favorites"
-msgstr ""
+msgstr "将 {} 加入收藏"
 
 #. browser dbus option
 #: src/widget/preferences/data.rs:69
 msgctxt "dbus"
 msgid "User Session Bus"
-msgstr ""
+msgstr "用户会话总线"
 
 #. browser dbus option
 #: src/widget/preferences/data.rs:71
 msgctxt "dbus"
 msgid "System Bus"
-msgstr ""
+msgstr "系统总线"
 
 #. browser dbus option
 #: src/widget/preferences/data.rs:73
 msgctxt "dbus"
 msgid "System & User Session Bus"
-msgstr ""
+msgstr "系统与用户会话总线"
 
 #. preference color scheme option
 #: src/widget/preferences/data.rs:166
 msgctxt "color scheme"
 msgid "No Preference"
-msgstr ""
+msgstr "无偏好"
 
 #. preference color scheme option
 #: src/widget/preferences/data.rs:168
 msgctxt "color scheme"
 msgid "Prefer Dark"
-msgstr ""
+msgstr "优先深色"
 
 #. preference color scheme option
 #: src/widget/preferences/data.rs:170
 msgctxt "color scheme"
 msgid "Prefer Light"
-msgstr ""
+msgstr "优先浅色"
 
 #. preference color scheme option
 #: src/widget/preferences/data.rs:172
 msgctxt "color scheme"
 msgid "Force Dark"
-msgstr ""
+msgstr "强制深色"
 
 #. preference color scheme option
 #: src/widget/preferences/data.rs:174
 msgctxt "color scheme"
 msgid "Force Light"
-msgstr ""
+msgstr "强制浅色"
 
 #. preference application orientation option
 #: src/widget/preferences/data.rs:220
 msgctxt "pref orientation"
 msgid "Automatic"
-msgstr ""
+msgstr "自动"
 
 #. preference application orientation option
 #: src/widget/preferences/data.rs:222
 msgctxt "pref orientation"
 msgid "Side by Side"
-msgstr ""
+msgstr "并排"
 
 #. preference application orientation option
 #: src/widget/preferences/data.rs:224
 msgctxt "pref orientation"
 msgid "Top Bottom"
-msgstr ""
+msgstr "上下"
+
+#: src/widget/preferences/imp.rs:201
+msgctxt "preference"
+msgid "Pick a Monospace Font"
+msgstr "选择等宽字体"
 
 #. unit file no preference style selected
 #: src/widget/preferences/imp.rs:462
 msgctxt "pref file style"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #. find count
 #. find count initial
@@ -2853,32 +3202,32 @@ msgstr ""
 #, rust-format
 msgctxt "text_find"
 msgid "{} of {}"
-msgstr ""
+msgstr "第 {} 个，共 {} 个"
 
 #. Open in text Menu item
 #: src/widget/text_search/mod.rs:55
 msgctxt "text_find"
 msgid "Toggle Find in Text"
-msgstr ""
+msgstr "切换文本查找"
 
 #. toast message on success
 #: src/widget/unit_control_panel/controls.rs:60
 #, rust-format
 msgctxt "toast"
 msgid "Unit {} has been successfully {}"
-msgstr ""
+msgstr "单元 {} 已成功{}"
 
 #. toast message action on fail
 #: src/widget/unit_control_panel/controls.rs:78
 msgctxt "toast"
 msgid "Disabling"
-msgstr ""
+msgstr "禁用"
 
 #. toast message action on fail
 #: src/widget/unit_control_panel/controls.rs:82
 msgctxt "toast"
 msgid "Enabling"
-msgstr ""
+msgstr "启用"
 
 #. Toast Message on fail action {Action} {UnitName} {ErrorMessage}
 #: src/widget/unit_control_panel/controls.rs:113
@@ -2888,93 +3237,95 @@ msgid ""
 "{} unit {} has failed!\n"
 "Because: {}"
 msgstr ""
+"{}单元 {} 失败！\n"
+"原因：{}"
 
 #. Toast message action on Reenable, in the rentance: ... has been successfully "Reenable"
 #: src/widget/unit_control_panel/controls.rs:172
 msgctxt "toast"
 msgid "Reenable"
-msgstr ""
+msgstr "重新启用"
 
 #: src/widget/unit_control_panel/controls.rs:178
 #, rust-format
 msgctxt "toast"
 msgid "Unit <unit>{}</unit> has been successfully <span fgcolor='{}'>{}</span>"
-msgstr ""
+msgstr "单元 <unit>{}</unit> 已成功<span fgcolor='{}'>{}</span>"
 
 #. toast message action on fail
 #: src/widget/unit_control_panel/controls.rs:196
 msgctxt "toast"
 msgid "Reenabling"
-msgstr ""
+msgstr "重新启用"
 
 #: src/widget/unit_control_panel/controls.rs:220
 #: src/widget/unit_list/imp/pop_menu.rs:190
 #, rust-format
 msgctxt "controls"
 msgid "Disable unit {}"
-msgstr ""
+msgstr "禁用单元 {}"
 
 #: src/widget/unit_control_panel/controls.rs:222
 #: src/widget/unit_list/imp/pop_menu.rs:184
 #, rust-format
 msgctxt "controls"
 msgid "Enable unit {}"
-msgstr ""
+msgstr "启用单元 {}"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:24
 msgctxt "toast"
 msgid "start"
-msgstr ""
+msgstr "启动"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:26
 msgctxt "toast"
 msgid "stop"
-msgstr ""
+msgstr "停止"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:28
 msgctxt "toast"
 msgid "restart"
-msgstr ""
+msgstr "重启"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:30
 msgctxt "toast"
 msgid "reload"
-msgstr ""
+msgstr "重载"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:37
 msgctxt "toast"
 msgid "started"
-msgstr ""
+msgstr "启动"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:39
 msgctxt "toast"
 msgid "stopped"
-msgstr ""
+msgstr "停止"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:41
 msgctxt "toast"
 msgid "restarted"
-msgstr ""
+msgstr "重启"
 
 #. unit action in toast message
 #: src/widget/unit_control_panel/enums.rs:43
 msgctxt "toast"
 msgid "reloaded"
-msgstr ""
+msgstr "重载"
 
 #. toast message
 #: src/widget/unit_control_panel/imp.rs:472
 #, rust-format
 msgctxt "toast"
 msgid "Unit {} has been {} with the mode {}"
-msgstr ""
+msgstr "单元 {} 已{}，使用的模式为 {}"
 
 #. toast message error --  "Can't {ACTION} the unit <unit>{UNITNAME}</unit>, because: {SYSTEMD HUMAN ERROR (english)}"),
 #: src/widget/unit_control_panel/imp.rs:498
@@ -2984,19 +3335,21 @@ msgid ""
 "Can't {} the unit {}!\n"
 "Because: {}"
 msgstr ""
+"无法{}单元 {}！\n"
+"原因：{}"
 
 #: src/widget/unit_control_panel/imp.rs:815
 #, rust-format
 msgctxt "toast"
 msgid "{} unit <unit>{}</unit> is <green>successful</green>"
-msgstr ""
+msgstr "{}单元 <unit>{}</unit> <green>成功</green>"
 
 #. toast message success (no unit) -- "{ACTION} successful."
 #: src/widget/unit_control_panel/imp.rs:822
 #, rust-format
 msgctxt "toast"
 msgid "{} successful."
-msgstr ""
+msgstr "{}成功。"
 
 #: src/widget/unit_control_panel/imp.rs:832
 #, rust-format
@@ -3005,6 +3358,8 @@ msgid ""
 "{} unit <unit>{}</unit> failed.\n"
 "Reason: <red>{}</red>."
 msgstr ""
+"{}单元 <unit>{}</unit> 失败。\n"
+"原因：<red>{}</red>。"
 
 #. toast message failed (no unit) -- "{ACTION} failed. Reason: <span fgcolor='{CSS}'>{SYSTEMD ERROR (English)}</span>."
 #: src/widget/unit_control_panel/imp.rs:843
@@ -3014,65 +3369,67 @@ msgid ""
 "{} failed.\n"
 "Reason: <red>{}</red>."
 msgstr ""
+"{}失败。\n"
+"原因：<red>{}</red>。"
 
 #: src/widget/unit_control_panel/mod.rs:136
 #, rust-format
 msgctxt "workaround"
 msgid "Unfortunately <b>SysD Manager</b> can't perfom <b>{}</b> action."
-msgstr ""
+msgstr "<b>SysD Manager</b> 无法执行<b>{}</b>操作。"
 
 #: src/widget/unit_control_panel/mod.rs:149
 msgctxt "workaround"
 msgid "The authorisation can be configured in the following file:"
-msgstr ""
+msgstr "可在以下文件中配置授权："
 
 #: src/widget/unit_control_panel/mod.rs:169
 msgctxt "workaround"
 msgid "Otherwise, you can try the bellow command line in your terminal."
-msgstr ""
+msgstr "您也可以尝试在终端中运行以下命令。"
 
 #. workaround dialog title -- "Fail! {SYSTEMD HUMAN ERROR (English)}"
 #: src/widget/unit_control_panel/mod.rs:191
 #, rust-format
 msgctxt "workaround"
 msgid "Fail! {}"
-msgstr ""
+msgstr "失败！{}"
 
 #. action name
 #: src/widget/unit_control_panel/side_control_panel/imp.rs:134
 msgctxt "action"
 msgid "Freeze"
-msgstr ""
+msgstr "冻结"
 
 #. action name
 #: src/widget/unit_control_panel/side_control_panel/imp.rs:148
 msgctxt "action"
 msgid "Thaw"
-msgstr ""
+msgstr "解冻"
 
 #. action name
 #: src/widget/unit_control_panel/side_control_panel/imp.rs:182
 msgctxt "action"
 msgid "Reload"
-msgstr ""
+msgstr "重载"
 
 #. action name
 #: src/widget/unit_control_panel/side_control_panel/imp.rs:276
 msgctxt "action"
 msgid "Unmask"
-msgstr ""
+msgstr "取消屏蔽"
 
 #. Filter title
 #: src/widget/unit_dependencies_panel/imp.rs:371
 msgctxt "dependency"
 msgid "Unit Types"
-msgstr ""
+msgstr "单元类型"
 
 #. tooltip on filter
 #: src/widget/unit_dependencies_panel/imp.rs:376
 msgctxt "dependency"
 msgid "Filter dependencies by types"
-msgstr ""
+msgstr "按类型筛选依赖关系"
 
 #: src/widget/unit_file_panel/flatpak.rs:16
 msgctxt "warning"
@@ -3080,11 +3437,13 @@ msgid ""
 "Failed to perform action. The proxy service might be inactive.\n"
 "Please install and start the following service"
 msgstr ""
+"操作失败。代理服务可能尚未运行。\n"
+"请安装并启动以下服务"
 
 #: src/widget/unit_file_panel/flatpak.rs:19
 msgctxt "warning"
 msgid "Operation Failed"
-msgstr ""
+msgstr "操作失败"
 
 #. Dialog button
 #. TODO tranlate
@@ -3093,25 +3452,25 @@ msgstr ""
 #: src/widget/unit_file_panel/flatpak.rs:104
 msgctxt "warning"
 msgid "_Cancel"
-msgstr ""
+msgstr "取消(_C)"
 
 #. Dialog button
 #: src/widget/unit_file_panel/flatpak.rs:30
 msgctxt "warning"
 msgid "_Save"
-msgstr ""
+msgstr "保存(_S)"
 
 #. Dialog Header
 #: src/widget/unit_file_panel/flatpak.rs:93
 msgctxt "warning"
 msgid "Warning!"
-msgstr ""
+msgstr "警告！"
 
 #. Dialog button
 #: src/widget/unit_file_panel/flatpak.rs:106
 msgctxt "warning"
 msgid "_Proceed"
-msgstr ""
+msgstr "继续(_P)"
 
 #: src/widget/unit_file_panel/flatpak.rs:121
 msgctxt "flatpak"
@@ -3122,45 +3481,50 @@ msgid ""
 "Follow this <a href=\"https://github.com/plrigaux/sysd-manager/wiki/"
 "Flatpak\">link</a> to know how to acquire the required permission."
 msgstr ""
+"您需要为 Flatpak 应用<b>开放沙盒权限</b>，才能运行子程序或在主机系统上保存文"
+"件。\n"
+"\n"
+"请参阅此<a href=\"https://github.com/plrigaux/sysd-manager/wiki/Flatpak\">链"
+"接</a>了解如何获得所需权限。"
 
 #: src/widget/unit_file_panel/flatpak.rs:125
 msgctxt "flatpak"
 msgid "Missing Flatpak Permission!"
-msgstr ""
+msgstr "缺少 Flatpak 权限！"
 
 #. Dialog button
 #: src/widget/unit_file_panel/flatpak.rs:137
 msgctxt "warning"
 msgid "_Close"
-msgstr ""
+msgstr "关闭(_C)"
 
 #: src/widget/unit_file_panel/imp.rs:268
 #, rust-format
 msgctxt "file"
 msgid "File {} created successfully!"
-msgstr ""
+msgstr "文件 {} 创建成功！"
 
 #: src/widget/unit_file_panel/imp.rs:269
 #, rust-format
 msgctxt "file"
 msgid "File {} saved successfully!"
-msgstr ""
+msgstr "文件 {} 保存成功！"
 
 #. Suggest to reload all unit configuation
 #: src/widget/unit_file_panel/imp.rs:279 src/widget/unit_file_panel/imp.rs:1034
 msgid "Daemon Reload"
-msgstr ""
+msgstr "重新加载守护进程配置"
 
 #: src/widget/unit_file_panel/imp.rs:296 src/widget/unit_file_panel/imp.rs:310
 #: src/widget/unit_file_panel/imp.rs:1050
 msgctxt "file"
 msgid "Not able to save file, permission not granted!"
-msgstr ""
+msgstr "无法保存文件，未获得权限！"
 
 #: src/widget/unit_file_panel/imp.rs:318
 msgctxt "file"
 msgid "Not able to save file, Flatpak permission not granted!"
-msgstr ""
+msgstr "无法保存文件，未获得 Flatpak 权限！"
 
 #: src/widget/unit_file_panel/imp.rs:324
 #, rust-format
@@ -3169,337 +3533,356 @@ msgid ""
 "Not able to save file!\n"
 " Because: {}"
 msgstr ""
+"无法保存文件！\n"
+"原因：{}"
 
 #: src/widget/unit_file_panel/imp.rs:504
 msgctxt "file"
 msgid "File not found! You may need to perform \"Daemon Reload\""
-msgstr ""
+msgstr "找不到文件！您可能需要执行“重新加载守护进程配置”"
 
 #: src/widget/unit_file_panel/imp.rs:596
-#, fuzzy
 msgctxt "file"
 msgid "Unit File"
-msgstr "服务单元文件"
+msgstr "单元文件"
 
 #: src/widget/unit_file_panel/imp.rs:598
 msgctxt "file"
 msgid "Drop In"
-msgstr ""
+msgstr "附加配置"
 
 #. Create Drop in file name
 #: src/widget/unit_file_panel/imp.rs:909
 msgctxt "file"
 msgid "Editing"
-msgstr ""
+msgstr "编辑中"
 
 #: src/widget/unit_file_panel/imp.rs:919
 msgctxt "file"
 msgid "Note: you can change the drop-in file name by modifying the above line"
-msgstr ""
+msgstr "提示：修改上一行即可更改附加配置文件名"
 
 #: src/widget/unit_file_panel/imp.rs:929
 msgctxt "file"
 msgid ""
 "Anything between here and the comment below will become the contents of the "
 "drop-in file"
-msgstr ""
+msgstr "此处与下方注释之间的所有内容都将写入附加配置文件"
 
 #. Create Drop in file footer
 #: src/widget/unit_file_panel/imp.rs:938
 msgctxt "file"
 msgid "Edits below this comment will be discarded"
-msgstr ""
+msgstr "此注释下方的修改将被丢弃"
 
 #: src/widget/unit_file_panel/imp.rs:1026
 #, rust-format
 msgctxt "file"
 msgid "Unit {} reverted successfully!"
-msgstr ""
+msgstr "单元 {} 已成功还原！"
 
 #: src/widget/unit_file_panel/imp.rs:1071
 msgctxt "file"
 msgid "Not able to revert unit, permission not granted!"
-msgstr ""
+msgstr "无法还原单元，未获得权限！"
 
 #: src/widget/unit_file_panel/imp.rs:1079
 msgctxt "file"
 msgid "Not able to revert unit, an error happened!"
-msgstr ""
+msgstr "无法还原单元，发生错误！"
 
 #. Menu item label for status menu
 #. Show Line Number Menu Item
 #: src/widget/unit_file_panel/imp.rs:1187
 msgctxt "file"
 msgid "Display Line Numbers"
-msgstr ""
+msgstr "显示行号"
 
 #: src/widget/unit_list/filter/imp.rs:213
 msgctxt "filter"
 msgid "Reflects whether the unit definition was properly loaded."
-msgstr ""
+msgstr "表示单元定义是否已正确加载。"
 
 #: src/widget/unit_list/filter/imp.rs:218
 msgctxt "filter"
 msgid ""
 "The high-level unit activation state, i.e. generalization of <b>Sub</b>."
-msgstr ""
+msgstr "单元的高层活动状态，即<b>子状态</b>的概括。"
 
 #: src/widget/unit_list/filter/imp.rs:223
 msgctxt "filter"
 msgid "The low-level unit activation state, values depend on unit type."
-msgstr ""
+msgstr "单元的底层活动状态，其取值取决于单元类型。"
 
 #. Filter group tooltip - Unit Name prefix
 #: src/widget/unit_list/filter/imp.rs:226
-#, fuzzy
 msgctxt "filter"
 msgid "Unit identifier"
-msgstr "单元文件"
+msgstr "单元标识符"
 
 #. Filter group tooltip - Systemd Bus
 #: src/widget/unit_list/filter/imp.rs:228
 msgctxt "filter"
 msgid "User or System instances"
-msgstr ""
+msgstr "用户或系统实例"
 
 #. Filter group tooltip - Unit type
 #: src/widget/unit_list/filter/imp.rs:230
 msgctxt "filter"
 msgid "Categories of units"
-msgstr ""
+msgstr "单元类别"
 
 #. Filter group tooltip - File Enablement
 #: src/widget/unit_list/filter/imp.rs:232
 msgctxt "filter"
 msgid "Unit File enablement status"
-msgstr ""
+msgstr "单元文件的启用状态"
 
 #: src/widget/unit_list/filter/imp.rs:236
 msgctxt "filter"
 msgid "Unit File default enablement status policy"
-msgstr ""
+msgstr "单元文件的默认启用策略"
 
 #: src/widget/unit_list/filter/imp.rs:241
 msgctxt "filter"
 msgid "A brief, meaningful, human-readable text identifying the unit."
-msgstr ""
+msgstr "用于标识单元的简短易读说明。"
 
 #: src/widget/unit_list/filter/imp.rs:385
 msgctxt "filter"
 msgid "Any sub states"
-msgstr ""
+msgstr "任意子状态"
 
 #. Filter Clear button
 #: src/widget/unit_list/filter/imp.rs:389
-#: src/widget/unit_list/filter/imp.rs:1058
+#: src/widget/unit_list/filter/imp.rs:1062
 #: src/widget/unit_list/filter/substate.rs:145
 msgctxt "filter"
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #. Filter text options
 #: src/widget/unit_list/filter/imp.rs:486
+#: src/widget/unit_list/filter/imp.rs:886
 msgctxt "filter"
 msgid "Match Type"
-msgstr ""
+msgstr "匹配方式"
 
 #. Filter option
-#: src/widget/unit_list/filter/imp.rs:504
+#: src/widget/unit_list/filter/imp.rs:505
 msgctxt "filter"
 msgid "Case Insensitive"
-msgstr ""
+msgstr "忽略大小写"
 
 #. Filter option
-#: src/widget/unit_list/filter/imp.rs:526
+#: src/widget/unit_list/filter/imp.rs:527
 msgctxt "filter"
 msgid "Unset"
-msgstr ""
+msgstr "未设置"
 
 #. Filter option
 #. Invert filter Button
-#: src/widget/unit_list/filter/imp.rs:542
-#: src/widget/unit_list/filter/imp.rs:1077
+#: src/widget/unit_list/filter/imp.rs:543
+#: src/widget/unit_list/filter/imp.rs:1081
 msgctxt "filter"
 msgid "Invert"
-msgstr ""
+msgstr "反选"
 
 #. Filter Clear button tooltip
-#: src/widget/unit_list/filter/imp.rs:1060
+#: src/widget/unit_list/filter/imp.rs:1064
 #: src/widget/unit_list/filter/substate.rs:147
 msgctxt "filter"
 msgid "Clear filter's selected items"
-msgstr ""
+msgstr "清除筛选器的所选项"
 
 #. Invert filter Button tooltip
-#: src/widget/unit_list/filter/imp.rs:1079
+#: src/widget/unit_list/filter/imp.rs:1083
 msgctxt "filter"
 msgid "Invert filter's selected items"
-msgstr ""
+msgstr "反选筛选器中的项目"
+
+#: src/widget/unit_list/filter/mod.rs:180
+msgctxt "filter"
+msgid "True"
+msgstr "真"
+
+#: src/widget/unit_list/filter/mod.rs:181
+msgctxt "filter"
+msgid "False"
+msgstr "假"
+
+#: src/widget/unit_list/filter/mod.rs:182
+msgctxt "filter"
+msgid "<i>Set</i>"
+msgstr "<i>已设置</i>"
+
+#: src/widget/unit_list/filter/mod.rs:183
+msgctxt "filter"
+msgid "<i>Unset</i>"
+msgstr "<i>未设置</i>"
 
 #. Filter Substate button label
 #: src/widget/unit_list/filter/substate.rs:38
 msgctxt "filter"
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #. Filter Substate button tooltip
 #: src/widget/unit_list/filter/substate.rs:40
 msgctxt "filter"
 msgid "Add filter on sub state"
-msgstr ""
+msgstr "添加子状态筛选条件"
 
 #. Automounts list column name
 #: src/widget/unit_list/imp/construct.rs:143
 msgctxt "list column"
 msgid "Where"
-msgstr ""
+msgstr "挂载点"
 
 #. Automounts list column name
 #: src/widget/unit_list/imp/construct.rs:154
 msgctxt "list column"
 msgid "What"
-msgstr ""
+msgstr "挂载源"
 
 #. Automounts list column name
 #: src/widget/unit_list/imp/construct.rs:165
 msgctxt "list column"
 msgid "Mounted"
-msgstr ""
+msgstr "已挂载"
 
 #. Automounts list column name
 #: src/widget/unit_list/imp/construct.rs:175
 msgctxt "list column"
 msgid "Idle Timeout"
-msgstr ""
+msgstr "空闲超时"
 
 #. Path list column name
 #: src/widget/unit_list/imp/construct.rs:293
 msgctxt "list column"
 msgid "Condition"
-msgstr ""
+msgstr "条件"
 
 #. Path list column name
 #: src/widget/unit_list/imp/construct.rs:304
 msgctxt "list column"
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 #. Path list column name
 #. Unit full name column name
 #: src/widget/unit_list/imp/construct.rs:326
 #: src/widget/unit_list/imp/construct.rs:804
 #: src/widget/unit_list/imp/construct.rs:823
-#, fuzzy
 msgctxt "list column"
 msgid "Unit"
-msgstr "服务单元文件"
+msgstr "单元"
 
 #: src/widget/unit_list/imp/construct.rs:672
 msgctxt "list column"
 msgid "Sub"
-msgstr ""
+msgstr "子状态"
 
 #: src/widget/unit_list/imp/construct.rs:690
 msgctxt "list column"
 msgid "Load"
-msgstr ""
+msgstr "加载状态"
 
 #: src/widget/unit_list/imp/construct.rs:708
 msgctxt "list column"
 msgid "Bus"
-msgstr ""
+msgstr "总线"
 
 #: src/widget/unit_list/imp/construct.rs:727
 msgctxt "list column"
 msgid "Preset"
-msgstr ""
+msgstr "预设"
 
 #: src/widget/unit_list/imp/construct.rs:746
 msgctxt "list column"
 msgid "State"
-msgstr ""
+msgstr "启用状态"
 
 #: src/widget/unit_list/imp/construct.rs:765
 msgctxt "list column"
 msgid "Active"
-msgstr ""
+msgstr "活动状态"
 
 #: src/widget/unit_list/imp/construct.rs:784
 msgctxt "list column"
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: src/widget/unit_list/imp/construct.rs:842
 msgctxt "list column"
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #. Socket list column name
 #: src/widget/unit_list/imp/construct.rs:852
 msgctxt "list column"
 msgid "Listen Type"
-msgstr ""
+msgstr "监听类型"
 
 #. Socket list column name
 #: src/widget/unit_list/imp/construct.rs:862
 msgctxt "list column"
 msgid "Listen"
-msgstr ""
+msgstr "监听地址"
 
 #. Timer list column name
 #: src/widget/unit_list/imp/construct.rs:873
 msgctxt "list column"
 msgid "Next"
-msgstr ""
+msgstr "下次触发"
 
 #. Timer list column name
 #: src/widget/unit_list/imp/construct.rs:883
 msgctxt "list column"
 msgid "Left"
-msgstr ""
+msgstr "剩余时间"
 
 #. Timer list column name
 #: src/widget/unit_list/imp/construct.rs:893
 msgctxt "list column"
 msgid "Last"
-msgstr ""
+msgstr "上次触发"
 
 #. Timer list column name
 #: src/widget/unit_list/imp/construct.rs:902
 msgctxt "list column"
 msgid "Passed"
-msgstr ""
+msgstr "已过时间"
 
 #. Timer list column name
 #: src/widget/unit_list/imp/construct.rs:913
-#, fuzzy
 msgctxt "list column"
 msgid "Activates"
-msgstr "操作"
+msgstr "触发的单元"
 
 #: src/widget/unit_list/imp/pop_menu.rs:166
 #, rust-format
 msgctxt "controls"
 msgid "Start unit {}"
-msgstr ""
+msgstr "启动单元 {}"
 
 #: src/widget/unit_list/imp/pop_menu.rs:172
 #, rust-format
 msgctxt "controls"
 msgid "Stop unit {}"
-msgstr ""
+msgstr "停止单元 {}"
 
 #: src/widget/unit_list/imp/pop_menu.rs:178
 #, rust-format
 msgctxt "controls"
 msgid "Restart unit {}"
-msgstr ""
+msgstr "重启单元 {}"
 
 #: src/widget/unit_list/imp/pop_menu.rs:196
 #, rust-format
 msgctxt "controls"
 msgid "Disable and then Enable unit {}"
-msgstr ""
+msgstr "禁用单元 {} 后再重新启用"
 
 #: src/widget/unit_list/imp/pop_menu.rs:202
 #, rust-format
@@ -3507,119 +3890,417 @@ msgctxt "controls"
 msgid ""
 "Reload unit {} configuration by calling the <b>ExecReload</b> unit file "
 "instruction"
-msgstr ""
+msgstr "调用单元文件中的 <b>ExecReload</b> 指令重新加载单元 {} 的配置"
 
 #. column header menu
 #: src/widget/unit_list/menus.rs:20
 msgctxt "menu"
 msgid "Hide this Column"
-msgstr ""
+msgstr "隐藏此列"
 
 #: src/widget/unit_list/menus.rs:27
-#, fuzzy
 msgctxt "menu"
 msgid "Display as Icon"
-msgstr "颜色指示"
+msgstr "以图标显示"
 
 #. column header menu
 #: src/widget/unit_list/menus.rs:38
 msgctxt "menu"
 msgid "Configure columns"
-msgstr ""
+msgstr "配置列"
 
 #: src/widget/unit_list/menus.rs:44
 msgctxt "menu"
 msgid "Reset all columns"
-msgstr ""
+msgstr "重置所有列"
 
 #. column header menu
 #: src/widget/unit_list/menus.rs:57
 msgctxt "menu"
 msgid "Configure Filters"
-msgstr ""
+msgstr "配置筛选条件"
 
 #. column header menu
 #: src/widget/unit_list/menus.rs:65
 msgctxt "menu"
 msgid "Clear Column Filter"
-msgstr ""
+msgstr "清除此列的筛选条件"
 
 #. column header menu section
 #: src/widget/unit_list/menus.rs:71
 msgctxt "menu"
 msgid "Filtering"
-msgstr ""
+msgstr "筛选"
 
 #. Menu Option
-#: src/widget/unit_list/mod.rs:182
-#, fuzzy
+#: src/widget/unit_list/mod.rs:185
 msgctxt "menu"
 msgid "Include Unit Files"
-msgstr "启用单元文件"
+msgstr "包含单元文件"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:202
-#, fuzzy
+#: src/widget/unit_list/mod.rs:205
 msgctxt "menu"
 msgid "Default"
-msgstr "恢复默认"
+msgstr "默认"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:206
-#, fuzzy
+#: src/widget/unit_list/mod.rs:209
 msgctxt "menu"
 msgid "Loaded Units"
-msgstr "重新加载所有服务单元"
+msgstr "已加载单元"
 
 #. List view
-#: src/widget/unit_list/mod.rs:210
-#, fuzzy
+#: src/widget/unit_list/mod.rs:213
 msgctxt "menu"
 msgid "Unit Files"
 msgstr "单元文件"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:214
+#: src/widget/unit_list/mod.rs:217
 msgctxt "menu"
 msgid "Timers"
-msgstr ""
+msgstr "定时器"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:218
+#: src/widget/unit_list/mod.rs:221
 msgctxt "menu"
 msgid "Sockets"
-msgstr ""
+msgstr "套接字"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:222
-#, fuzzy
+#: src/widget/unit_list/mod.rs:225
 msgctxt "menu"
 msgid "Services"
-msgstr "服务管理器"
+msgstr "服务"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:226
+#: src/widget/unit_list/mod.rs:229
 msgctxt "menu"
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:230
+#: src/widget/unit_list/mod.rs:233
 msgctxt "menu"
 msgid "Automounts"
-msgstr ""
+msgstr "自动挂载"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:234
+#: src/widget/unit_list/mod.rs:237
 msgctxt "menu"
 msgid "Customized"
-msgstr ""
+msgstr "自定义"
 
 #. Curated List View
-#: src/widget/unit_list/mod.rs:238
+#: src/widget/unit_list/mod.rs:241
 msgctxt "menu"
 msgid "Favorites"
-msgstr ""
+msgstr "收藏"
+
+#: src/widget/unit_properties_selector/imp.rs:119
+msgid "Collapse all interfaces"
+msgstr "折叠所有接口"
+
+#: src/widget/unit_properties_selector/imp.rs:141
+msgid "Switch to top down layout"
+msgstr "切换为上下布局"
+
+#: src/widget/unit_properties_selector/imp.rs:147
+msgid "Switch to side by side layout"
+msgstr "切换为并排布局"
+
+#: src/widget/unit_status/construct_info.rs:200
+#, rust-format
+msgctxt "unit status"
+msgid " since {}; {}\n"
+msgstr " 自 {} 起；{}\n"
+
+#: src/widget/unit_status/construct_info.rs:360
+#, rust-format
+msgctxt "unit status"
+msgid "unit currently follows state of {}"
+msgstr "单元当前跟随 {} 的状态"
+
+#: src/widget/unit_status/construct_info.rs:526
+#, rust-format
+msgctxt "unit status"
+msgid " (limit: {})\n"
+msgstr "（限制：{}）\n"
+
+#: src/widget/unit_status/construct_info.rs:750
+#, rust-format
+msgctxt "unit status"
+msgid "{} in, {} out"
+msgstr "接收 {}，发送 {}"
+
+#: src/widget/unit_status/construct_info.rs:770
+#, rust-format
+msgctxt "unit status"
+msgid "{} read, {} written"
+msgstr "读取 {}，写入 {}"
+
+#: src/widget/unit_status/construct_info.rs:796
+#, rust-format
+msgctxt "unit status"
+msgid " (limit: {})"
+msgstr "（限制：{}）"
+
+#: src/widget/unit_status/construct_info.rs:988
+#, rust-format
+msgctxt "unit status"
+msgid "{}; Connected: {};"
+msgstr "{}；已连接：{}；"
+
+#: src/widget/unit_status/labels.rs:18
+msgctxt "unit status"
+msgid "Name:"
+msgstr "名称："
+
+#: src/widget/unit_status/labels.rs:19
+msgctxt "unit status"
+msgid "Drop in:"
+msgstr "附加配置："
+
+#: src/widget/unit_status/labels.rs:20
+msgctxt "unit status"
+msgid "Active:"
+msgstr "活动状态："
+
+#: src/widget/unit_status/labels.rs:21
+msgctxt "unit status"
+msgid "Duration:"
+msgstr "持续时间："
+
+#: src/widget/unit_status/labels.rs:22
+msgctxt "unit status"
+msgid "Description:"
+msgstr "描述："
+
+#: src/widget/unit_status/labels.rs:23
+msgctxt "unit status"
+msgid "Loaded:"
+msgstr "加载状态："
+
+#: src/widget/unit_status/labels.rs:24
+msgctxt "unit status"
+msgid "Follows:"
+msgstr "跟随状态："
+
+#: src/widget/unit_status/labels.rs:25
+msgctxt "unit status"
+msgid "Transient:"
+msgstr "瞬态单元："
+
+#: src/widget/unit_status/labels.rs:26
+msgctxt "unit status"
+msgid "Status:"
+msgstr "状态："
+
+#: src/widget/unit_status/labels.rs:27
+msgctxt "unit status"
+msgid "Error:"
+msgstr "错误："
+
+#: src/widget/unit_status/labels.rs:28
+msgctxt "unit status"
+msgid "Device:"
+msgstr "设备："
+
+#: src/widget/unit_status/labels.rs:29
+msgctxt "unit status"
+msgid "Where:"
+msgstr "挂载点："
+
+#: src/widget/unit_status/labels.rs:30
+msgctxt "unit status"
+msgid "What:"
+msgstr "挂载源："
+
+#: src/widget/unit_status/labels.rs:31
+msgctxt "unit status"
+msgid "Doc:"
+msgstr "文档："
+
+#: src/widget/unit_status/labels.rs:32
+msgctxt "unit status"
+msgid "Docs:"
+msgstr "文档："
+
+#: src/widget/unit_status/labels.rs:33
+msgctxt "unit status"
+msgid "FD Store:"
+msgstr "描述符存储："
+
+#: src/widget/unit_status/labels.rs:34
+msgctxt "unit status"
+msgid "Memory:"
+msgstr "内存："
+
+#: src/widget/unit_status/labels.rs:35
+msgctxt "unit status"
+msgid "Main PID:"
+msgstr "主进程 PID："
+
+#: src/widget/unit_status/labels.rs:36
+msgctxt "unit status"
+msgid "CPU:"
+msgstr "CPU："
+
+#: src/widget/unit_status/labels.rs:37
+msgctxt "unit status"
+msgid "IP:"
+msgstr "IP："
+
+#: src/widget/unit_status/labels.rs:38
+msgctxt "unit status"
+msgid "Tasks:"
+msgstr "任务："
+
+#: src/widget/unit_status/labels.rs:39
+msgctxt "unit status"
+msgid "Invocation:"
+msgstr "调用标识："
+
+#: src/widget/unit_status/labels.rs:40
+msgctxt "unit status"
+msgid "Trigger:"
+msgstr "触发时间："
+
+#: src/widget/unit_status/labels.rs:41
+msgctxt "unit status"
+msgid "Triggers:"
+msgstr "触发单元："
+
+#: src/widget/unit_status/labels.rs:42
+msgctxt "unit status"
+msgid "TriggeredBy:"
+msgstr "触发来源："
+
+#: src/widget/unit_status/labels.rs:43
+msgctxt "unit status"
+msgid "Listen:"
+msgstr "监听："
+
+#: src/widget/unit_status/labels.rs:44
+msgctxt "unit status"
+msgid "Accepted:"
+msgstr "已接受："
+
+#: src/widget/unit_status/labels.rs:45
+msgctxt "unit status"
+msgid "Refused:"
+msgstr "已拒绝："
+
+#: src/widget/unit_status/labels.rs:46
+msgctxt "unit status"
+msgid "CGroup:"
+msgstr "控制组："
+
+#: src/widget/unit_status/labels.rs:47
+msgctxt "unit status"
+msgid "preset: "
+msgstr "预设："
+
+#: src/widget/unit_status/labels.rs:48
+msgctxt "unit status"
+msgid "min: "
+msgstr "最低："
+
+#: src/widget/unit_status/labels.rs:49
+msgctxt "unit status"
+msgid "low: "
+msgstr "低值："
+
+#: src/widget/unit_status/labels.rs:52
+msgctxt "unit status"
+msgid "low (startup): "
+msgstr "启动低值："
+
+#: src/widget/unit_status/labels.rs:54
+msgctxt "unit status"
+msgid "high: "
+msgstr "高值："
+
+#: src/widget/unit_status/labels.rs:57
+msgctxt "unit status"
+msgid "high (startup): "
+msgstr "启动高值："
+
+#: src/widget/unit_status/labels.rs:59
+msgctxt "unit status"
+msgid "max: "
+msgstr "最大："
+
+#: src/widget/unit_status/labels.rs:62
+msgctxt "unit status"
+msgid "max (startup): "
+msgstr "启动最大："
+
+#: src/widget/unit_status/labels.rs:64
+msgctxt "unit status"
+msgid "swap max: "
+msgstr "交换空间上限："
+
+#: src/widget/unit_status/labels.rs:67
+msgctxt "unit status"
+msgid "swap max (startup): "
+msgstr "启动交换空间上限："
+
+#: src/widget/unit_status/labels.rs:69
+msgctxt "unit status"
+msgid "zswap max: "
+msgstr "zswap 上限："
+
+#: src/widget/unit_status/labels.rs:72
+msgctxt "unit status"
+msgid "zswap max (startup): "
+msgstr "启动 zswap 上限："
+
+#: src/widget/unit_status/labels.rs:74
+msgctxt "unit status"
+msgid "limit: "
+msgstr "限制："
+
+#: src/widget/unit_status/labels.rs:75
+msgctxt "unit status"
+msgid "available: "
+msgstr "可用："
+
+#: src/widget/unit_status/labels.rs:76
+msgctxt "unit status"
+msgid "peak: "
+msgstr "峰值："
+
+#: src/widget/unit_status/labels.rs:77
+msgctxt "unit status"
+msgid "swap: "
+msgstr "交换空间："
+
+#: src/widget/unit_status/labels.rs:78
+msgctxt "unit status"
+msgid "swap peak: "
+msgstr "交换空间峰值："
+
+#: src/widget/unit_status/labels.rs:79
+msgctxt "unit status"
+msgid "zswap: "
+msgstr "zswap："
+
+#: src/widget/unit_status/labels.rs:80
+msgctxt "unit status"
+msgid "yes"
+msgstr "是"
+
+#: src/widget/unit_status/labels.rs:81
+msgctxt "unit status"
+msgid "no"
+msgstr "否"
+
+#: src/widget/unit_status/labels.rs:82
+msgctxt "unit status"
+msgid "n/a"
+msgstr "不适用"
 
 #. Not set preset value
 #. Not set file status value
@@ -3630,24 +4311,24 @@ msgstr ""
 #: sysd-manager-comcontroler/src/enums.rs:399
 #: sysd-manager-comcontroler/src/enums.rs:1021
 msgid "not set"
-msgstr ""
+msgstr "未设置"
 
 #: sysd-manager-comcontroler/src/enums.rs:187
 msgctxt "list"
 msgid "The name is an alias (symlink to another unit file)."
-msgstr ""
+msgstr "该名称是别名（指向另一个单元文件的符号链接）。"
 
 #: sysd-manager-comcontroler/src/enums.rs:192
 msgctxt "list"
 msgid "The unit file is invalid or another error occurred."
-msgstr ""
+msgstr "单元文件无效或发生了其他错误。"
 
 #: sysd-manager-comcontroler/src/enums.rs:197
 msgctxt "list"
 msgid ""
 "The unit file is not enabled, but contains an [Install] section with "
 "installation instructions."
-msgstr ""
+msgstr "单元文件尚未启用，但包含带有安装指令的 [Install] 段。"
 
 #: sysd-manager-comcontroler/src/enums.rs:202
 #: sysd-manager-comcontroler/src/enums.rs:239
@@ -3658,6 +4339,10 @@ msgid ""
 "in <span fgcolor='#62a0ea'>/etc/systemd/system/</span>, or transiently in "
 "<span fgcolor='#62a0ea'>/run/systemd/system/</span>)."
 msgstr ""
+"通过 <span fgcolor='#62a0ea'>.wants/</span>、<span "
+"fgcolor='#62a0ea'>.requires/</span> 或 <u>Alias=</u> 符号链接启用（永久链接位"
+"于 <span fgcolor='#62a0ea'>/etc/systemd/system/</span>，临时链接位于 <span "
+"fgcolor='#62a0ea'>/run/systemd/system/</span>）。"
 
 #: sysd-manager-comcontroler/src/enums.rs:207
 msgctxt "list"
@@ -3666,6 +4351,8 @@ msgid ""
 "systemd.generator(7)</b>. Generated unit files may not be enabled, they are "
 "enabled implicitly by their generator."
 msgstr ""
+"单元文件由生成器动态生成。请参阅 <b>man systemd.generator(7)</b>。生成的单元"
+"文件无法手动启用，而是由生成器隐式启用。"
 
 #: sysd-manager-comcontroler/src/enums.rs:212
 msgctxt "list"
@@ -3677,6 +4364,9 @@ msgid ""
 "instance different than the one specified in <u>DefaultInstance=</u> is "
 "enabled."
 msgstr ""
+"单元文件本身未启用，但其 [Install] 段包含非空的 <u>Also=</u> 设置，列出了其他"
+"可启用的单元文件；或者它具有一个未在 <u>Also=</u> 中指定的符号链接别名。对于"
+"模板单元文件，已启用的实例不同于 <u>DefaultInstance=</u> 指定的实例。"
 
 #: sysd-manager-comcontroler/src/enums.rs:217
 #: sysd-manager-comcontroler/src/enums.rs:244
@@ -3687,6 +4377,9 @@ msgid ""
 "fgcolor='#62a0ea'>/run/systemd/system/</span>), even though the unit file "
 "might reside outside of the unit file search path."
 msgstr ""
+"通过一个或多个符号链接使单元文件可用（永久链接位于 <span fgcolor='#62a0ea'>/"
+"etc/systemd/system/</span>，临时链接位于 <span fgcolor='#62a0ea'>/run/"
+"systemd/system/</span>），即使文件本身位于单元文件搜索路径之外。"
 
 #: sysd-manager-comcontroler/src/enums.rs:222
 #: sysd-manager-comcontroler/src/enums.rs:249
@@ -3696,35 +4389,38 @@ msgid ""
 "<span fgcolor='#62a0ea'>/etc/systemd/system/</span> or transiently in <span "
 "fgcolor='#62a0ea'>/run/systemd/systemd/</span>)."
 msgstr ""
+"已完全屏蔽，任何启动操作都会失败（永久屏蔽位于 <span fgcolor='#62a0ea'>/etc/"
+"systemd/system/</span>，临时屏蔽位于 <span fgcolor='#62a0ea'>/run/systemd/"
+"systemd/</span>）。"
 
 #: sysd-manager-comcontroler/src/enums.rs:227
 msgctxt "list"
 msgid ""
 "The unit file is not enabled, and has no provisions for enabling in the "
 "[Install] unit file section."
-msgstr ""
+msgstr "单元文件未启用，其 [Install] 段也未提供启用所需的配置。"
 
 #: sysd-manager-comcontroler/src/enums.rs:232
 msgctxt "list"
 msgid ""
 "The unit file has been created dynamically with the runtime API. Transient "
 "units may not be enabled."
-msgstr ""
+msgstr "单元文件由运行时 API 动态创建。瞬态单元无法启用。"
 
 #: sysd-manager-comcontroler/src/enums.rs:454
 msgctxt "active state"
 msgid "Started, bound, plugged in, ..., depending on the unit type."
-msgstr ""
+msgstr "已启动、已绑定、已接入等，具体含义取决于单元类型。"
 
 #: sysd-manager-comcontroler/src/enums.rs:461
 msgctxt "active state"
 msgid "Unit is <b>active</b> and it is reloading its configuration."
-msgstr ""
+msgstr "单元处于<b>活动状态</b>，正在重新加载配置。"
 
 #: sysd-manager-comcontroler/src/enums.rs:469
 msgctxt "active state"
 msgid "Stopped, unbound, unplugged, ..., depending on the unit type."
-msgstr ""
+msgstr "已停止、已解绑、已断开等，具体含义取决于单元类型。"
 
 #: sysd-manager-comcontroler/src/enums.rs:476
 msgctxt "active state"
@@ -3732,114 +4428,153 @@ msgid ""
 "Similar to inactive, but the unit failed in some way (process returned error "
 "code on exit, crashed, an operation timed out, or after too many restarts)."
 msgstr ""
+"类似于非活动状态，但单元发生了故障（进程退出时返回错误码、崩溃、操作超时或重"
+"启次数过多）。"
 
 #: sysd-manager-comcontroler/src/enums.rs:483
 msgctxt "active state"
 msgid "Changing from <b>inactive</b> to <b>active</b>."
-msgstr ""
+msgstr "正在从<b>非活动状态</b>切换为<b>活动状态</b>。"
 
 #: sysd-manager-comcontroler/src/enums.rs:490
 msgctxt "active state"
 msgid "Changing from <b>active</b> to <b>inactive</b>."
-msgstr ""
+msgstr "正在从<b>活动状态</b>切换为<b>非活动状态</b>。"
 
 #: sysd-manager-comcontroler/src/enums.rs:497
 msgctxt "active state"
 msgid "Unit is inactive and a maintenance operation is in progress."
-msgstr ""
+msgstr "单元处于非活动状态，正在执行维护操作。"
 
 #: sysd-manager-comcontroler/src/enums.rs:504
 msgctxt "active state"
 msgid "Unit is active and a new mount is being activated in its namespace."
-msgstr ""
+msgstr "单元处于活动状态，正在其命名空间中激活新的挂载。"
 
 #. subtitle to detail who to kill Main
 #: sysd-manager-comcontroler/src/enums.rs:749
 msgctxt "kill"
 msgid "Only the main unit's process"
-msgstr ""
+msgstr "仅单元的主进程"
 
 #. subtitle to detail who to kill Control
 #: sysd-manager-comcontroler/src/enums.rs:751
-#, fuzzy
 msgctxt "kill"
 msgid "Only the unit's controled processes"
-msgstr "单元相关进程"
+msgstr "仅单元的控制进程"
 
 #. subtitle to detail who to kill All
 #: sysd-manager-comcontroler/src/enums.rs:753
-#, fuzzy
 msgctxt "kill"
 msgid "All unit's processes"
-msgstr "单元相关进程"
+msgstr "单元的所有进程"
 
 #. menu option
 #: sysd-manager-comcontroler/src/enums.rs:803
 msgctxt "dependency"
 msgid "Forward"
-msgstr ""
+msgstr "正向依赖"
 
 #. menu option
 #: sysd-manager-comcontroler/src/enums.rs:805
 msgctxt "dependency"
 msgid "Reverse"
-msgstr ""
+msgstr "反向依赖"
 
 #. menu option
 #: sysd-manager-comcontroler/src/enums.rs:807
 msgctxt "dependency"
 msgid "After"
-msgstr ""
+msgstr "之后"
 
 #. menu option
 #: sysd-manager-comcontroler/src/enums.rs:809
 msgctxt "dependency"
 msgid "Before"
-msgstr ""
+msgstr "之前"
 
 #. clean options
 #: sysd-manager-comcontroler/src/enums.rs:963
-#, fuzzy
 msgctxt "clean"
 msgid "_Runtime"
-msgstr "运行时"
+msgstr "运行时数据(_R)"
 
 #. clean options
 #: sysd-manager-comcontroler/src/enums.rs:965
 msgctxt "clean"
 msgid "_State"
-msgstr ""
+msgstr "状态数据(_S)"
 
 #. clean options
 #: sysd-manager-comcontroler/src/enums.rs:967
 msgctxt "clean"
 msgid "Cac_he"
-msgstr ""
+msgstr "缓存(_H)"
 
 #. clean options
 #: sysd-manager-comcontroler/src/enums.rs:969
 msgctxt "clean"
 msgid "_Logs"
-msgstr ""
+msgstr "日志(_L)"
 
 #. clean options
 #: sysd-manager-comcontroler/src/enums.rs:971
-#, fuzzy
 msgctxt "clean"
 msgid "_Configuration"
-msgstr "_代理配置"
+msgstr "配置(_C)"
 
 #. clean options
 #: sysd-manager-comcontroler/src/enums.rs:973
 msgctxt "clean"
 msgid "_File Descriptor Store"
-msgstr ""
+msgstr "文件描述符存储(_F)"
 
 #. clean options
 #: sysd-manager-comcontroler/src/enums.rs:975
 msgctxt "clean"
 msgid "_All"
-msgstr ""
+msgstr "全部(_A)"
+
+#: sysd-manager-comcontroler/src/enums.rs:1102
+msgctxt "filter"
+msgid "Contains"
+msgstr "包含"
+
+#: sysd-manager-comcontroler/src/enums.rs:1103
+msgctxt "filter"
+msgid "Starts with"
+msgstr "开头为"
+
+#: sysd-manager-comcontroler/src/enums.rs:1104
+msgctxt "filter"
+msgid "Ends with"
+msgstr "结尾为"
+
+#: sysd-manager-comcontroler/src/enums.rs:1105
+#: sysd-manager-comcontroler/src/enums.rs:1159
+msgctxt "filter"
+msgid "Equals"
+msgstr "等于"
+
+#: sysd-manager-comcontroler/src/enums.rs:1160
+msgctxt "filter"
+msgid "Greater than"
+msgstr "大于"
+
+#: sysd-manager-comcontroler/src/enums.rs:1161
+msgctxt "filter"
+msgid "Less than"
+msgstr "小于"
+
+#: sysd-manager-comcontroler/src/enums.rs:1162
+msgctxt "filter"
+msgid "Greater than or equal to"
+msgstr "大于或等于"
+
+#: sysd-manager-comcontroler/src/enums.rs:1163
+msgctxt "filter"
+msgid "Less than or equal to"
+msgstr "小于或等于"
 
 #: sysd-manager-comcontroler/src/errors.rs:59
 msgctxt "error"
@@ -3848,6 +4583,8 @@ msgid ""
 "Flatpack.\n"
 "Please install it to enable all features."
 msgstr ""
+"通过 Flatpak 使用本应用需要 <b>flatpak-spawn</b> 程序。\n"
+"请安装它以启用全部功能。"
 
 #: sysd-manager-comcontroler/src/errors.rs:66
 msgctxt "error"
@@ -3855,82 +4592,148 @@ msgid ""
 "It requires permission to talk to <b>org.freedesktop.Flatpak</b> D-Bus "
 "interface when the program is a Flatpak."
 msgstr ""
+"以 Flatpak 方式运行时，需要获得与 <b>org.freedesktop.Flatpak</b> D-Bus 接口通"
+"信的权限。"
 
 #. Error message displayed to user
 #: sysd-manager-comcontroler/src/errors.rs:83
-#, fuzzy
 msgctxt "error"
 msgid "SysD Manager Proxy issue"
-msgstr "SysD 管理器"
+msgstr "SysD Manager 代理问题"
 
 #. time style option
-#: sysd-manager-comcontroler/src/time_handling.rs:36
+#: sysd-manager-comcontroler/src/time_handling.rs:37
 msgctxt "pref time style"
 msgid "Pretty"
-msgstr ""
+msgstr "易读格式"
 
 #. time style option
-#: sysd-manager-comcontroler/src/time_handling.rs:38
+#: sysd-manager-comcontroler/src/time_handling.rs:39
 msgctxt "pref time style"
 msgid "Pretty usec"
-msgstr ""
+msgstr "易读格式（微秒）"
 
 #. time style option
-#: sysd-manager-comcontroler/src/time_handling.rs:40
+#: sysd-manager-comcontroler/src/time_handling.rs:41
 msgctxt "pref time style"
 msgid "UTC"
-msgstr ""
+msgstr "UTC"
 
 #. time style option
-#: sysd-manager-comcontroler/src/time_handling.rs:42
+#: sysd-manager-comcontroler/src/time_handling.rs:43
 msgctxt "pref time style"
 msgid "UTC usec"
-msgstr ""
+msgstr "UTC（微秒）"
 
 #. time style option
-#: sysd-manager-comcontroler/src/time_handling.rs:44
+#: sysd-manager-comcontroler/src/time_handling.rs:45
 msgctxt "pref time style"
 msgid "Unix"
-msgstr ""
+msgstr "Unix 时间戳"
 
 #. time style option
-#: sysd-manager-comcontroler/src/time_handling.rs:46
+#: sysd-manager-comcontroler/src/time_handling.rs:47
 msgctxt "pref time style"
 msgid "Unix usec"
-msgstr ""
+msgstr "Unix 时间戳（微秒）"
 
 #. time style option tooltip
-#: sysd-manager-comcontroler/src/time_handling.rs:53
+#: sysd-manager-comcontroler/src/time_handling.rs:54
 msgctxt "pref time style"
 msgid "Day YYYY-MM-DD HH:MM:SS TZ"
-msgstr ""
+msgstr "星期 YYYY-MM-DD HH:MM:SS 时区"
 
-#: sysd-manager-comcontroler/src/time_handling.rs:57
+#: sysd-manager-comcontroler/src/time_handling.rs:58
 msgctxt "pref time style"
 msgid "Day YYYY-MM-DD HH:MM:SS.000000 TZ"
-msgstr ""
+msgstr "星期 YYYY-MM-DD HH:MM:SS.000000 时区"
 
 #. time style option tooltip
-#: sysd-manager-comcontroler/src/time_handling.rs:61
+#: sysd-manager-comcontroler/src/time_handling.rs:62
 msgctxt "pref time style"
 msgid "Day YYYY-MM-DD HH:MM:SS UTC"
-msgstr ""
+msgstr "星期 YYYY-MM-DD HH:MM:SS UTC"
 
-#: sysd-manager-comcontroler/src/time_handling.rs:65
+#: sysd-manager-comcontroler/src/time_handling.rs:66
 msgctxt "pref time style"
 msgid "Day YYYY-MM-DD HH:MM:SS.000000 UTC"
-msgstr ""
+msgstr "星期 YYYY-MM-DD HH:MM:SS.000000 UTC"
 
 #. time style option tooltip
-#: sysd-manager-comcontroler/src/time_handling.rs:69
+#: sysd-manager-comcontroler/src/time_handling.rs:70
 msgctxt "pref time style"
 msgid "Seconds since the epoch"
-msgstr ""
+msgstr "自 Unix 纪元起的秒数"
 
-#: sysd-manager-comcontroler/src/time_handling.rs:73
+#: sysd-manager-comcontroler/src/time_handling.rs:74
 msgctxt "pref time style"
 msgid "Micro seconds since the epoch"
-msgstr ""
+msgstr "自 Unix 纪元起的微秒数"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:192
+msgctxt "time unit"
+msgid "month"
+msgstr "月"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:193
+msgctxt "time"
+msgid "ago"
+msgstr "前"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:194
+msgctxt "time"
+msgid "left"
+msgstr "后"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:195
+msgctxt "time"
+msgid "now"
+msgstr "现在"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:196
+msgctxt "time"
+msgid "infinity"
+msgstr "无限"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:200
+msgctxt "time"
+msgid "year"
+msgid_plural "years"
+msgstr[0] "年"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:204
+msgctxt "time"
+msgid "month"
+msgid_plural "months"
+msgstr[0] "月"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:208
+msgctxt "time"
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] "周"
+
+#: sysd-manager-comcontroler/src/time_handling.rs:212
+msgctxt "time"
+msgid "day"
+msgid_plural "days"
+msgstr[0] "天"
+
+#~ msgctxt "time"
+#~ msgid "years"
+#~ msgstr "年"
+
+#~ msgctxt "time"
+#~ msgid "months"
+#~ msgstr "月"
+
+#~ msgctxt "time"
+#~ msgid "weeks"
+#~ msgstr "周"
+
+#~ msgctxt "time"
+#~ msgid "days"
+#~ msgstr "天"
 
 #~ msgid "Unit Files"
 #~ msgstr "单元文件"

@@ -1,4 +1,3 @@
-use freedesktop_entry_parser::{ParseError, low_level};
 use indexmap::map::Entry;
 use indexmap::{Equivalent, IndexMap};
 use std::cmp::Ordering::{Equal, Greater, Less};
@@ -170,28 +169,60 @@ impl UnitFileData {
             .ok()
     }
 
-    fn parse(input: impl AsRef<[u8]>) -> Result<UnitFileData, ParseError> {
+    fn parse(input: &str) -> Result<UnitFileData, &'static str> {
+        // Preserve systemd's C-style escapes verbatim. A desktop-entry parser
+        // treats every backslash as a line continuation and corrupts ExecStart.
         let mut map = UnitFileData::new();
-        for section in low_level::parse_entry_str(input.as_ref()) {
-            let section = section?;
-            let section_name = section.title;
-            for attr in section.attrs {
-                let key = match attr.param {
-                    Some(param) => param.attr_name,
-                    None => attr.name,
-                };
-                let value = attr.value;
-                if !value.trim_ascii().is_empty() {
-                    match map.0.entry(FileEntry::new(section_name, key)) {
-                        indexmap::map::Entry::Occupied(mut occupied_entry) => {
-                            occupied_entry.get_mut().push(value.into());
-                        }
-                        indexmap::map::Entry::Vacant(vacant_entry) => {
-                            vacant_entry.insert_entry(vec![value.into()]);
-                        }
-                    };
-                }
+        let mut section = None;
+        let mut pending = String::new();
+        for physical in input.lines() {
+            let line = physical.trim_ascii();
+            if line.starts_with(['#', ';']) || (line.is_empty() && pending.is_empty()) {
+                continue;
             }
+            let backslashes = physical
+                .bytes()
+                .rev()
+                .take_while(|byte| *byte == b'\\')
+                .count();
+            if backslashes % 2 == 1 {
+                pending.push_str(&physical[..physical.len() - 1]);
+                pending.push(' ');
+                continue;
+            }
+            let logical = if pending.is_empty() {
+                std::borrow::Cow::Borrowed(line)
+            } else {
+                pending.push_str(physical);
+                std::borrow::Cow::Owned(std::mem::take(&mut pending))
+            };
+            let logical = logical.trim_ascii();
+            if logical.starts_with('[') {
+                let name = logical
+                    .strip_prefix('[')
+                    .and_then(|s| s.strip_suffix(']'))
+                    .filter(|s| !s.is_empty() && !s.contains(['[', ']']))
+                    .ok_or("invalid section header")?;
+                section = Some(name.to_owned());
+                continue;
+            }
+            let section = section.as_deref().ok_or("assignment outside a section")?;
+            let (key, value) = logical
+                .split_once('=')
+                .ok_or("missing assignment separator")?;
+            let key = key.trim_ascii();
+            if key.is_empty() || key.chars().any(|c| c.is_ascii_whitespace()) {
+                return Err("invalid assignment key");
+            }
+            // Empty assignments reset accumulated values in systemd. Keep them
+            // alongside repeated directives so a file round trip preserves them.
+            map.0
+                .entry(FileEntry::new(section, key))
+                .or_default()
+                .push(value.trim_ascii().to_owned());
+        }
+        if !pending.is_empty() {
+            return Err("unfinished line continuation");
         }
         Ok(map)
     }
@@ -393,6 +424,59 @@ fn write_section_header(out: &mut String, section: &str) {
 
 #[cfg(test)]
 mod tests {
+
+    use super::UnitFileData;
+
+    #[test]
+    fn parser_preserves_unicode_escapes_and_empty_resets() {
+        let text = "[Unit]\nDescription=中文 <>& 🚀\n[Service]\nExecStart=/bin/printf '你好\\n'\nEnvironment=A=1\nEnvironment=\nEnvironment=B=2\n";
+        let file = UnitFileData::from_content(text).unwrap().to_file();
+        assert!(file.contains("Description=中文 <>& 🚀\n"));
+        assert!(file.contains("ExecStart=/bin/printf '你好\\n'\n"));
+        assert!(file.contains("Environment=A=1\nEnvironment=\nEnvironment=B=2\n"));
+        assert_eq!(UnitFileData::from_content(&file).unwrap().to_file(), file);
+    }
+
+    #[test]
+    fn parser_joins_continuations_and_ignores_comment_blocks() {
+        let text = "# 注释\r\n[Service]\r\nExecStart = /bin/echo first\\\r\n# ignored\r\n; ignored\r\n  second\r\n";
+        let file = UnitFileData::from_content(text).unwrap();
+        assert_eq!(file.exec_start(), "/bin/echo first   second");
+    }
+
+    #[test]
+    fn parser_keeps_quoted_continuation_whitespace_and_blank_line_boundaries() {
+        let text = "[Service]\nEnvironment=\"TEXT=first\\\n    second\"\nExecStart=/bin/echo first\\\n\nWorkingDirectory=/tmp\n";
+        let file = UnitFileData::from_content(text).unwrap();
+        assert!(
+            file.to_file()
+                .contains("Environment=\"TEXT=first     second\"\n")
+        );
+        assert_eq!(file.exec_start(), "/bin/echo first");
+        assert_eq!(file.working_directory(), "/tmp");
+    }
+
+    #[test]
+    fn parser_retains_literal_double_backslashes_and_repeated_sections() {
+        let text = "[Service]\nEnvironment=PATH=C:\\\\temp\\\\\n[Unit]\nDescription=示例\n[Service]\nExecStart=/bin/true\n";
+        let file = UnitFileData::from_content(text).unwrap().to_file();
+        assert!(file.contains("Environment=PATH=C:\\\\temp\\\\\n"));
+        assert!(file.contains("ExecStart=/bin/true\n"));
+    }
+
+    #[test]
+    fn parser_rejects_malformed_input_without_partial_data() {
+        for text in [
+            "ExecStart=/bin/true",
+            "[Service",
+            "[]\nKey=value",
+            "[Service]\ninvalid",
+            "[Service]\n=value",
+            "[Service]\nExecStart=/bin/echo\\",
+        ] {
+            assert!(UnitFileData::from_content(text).is_none(), "{text:?}");
+        }
+    }
 
     use test_base::init_logs;
 

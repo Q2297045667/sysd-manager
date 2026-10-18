@@ -116,10 +116,10 @@ impl UnitPropertiesSelectorDialogImp {
 
         if toogle_button.is_active() {
             toogle_button.set_icon_name("go-down-symbolic");
-            toogle_button.set_tooltip_text(Some("Collapse all interfaces"));
+            toogle_button.set_tooltip_text(Some(&gettextrs::gettext("Collapse all interfaces")));
         } else {
             toogle_button.set_icon_name("go-next-symbolic");
-            toogle_button.set_tooltip_text(Some("Expand all interfaces"));
+            toogle_button.set_tooltip_text(Some(&gettextrs::gettext("Expand all interfaces")));
         }
     }
 
@@ -138,13 +138,13 @@ impl UnitPropertiesSelectorDialogImp {
         if orientation == gtk::Orientation::Vertical {
             self.orientation_button.set_icon_name("top-down");
             self.orientation_button
-                .set_tooltip_text(Some("Switch to top down layout"));
+                .set_tooltip_text(Some(&gettextrs::gettext("Switch to top down layout")));
 
             gtk::Orientation::Horizontal
         } else {
             self.orientation_button.set_icon_name("side-by-side");
             self.orientation_button
-                .set_tooltip_text(Some("Switch to side by side layout"));
+                .set_tooltip_text(Some(&gettextrs::gettext("Switch to side by side layout")));
 
             gtk::Orientation::Vertical
         }

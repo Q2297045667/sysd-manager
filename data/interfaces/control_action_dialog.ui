@@ -21,7 +21,7 @@
                 <property name="margin-end">5</property>
                 <property name="margin-start">5</property>
                 <property name="margin-top">5</property>
-                <property name="title">Enable</property>
+                <property name="title" translatable="yes">Enable</property>
                 <child>
                   <object class="AdwEntryRow" id="unit_file_entry">
                     <property name="input-hints">lowercase|no-spellcheck|private|uppercase-sentences|vertical-writing|word-completion</property>
@@ -81,7 +81,7 @@
                 <property name="margin-end">5</property>
                 <property name="margin-start">5</property>
                 <property name="margin-top">5</property>
-                <property name="title">Start</property>
+                <property name="title" translatable="yes">Start</property>
                 <child>
                   <object class="AdwSwitchRow" id="run_stop_now_switch">
                     <property name="subtitle" translatable="yes" context="enable unit file" comments="subtitle">Start Unit just after being enabled</property>

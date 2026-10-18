@@ -24,7 +24,7 @@
             <property name="show-end-title-buttons">False</property>
             <property name="title-widget">
               <object class="AdwWindowTitle" id="window_title">
-                <property name="title">Unit File</property>
+                <property name="title" translatable="yes">Unit File</property>
               </object>
             </property>
           </object>
@@ -32,6 +32,6 @@
       </object>
     </property>
     <property name="tag">unit_file_page</property>
-    <property name="title">Unit File</property>
+    <property name="title" translatable="yes">Unit File</property>
   </template>
 </interface>

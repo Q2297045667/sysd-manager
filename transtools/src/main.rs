@@ -75,7 +75,7 @@ enum Commands {
     Packfiles,
 }
 
-fn main() {
+fn main() -> std::process::ExitCode {
     // Force log level
 
     let timer = tracing_subscriber::fmt::time::ChronoLocal::new("%Y-%m-%d %H:%M:%S%.3f".to_owned());
@@ -102,7 +102,7 @@ fn main() {
 
         if let Err(e) = env::set_current_dir(wd) {
             println!("set_current_dir {wd} Error {e:?}");
-            return;
+            return std::process::ExitCode::FAILURE;
         }
     }
 
@@ -112,7 +112,9 @@ fn main() {
 
     if let Err(err) = result {
         error!("Error {err:?}");
+        return std::process::ExitCode::FAILURE;
     }
+    std::process::ExitCode::SUCCESS
 }
 
 fn execute_command(args: Args) -> Result<(), TransError> {
@@ -183,6 +185,9 @@ fn generate_pack() -> Result<(), TransError> {
     for entry in entries {
         let entry = entry?;
         let path = entry.path();
+        if !path.is_file() {
+            continue;
+        }
         let file_name = path.file_name().unwrap();
 
         fs::copy(&path, generated.join(file_name))?;
